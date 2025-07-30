@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgq7t1gdqtub"]
+
+[ext_resource type="Texture2D" uid="uid://4vbrdlx8amd1" path="res://icon.svg" id="1_xbhsl"]
+[ext_resource type="PackedScene" uid="uid://bbs6thqicl6be" path="res://game_objects/player/player.tscn" id="2_f1ckj"]
+[ext_resource type="PackedScene" uid="uid://c752gnmyuhq6i" path="res://game_objects/camera/game_camera.tscn" id="3_fr3hr"]
+[ext_resource type="PackedScene" uid="uid://bx74u2cxmuxt3" path="res://game_objects/NPCs/NPC_template.tscn" id="4_hg133"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwfj4"]
+size = Vector2(856, 122)
+
+[node name="TestMap1" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(240, 85)
+texture = ExtResource("1_xbhsl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(318, 302)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-29, -2)
+shape = SubResource("RectangleShape2D_wwfj4")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(8, 1)
+texture = ExtResource("1_xbhsl")
+
+[node name="grabbablestatic" type="StaticBody2D" parent="."]
+position = Vector2(366, 59)
+collision_layer = 17
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grabbablestatic"]
+position = Vector2(-29, -2)
+shape = SubResource("RectangleShape2D_wwfj4")
+
+[node name="Sprite2D" type="Sprite2D" parent="grabbablestatic"]
+modulate = Color(0.564706, 1, 0.552941, 1)
+scale = Vector2(8, 1)
+texture = ExtResource("1_xbhsl")
+
+[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+
+[node name="Player" parent="Entities" instance=ExtResource("2_f1ckj")]
+position = Vector2(279, 183)
+
+[node name="GameCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_fr3hr")]
+target = NodePath("../Entities/Player")
+
+[node name="NpcTemplate" parent="." instance=ExtResource("4_hg133")]
+position = Vector2(426, 239)
+dialogArray = Array[String](["Hello!", "What?", "Do you need something?"])
+
+[node name="NpcTemplate2" parent="." instance=ExtResource("4_hg133")]
+position = Vector2(492, 238)
+dialogArray = Array[String](["Sup!", ":)"])

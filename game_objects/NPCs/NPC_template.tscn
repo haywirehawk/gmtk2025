@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx74u2cxmuxt3"]
+
+[ext_resource type="Script" uid="uid://bfi1rqp2j5ulq" path="res://game_objects/NPCs/npc_template.gd" id="1_130m6"]
+[ext_resource type="Texture2D" uid="uid://deoylh3dnpbwl" path="res://game_objects/player/character_beige_idle.svg" id="2_xrcap"]
+[ext_resource type="Texture2D" uid="uid://4vbrdlx8amd1" path="res://icon.svg" id="3_xrcap"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvut0"]
+height = 24.0
+
+[node name="NpcTemplate" type="Node2D"]
+script = ExtResource("1_130m6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_xrcap")
+offset = Vector2(0, -64)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_dvut0")
+
+[node name="TextHolder" type="Node2D" parent="."]
+visible = false
+scale = Vector2(0.25, 0.25)
+
+[node name="Sprite2D2" type="Sprite2D" parent="TextHolder"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -140)
+scale = Vector2(2.5, 0.5)
+texture = ExtResource("3_xrcap")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextHolder"]
+offset_left = -144.0
+offset_top = -166.0
+offset_right = 144.0
+offset_bottom = -115.0
+text = "Hello there!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
