@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dspgucdg0i66x"]
+
+[ext_resource type="Texture2D" uid="uid://4vbrdlx8amd1" path="res://icon.svg" id="1_cjpbq"]
+[ext_resource type="PackedScene" uid="uid://bbs6thqicl6be" path="res://game_objects/player/player.tscn" id="2_i4lod"]
+[ext_resource type="PackedScene" uid="uid://c752gnmyuhq6i" path="res://game_objects/camera/game_camera.tscn" id="3_i4lod"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwfj4"]
+size = Vector2(856, 122)
+
+[node name="TestMap1" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(240, 85)
+texture = ExtResource("1_cjpbq")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(318, 302)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-29, -2)
+shape = SubResource("RectangleShape2D_wwfj4")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(8, 1)
+texture = ExtResource("1_cjpbq")
+
+[node name="grabbablestatic" type="StaticBody2D" parent="."]
+position = Vector2(366, 59)
+collision_layer = 17
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grabbablestatic"]
+position = Vector2(-29, -2)
+shape = SubResource("RectangleShape2D_wwfj4")
+
+[node name="Sprite2D" type="Sprite2D" parent="grabbablestatic"]
+modulate = Color(0.564706, 1, 0.552941, 1)
+scale = Vector2(8, 1)
+texture = ExtResource("1_cjpbq")
+
+[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+
+[node name="Player" parent="Entities" instance=ExtResource("2_i4lod")]
+position = Vector2(279, 183)
+
+[node name="GameCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_i4lod")]
+target = NodePath("../Entities/Player")
