@@ -22,6 +22,7 @@ buses/default_bus_layout="uid://conoialec7bi6"
 [autoload]
 
 OptionsManager="*res://maps/Menus/Options_Manager.gd"
+GameEvents="*res://game_objects/autoload/game_events.tscn"
 
 [display]
 
@@ -102,6 +103,9 @@ Interact={
 [layer_names]
 
 2d_physics/layer_1="Environment"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Collectable"
+2d_physics/layer_4="Enemy"
 2d_physics/layer_5="Grabbable"
 
 [rendering]

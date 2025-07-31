@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba5arjpbjqef0"]
+
+[ext_resource type="Script" uid="uid://dpb7pwfa5bq62" path="res://game_objects/manager/inventory_manager.gd" id="1_a63nt"]
+[ext_resource type="AudioStream" uid="uid://blc5nwlylrrm2" path="res://game_objects/collectable/sfx_coin.ogg" id="2_lw58d"]
+
+[node name="InventoryManager" type="Node"]
+script = ExtResource("1_a63nt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lw58d")

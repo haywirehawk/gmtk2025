@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://wg1m2ay2ukic"]
+
+[ext_resource type="Script" uid="uid://cdp0oh6cypvbh" path="res://game_objects/collectable/collectable.gd" id="1_58sku"]
+[ext_resource type="Texture2D" uid="uid://cgipkxjffayke" path="res://game_objects/collectable/coin_gold.png" id="1_u055p"]
+[ext_resource type="Resource" uid="uid://cwu6bdaiue6yi" path="res://game_objects/inventory/resources/coin.tres" id="2_6us6x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_58sku"]
+
+[node name="Collectable" type="Node2D"]
+script = ExtResource("1_58sku")
+item_resource = ExtResource("2_6us6x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u055p")
+
+[node name="PickupArea2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D"]
+shape = SubResource("CircleShape2D_58sku")
