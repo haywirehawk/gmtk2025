@@ -1,14 +1,15 @@
 class_name Player
 extends CharacterBody2D
 
-const BASE_MOVE_SPEED: float = 200.0
-const MAX_MOVE_SPEED: float = 300.0
+const BASE_MOVE_SPEED: float = 120.0
+const MAX_MOVE_SPEED: float = 250.0
 const BASE_MOVEMENT_DAMPING: float = 5.0
-const JUMP_VELOCITY: float = -300.0
+const JUMP_VELOCITY: float = -250.0
 const JUMP_CANCEL_FACTOR: float = 0.75
 const AIRBORNE_MOVEMENT_FACTOR: float = 250.0
 
-@export var lasso_range: float = 80
+# TODO: Remove, for testing only
+@export var starting_lasso: LassoResource
 
 # Movement
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -34,6 +35,8 @@ var joystick_mode: bool
 
 func _ready() -> void:
 	lasso_controller.setup(self)
+	if starting_lasso:
+		_change_lasso(starting_lasso)
 
 
 func _process(_delta: float) -> void:

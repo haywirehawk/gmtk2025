@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpqpp7ve1skp7"]
+
+[ext_resource type="Script" uid="uid://dgyafl1wy1s7" path="res://game_objects/components/health/health_component.gd" id="1_o7lwe"]
+
+[node name="HealthComponent" type="Node"]
+script = ExtResource("1_o7lwe")
+
+[node name="Timer" type="Timer" parent="."]
