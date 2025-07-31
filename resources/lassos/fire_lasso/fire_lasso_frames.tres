@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bbhw1c478ptg3"]
+
+[ext_resource type="Texture2D" uid="uid://f1tv82gfhc6a" path="res://resources/lassos/basic_lasso/assets/base_lasso.png" id="1_y0j74"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bmxs"]
+atlas = ExtResource("1_y0j74")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkgei"]
+atlas = ExtResource("1_y0j74")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tmce"]
+atlas = ExtResource("1_y0j74")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yifxy"]
+atlas = ExtResource("1_y0j74")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db7n2"]
+atlas = ExtResource("1_y0j74")
+region = Rect2(16, 16, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bmxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkgei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tmce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yifxy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db7n2")
+}],
+"loop": true,
+"name": &"thrown",
+"speed": 5.0
+}]
