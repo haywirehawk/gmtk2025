@@ -1,13 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c752gnmyuhq6i"]
+[gd_scene load_steps=2 format=3 uid="uid://c752gnmyuhq6i"]
 
 [ext_resource type="Script" uid="uid://no0kchxmyw21" path="res://game_objects/camera/game_camera.gd" id="1_7cwtc"]
-[ext_resource type="PackedScene" uid="uid://bv1rgkr4hoinx" path="res://maps/Menus/Pause_Menu.tscn" id="2_5olko"]
 
 [node name="GameCamera" type="Camera2D"]
 offset = Vector2(0, -50)
 zoom = Vector2(2, 2)
 script = ExtResource("1_7cwtc")
-
-[node name="PauseMenu" parent="." instance=ExtResource("2_5olko")]
-position = Vector2(-160, -140)
-scale = Vector2(0.5, 0.5)

@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://conoialec7bi6"
 
 OptionsManager="*res://maps/Menus/Options_Manager.gd"
 GameEvents="*res://game_objects/autoload/game_events.tscn"
+PauseMenu="*res://maps/Menus/Pause_Menu.tscn"
 
 [display]
 
