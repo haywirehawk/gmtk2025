@@ -57,7 +57,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Music Volume"
+text = "SFX Volume"
 scroll_active = false
 
 [node name="SFXVolSlider" type="HSlider" parent="VBoxContainer/HBoxContainer4"]

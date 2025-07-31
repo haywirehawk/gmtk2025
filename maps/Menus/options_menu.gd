@@ -4,6 +4,7 @@ extends Node2D
 func _ready() -> void:
 	$VBoxContainer/HBoxContainer/MasterVolSlider.value = OptionsManager.MasterVolume
 	$VBoxContainer/HBoxContainer2/MusicVolSlider.value = OptionsManager.MusicVolume
+	$VBoxContainer/HBoxContainer4/SFXVolSlider.value = OptionsManager.SFXVolume
 	$VBoxContainer/HBoxContainer3/FullscreenModeSelect.select(OptionsManager.ScreenMode)
 
 func _on_master_vol_slider_value_changed(value: float) -> void:
