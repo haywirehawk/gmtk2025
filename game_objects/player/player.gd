@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 const BASE_MOVE_SPEED: float = 300.0
@@ -30,13 +31,14 @@ var current_lasso_length: float
 @onready var visuals: Node2D = $Visuals
 @onready var aim_root: Node2D = %AimRoot
 @onready var direction_arrow: Sprite2D = %DirectionArrow
-@onready var lasso_controller: Node2D = %LassoController
+@onready var lasso_controller: LassoController = %LassoController
 @onready var lasso_raycast: RayCast2D = %LassoRaycast
 @onready var lasso_line: Line2D = %LassoLine
 
 
 func _ready() -> void:
 	lasso_raycast.target_position *= lasso_range
+	lasso_controller.init(self)
 
 
 func _process(_delta: float) -> void:
@@ -49,12 +51,10 @@ func _physics_process(delta: float) -> void:
 	get_inputs()
 	handle_jump()
 	handle_walking_movement(delta)
-	#if input_lasso_just_pressed:
-		#try_lasso_grab()
-	#if lasso_hooked and input_lasso_held:
-		#swing(delta)
-	#elif lasso_hooked:
-		#release_lasso()
+	if input_lasso_just_pressed:
+		lasso_controller.throw_lasso()
+	if lasso_controller.thrown and not input_lasso_held:
+		lasso_controller.release_lasso()
 
 
 func _input(event: InputEvent) -> void:
@@ -105,8 +105,9 @@ func handle_walking_movement(delta: float) -> void:
 
 
 func handle_jump() -> void:
-	if input_jump_just_pressed and is_on_floor() and not is_jumping:
-		velocity.y = JUMP_VELOCITY
+	if input_jump_just_pressed and (is_on_floor() or lasso_controller.thrown) and not is_jumping:
+		velocity.y += JUMP_VELOCITY
+		lasso_controller.release_lasso()
 		is_jumping = true
 	if not input_jump_held and is_jumping:
 		velocity.y *= JUMP_CANCEL_FACTOR
