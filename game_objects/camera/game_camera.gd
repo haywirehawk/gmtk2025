@@ -5,6 +5,11 @@ const MOTION_DAMPING: float = 3.0
 @export var target: Node2D
 
 
+func _ready() -> void:
+	if target:
+		global_position = target.global_position
+
+
 func _process(delta: float) -> void:
 	follow_target(delta)
 

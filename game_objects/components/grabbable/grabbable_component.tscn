@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://p86bjl8eh3bk"]
+
+[ext_resource type="Script" uid="uid://bvsqq0uifjxut" path="res://game_objects/components/grabbable/grabbable_component.gd" id="1_sc6vj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sc6vj"]
+radius = 14.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7yill"]
+size = Vector2(10, 10)
+
+[node name="GrabbableComponent" type="Node2D"]
+script = ExtResource("1_sc6vj")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 17
+collision_mask = 0
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_sc6vj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = SubResource("PlaceholderTexture2D_7yill")

@@ -7,14 +7,13 @@ signal transition(state: State, new_state_name: String)
 ## The [param String] name of the animation to play when entering this state.
 @export var animation_name: String
 
-var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Holds a reference to the parent and animation player
 # to avoid scene tree heirarchy assumptions.
-var parent: CharacterBody2D: set = _set_parent
+var parent: Node2D: set = _set_parent
 var animations: Node
 
 
-func _set_parent(node: CharacterBody2D) -> void:
+func _set_parent(node: Node2D) -> void:
 	parent = node
 	return
 

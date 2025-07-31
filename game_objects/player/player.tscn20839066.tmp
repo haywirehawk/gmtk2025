@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://bbs6thqicl6be"]
+[gd_scene load_steps=19 format=3 uid="uid://bbs6thqicl6be"]
 
 [ext_resource type="Script" uid="uid://dfc77vxsgp2f4" path="res://game_objects/player/player.gd" id="1_jcgnw"]
+[ext_resource type="Texture2D" uid="uid://deoylh3dnpbwl" path="res://game_objects/player/character_beige_idle.svg" id="1_l3qw1"]
 [ext_resource type="Texture2D" uid="uid://b5i7k7oayc3xp" path="res://game_objects/player/arrow.png" id="3_gnf7o"]
 [ext_resource type="Script" uid="uid://dvcdhgkg4nk1l" path="res://game_objects/player/states/lasso_states/lasso_state_idle.gd" id="3_kc3ei"]
 [ext_resource type="Script" uid="uid://bgx88nkg7ilmm" path="res://game_objects/player/states/lasso_states/lasso_state_ready.gd" id="3_kke0l"]
@@ -12,8 +13,6 @@
 [ext_resource type="Resource" uid="uid://cpsmdwr31ljb8" path="res://resources/lassos/basic_lasso/basic_lasso.tres" id="6_wktog"]
 [ext_resource type="Script" uid="uid://cojs7ypbbsdnt" path="res://game_objects/player/states/lasso_states/lasso_state_swing.gd" id="7_3g2qd"]
 [ext_resource type="Script" uid="uid://cwetfej2djc7n" path="res://game_objects/player/states/lasso_states/lasso_state_miss.gd" id="8_d4pf5"]
-[ext_resource type="Texture2D" uid="uid://dqitiwxht8r11" path="res://game_objects/player/Cowboy.png" id="10_kc3ei"]
-[ext_resource type="Shader" uid="uid://bxa23hv7qmfki" path="res://resources/shaders/flash.gdshader" id="14_o7l5b"]
 
 [sub_resource type="Animation" id="Animation_kke0l"]
 length = 0.001
@@ -127,37 +126,10 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ec2f0"]
-radius = 6.0
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_na85j"]
-radius = 24.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuamp"]
-resource_local_to_scene = true
-shader = ExtResource("14_o7l5b")
-shader_parameter/flash_color = Color(1, 0, 0, 1)
-shader_parameter/flash_intensity = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3g2qd"]
-resource_local_to_scene = true
-shader = ExtResource("14_o7l5b")
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_intensity = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o7l5b"]
-atlas = ExtResource("10_kc3ei")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_cuamp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o7l5b")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+radius = 30.0
 
 [node name="Player" type="CharacterBody2D"]
 platform_floor_layers = 4294967263
@@ -175,6 +147,8 @@ script = ExtResource("4_na85j")
 
 [node name="Idle" type="Node" parent="PlayerStateMachine"]
 
+[node name="Swing" type="Node" parent="PlayerStateMachine"]
+
 [node name="Walk" type="Node" parent="PlayerStateMachine"]
 
 [node name="Fall" type="Node" parent="PlayerStateMachine"]
@@ -183,13 +157,13 @@ script = ExtResource("4_na85j")
 
 [node name="Stun" type="Node" parent="PlayerStateMachine"]
 
-[node name="LassoStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="LassoStateMachine" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_na85j")
-initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="LassoStateMachine"]
 script = ExtResource("3_kc3ei")
+animation_name = null
 
 [node name="Ready" type="Node" parent="LassoStateMachine"]
 script = ExtResource("3_kke0l")
@@ -207,7 +181,7 @@ script = ExtResource("7_3g2qd")
 script = ExtResource("8_d4pf5")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_ec2f0")
 
 [node name="ActivationArea" type="Area2D" parent="."]
@@ -229,6 +203,11 @@ offset = Vector2(16, 0)
 
 [node name="Visuals" type="Node2D" parent="."]
 
+[node name="PlayerSprite" type="Sprite2D" parent="Visuals"]
+position = Vector2(0, -16)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_l3qw1")
+
 [node name="LassoController" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true
 position = Vector2(0, -8)
@@ -246,24 +225,20 @@ collide_with_areas = true
 [node name="LassoLine" type="Line2D" parent="Visuals/LassoController"]
 unique_name_in_owner = true
 texture_repeat = 2
-material = SubResource("ShaderMaterial_cuamp")
 width = 4.0
 texture_mode = 1
 joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
 
 [node name="LassoRoot" type="Node2D" parent="Visuals/LassoController"]
 unique_name_in_owner = true
-position = Vector2(-6, -2.5)
+position = Vector2(-10, -5)
 
 [node name="LassoHonda" type="AnimatedSprite2D" parent="Visuals/LassoController/LassoRoot"]
 unique_name_in_owner = true
 visible = false
-material = SubResource("ShaderMaterial_3g2qd")
 sprite_frames = ExtResource("6_b08t1")
 offset = Vector2(0, -8)
 
-[node name="PlayerSprite" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_cuamp")
+[node name="LassoHitch" type="Sprite2D" parent="Visuals/LassoController/LassoRoot"]
+unique_name_in_owner = true
+visible = false
