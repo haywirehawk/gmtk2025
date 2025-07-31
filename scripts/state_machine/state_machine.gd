@@ -52,8 +52,6 @@ func change_state(new_state_name: String):
 	if current_state:
 		current_state.exit()
 	
-	print("%s's state is changing to %s by function call." % [owner.name, new_state_name])
-	
 	new_state.enter()
 	current_state = new_state
 
@@ -69,8 +67,6 @@ func _on_child_transition(state: State, new_state_name: String):
 	
 	if current_state:
 		current_state.exit()
-	
-	print("%s's state is changing to %s from %s." % [owner.name, new_state_name, current_state.name])
 	
 	new_state.enter()
 	current_state = new_state
