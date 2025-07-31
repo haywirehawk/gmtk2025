@@ -35,6 +35,7 @@ var joystick_mode: bool
 
 func _ready() -> void:
 	lasso_controller.setup(self)
+	_change_lasso(starting_lasso)
 
 
 func _process(_delta: float) -> void:
