@@ -35,8 +35,6 @@ var joystick_mode: bool
 
 func _ready() -> void:
 	lasso_controller.setup(self)
-	if starting_lasso:
-		_change_lasso(starting_lasso)
 
 
 func _process(_delta: float) -> void:
@@ -58,6 +56,10 @@ func _input(event: InputEvent) -> void:
 		joystick_mode = true
 	else:
 		joystick_mode = false
+
+
+func setup(lasso: LassoResource) -> void:
+	_change_lasso(lasso)
 
 
 func check_out_of_bounds() -> bool:
