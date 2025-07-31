@@ -11,8 +11,8 @@ var states: Dictionary = {}
 
 
 ## Initializes all the states included as children to this node. [br]
-## Requires a reference to the [CharacterBody2D], and an optional [AnimatedSprite2D] or [AnimationPlayer].
-func init(parent: CharacterBody2D, animation_node: Node = null) -> void:
+## Requires a reference to the [Node2D], and an optional [AnimatedSprite2D] or [AnimationPlayer].
+func setup(parent: Node2D, animation_node: Node = null) -> void:
 	var animations: Node = null
 	if animation_node is AnimatedSprite2D || animation_node is AnimationPlayer:
 		animations = animation_node

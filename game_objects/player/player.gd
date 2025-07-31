@@ -1,10 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
-const BASE_MOVE_SPEED: float = 300.0
+const BASE_MOVE_SPEED: float = 200.0
 const MAX_MOVE_SPEED: float = 300.0
 const BASE_MOVEMENT_DAMPING: float = 5.0
-const JUMP_VELOCITY: float = -400.0
+const JUMP_VELOCITY: float = -300.0
 const JUMP_CANCEL_FACTOR: float = 0.75
 const AIRBORNE_MOVEMENT_FACTOR: float = 250.0
 
@@ -15,18 +15,14 @@ var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gra
 var move_direction_x: float
 var is_jumping: bool
 # Inputs
+var aim_vector: Vector2
 var mouse_aim_vector: Vector2
+var joypad_aim_vector: Vector2
 var input_jump_held: bool
 var input_jump_just_pressed: bool
 var input_lasso_held: bool
 var input_lasso_just_pressed: bool
 var joystick_mode: bool
-# Lasso
-var aim_vector: Vector2
-var joypad_aim_vector: Vector2
-var lasso_hook_position: Vector2
-var lasso_hooked: bool
-var current_lasso_length: float
 
 @onready var visuals: Node2D = $Visuals
 @onready var aim_root: Node2D = %AimRoot
@@ -37,13 +33,14 @@ var current_lasso_length: float
 
 
 func _ready() -> void:
-	lasso_raycast.target_position *= lasso_range
-	lasso_controller.init(self)
+	lasso_controller.setup(self)
 
 
 func _process(_delta: float) -> void:
 	update_aim_position()
 	move_and_slide()
+	if check_out_of_bounds():
+		get_tree().reload_current_scene()
 
 
 func _physics_process(delta: float) -> void:
@@ -51,10 +48,6 @@ func _physics_process(delta: float) -> void:
 	get_inputs()
 	handle_jump()
 	handle_walking_movement(delta)
-	if input_lasso_just_pressed:
-		lasso_controller.throw_lasso()
-	if lasso_controller.thrown and not input_lasso_held:
-		lasso_controller.release_lasso()
 
 
 func _input(event: InputEvent) -> void:
@@ -62,6 +55,11 @@ func _input(event: InputEvent) -> void:
 		joystick_mode = true
 	else:
 		joystick_mode = false
+
+
+func check_out_of_bounds() -> bool:
+	if global_position.y > 5_000: return true
+	else: return false
 
 
 func get_inputs() -> void:
@@ -86,8 +84,8 @@ func update_aim_position() -> void:
 	if is_zero_approx(aim_vector.length_squared()):
 		direction_arrow.hide()
 	else:
-		lasso_controller.look_at(lasso_controller.global_position + aim_vector)
 		direction_arrow.look_at(aim_root.global_position + aim_vector)
+		lasso_controller.aim_direction = aim_vector
 
 
 func apply_gravity(delta: float, gravity: float = default_gravity) -> void:
@@ -105,46 +103,22 @@ func handle_walking_movement(delta: float) -> void:
 
 
 func handle_jump() -> void:
-	if input_jump_just_pressed and (is_on_floor() or lasso_controller.thrown) and not is_jumping:
+	if input_jump_just_pressed and is_on_floor() and not is_jumping:
 		velocity.y += JUMP_VELOCITY
-		lasso_controller.release_lasso()
 		is_jumping = true
 	if not input_jump_held and is_jumping:
 		velocity.y *= JUMP_CANCEL_FACTOR
 		is_jumping = false
 
 
-func try_lasso_grab() -> void:
-	if lasso_raycast.is_colliding():
-		print("lasso!")
-		lasso_hook_position = lasso_raycast.get_collision_point()
-		current_lasso_length = aim_root.global_position.distance_to(lasso_hook_position)
-		lasso_hooked = true
+## Wrapper for accessing the LassoController's change_lasso function with only a player reference.
+## Returns true if successful, false otherwise. Checks on the lasso_controller's state_machine first.
+func try_change_lasso(new_lasso: LassoResource) -> bool:
+	if lasso_controller.state_machine.current_state.name == "idle":
+		_change_lasso(new_lasso)
+		return true
+	return false
 
 
-# TODO: Lasso as a hold and release button combo instead of click = immediate lasso
-# 		Lasso point moves towards target point but is restricted by players distance, so if player moves away/ falls it doesnt reach?
-
-func swing(delta: float) -> void:
-	var radius = global_position - lasso_hook_position
-	var motion: Vector2 = velocity
-	if motion.length() < 0.01 or radius.length() < 10: return
-	var angle = acos(radius.dot(motion) / radius.length() * motion.length()) 
-	var radial_velocity = cos(angle) * motion.length()
-	motion += radius.normalized() * -radial_velocity
-	
-	if global_position.distance_to(lasso_hook_position) > current_lasso_length:
-		global_position = lasso_hook_position + radius.normalized() * current_lasso_length
-	
-	velocity = motion + ((lasso_hook_position - global_position).normalized() * 15000 * delta) * .975
-
-
-func release_lasso() -> void:
-	lasso_hooked = false
-
-
-#func flip_visuals_direction() -> void:
-	## Change visuals left/right orientation
-	#var move_sign = sign(velocity.x)
-	#if move_sign != 0:
-		#visuals.scale = Vector2(move_sign, 1)
+func _change_lasso(new_lasso: LassoResource) -> void:
+	lasso_controller.change_lasso(new_lasso)

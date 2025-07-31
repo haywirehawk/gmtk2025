@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://gwt1vja6sy86"]
+
+[ext_resource type="Texture2D" uid="uid://rdoh4po4mtug" path="res://resources/lassos/basic_lasso/assets/base_lasso_hitched.png" id="1_k04t4"]
+[ext_resource type="Script" uid="uid://btxfsae7n4opm" path="res://game_objects/components/lasso_hitch/lasso_hitch_component.gd" id="2_4ul6g"]
+
+[node name="LassoHitchComponent" type="Sprite2D"]
+visible = false
+texture = ExtResource("1_k04t4")
+script = ExtResource("2_4ul6g")
