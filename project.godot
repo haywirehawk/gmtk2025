@@ -15,6 +15,14 @@ run/main_scene="uid://dspgucdg0i66x"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://conoialec7bi6"
+
+[autoload]
+
+OptionsManager="*res://maps/Menus/Options_Manager.gd"
+
 [display]
 
 window/size/viewport_width=640

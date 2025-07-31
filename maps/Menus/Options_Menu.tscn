@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvhlk1kmxn4lj"]
+
+[ext_resource type="Script" uid="uid://bm3y8a4qnr6vw" path="res://maps/Menus/options_menu.gd" id="1_vhqai"]
+
+[node name="OptionsMenu" type="Node2D"]
+script = ExtResource("1_vhqai")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 144.0
+offset_top = 17.0
+offset_right = 503.0
+offset_bottom = 282.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="MasterVolLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Master Volume"
+scroll_active = false
+
+[node name="MasterVolSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="MusicVolLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Music Volume"
+scroll_active = false
+
+[node name="MusicVolSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="SFXVolLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Music Volume"
+scroll_active = false
+
+[node name="SFXVolSlider" type="HSlider" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Fullscreen Mode" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Fullscreen Mode"
+scroll_active = false
+
+[node name="FullscreenModeSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+selected = 1
+item_count = 3
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Boarderless"
+popup/item_1/id = 1
+popup/item_2/text = "Windowed"
+popup/item_2/id = 2
+
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/MasterVolSlider" to="." method="_on_master_vol_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer2/MusicVolSlider" to="." method="_on_music_vol_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer4/SFXVolSlider" to="." method="_on_sfx_vol_slider_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer3/FullscreenModeSelect" to="." method="_on_fullscreen_mode_select_item_selected"]
