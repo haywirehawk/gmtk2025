@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c752gnmyuhq6i" path="res://game_objects/camera/game_camera.tscn" id="3_i4lod"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwfj4"]
-size = Vector2(856, 122)
+size = Vector2(900, 100)
 
 [node name="TestMap1" type="Node"]
 
@@ -22,6 +22,7 @@ position = Vector2(-29, -2)
 shape = SubResource("RectangleShape2D_wwfj4")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+visible = false
 scale = Vector2(8, 1)
 texture = ExtResource("1_cjpbq")
 
@@ -35,8 +36,9 @@ position = Vector2(-29, -2)
 shape = SubResource("RectangleShape2D_wwfj4")
 
 [node name="Sprite2D" type="Sprite2D" parent="grabbablestatic"]
+visible = false
 modulate = Color(0.564706, 1, 0.552941, 1)
-scale = Vector2(8, 1)
+scale = Vector2(9, 1)
 texture = ExtResource("1_cjpbq")
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]

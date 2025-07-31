@@ -1,6 +1,6 @@
 extends Camera2D
 
-const MOTION_DAMPING: float = 40.0
+const MOTION_DAMPING: float = 3.0
 
 @export var target: Node2D
 

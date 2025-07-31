@@ -12,8 +12,6 @@ const AIRBORNE_MOVEMENT_FACTOR: float = 250.0
 # Movement
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var move_direction_x: float
-var aim_vector: Vector2
-var joypad_aim_vector: Vector2
 var is_jumping: bool
 # Inputs
 var mouse_aim_vector: Vector2
@@ -22,19 +20,26 @@ var input_jump_just_pressed: bool
 var input_lasso_held: bool
 var input_lasso_just_pressed: bool
 var joystick_mode: bool
+# Lasso
+var aim_vector: Vector2
+var joypad_aim_vector: Vector2
+var lasso_hook_position: Vector2
+var lasso_hooked: bool
+var current_lasso_length: float
 
 @onready var visuals: Node2D = $Visuals
 @onready var aim_root: Node2D = %AimRoot
-@onready var lasso_root: Node2D = %LassoRoot
 @onready var direction_arrow: Sprite2D = %DirectionArrow
+@onready var lasso_controller: Node2D = %LassoController
 @onready var lasso_raycast: RayCast2D = %LassoRaycast
+@onready var lasso_line: Line2D = %LassoLine
 
 
 func _ready() -> void:
 	lasso_raycast.target_position *= lasso_range
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_aim_position()
 	move_and_slide()
 
@@ -43,9 +48,13 @@ func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	get_inputs()
 	handle_jump()
-	handle_horizontal_movement(delta)
-	if input_lasso_just_pressed:
-		try_lasso_grab()
+	handle_walking_movement(delta)
+	#if input_lasso_just_pressed:
+		#try_lasso_grab()
+	#if lasso_hooked and input_lasso_held:
+		#swing(delta)
+	#elif lasso_hooked:
+		#release_lasso()
 
 
 func _input(event: InputEvent) -> void:
@@ -77,7 +86,7 @@ func update_aim_position() -> void:
 	if is_zero_approx(aim_vector.length_squared()):
 		direction_arrow.hide()
 	else:
-		lasso_root.look_at(lasso_root.global_position + aim_vector)
+		lasso_controller.look_at(lasso_controller.global_position + aim_vector)
 		direction_arrow.look_at(aim_root.global_position + aim_vector)
 
 
@@ -86,7 +95,7 @@ func apply_gravity(delta: float, gravity: float = default_gravity) -> void:
 		velocity.y += gravity * delta
 
 
-func handle_horizontal_movement(delta: float) -> void:
+func handle_walking_movement(delta: float) -> void:
 	if is_on_floor():
 		var target_velocity := move_direction_x * BASE_MOVE_SPEED
 		velocity.x = lerpf(velocity.x, target_velocity, 1 - exp(-BASE_MOVEMENT_DAMPING * delta))
@@ -107,7 +116,30 @@ func handle_jump() -> void:
 func try_lasso_grab() -> void:
 	if lasso_raycast.is_colliding():
 		print("lasso!")
-		var lasso_length = lasso_raycast.get_collision_point()
+		lasso_hook_position = lasso_raycast.get_collision_point()
+		current_lasso_length = aim_root.global_position.distance_to(lasso_hook_position)
+		lasso_hooked = true
+
+
+# TODO: Lasso as a hold and release button combo instead of click = immediate lasso
+# 		Lasso point moves towards target point but is restricted by players distance, so if player moves away/ falls it doesnt reach?
+
+func swing(delta: float) -> void:
+	var radius = global_position - lasso_hook_position
+	var motion: Vector2 = velocity
+	if motion.length() < 0.01 or radius.length() < 10: return
+	var angle = acos(radius.dot(motion) / radius.length() * motion.length()) 
+	var radial_velocity = cos(angle) * motion.length()
+	motion += radius.normalized() * -radial_velocity
+	
+	if global_position.distance_to(lasso_hook_position) > current_lasso_length:
+		global_position = lasso_hook_position + radius.normalized() * current_lasso_length
+	
+	velocity = motion + ((lasso_hook_position - global_position).normalized() * 15000 * delta) * .975
+
+
+func release_lasso() -> void:
+	lasso_hooked = false
 
 
 #func flip_visuals_direction() -> void:
