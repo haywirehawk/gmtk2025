@@ -1,0 +1,143 @@
+[gd_scene load_steps=22 format=3 uid="uid://b7j66qyrx0gp0"]
+
+[ext_resource type="Script" uid="uid://dd6d53vtfdelw" path="res://game_objects/enemy/enemy.gd" id="1_koftu"]
+[ext_resource type="Texture2D" uid="uid://cgyb56qn6vt6y" path="res://game_objects/enemy/spider/spider_start.png" id="2_a0j3f"]
+[ext_resource type="Texture2D" uid="uid://caiyu5tkrif40" path="res://game_objects/enemy/spider/spider_attack_1.png" id="3_luhsj"]
+[ext_resource type="Texture2D" uid="uid://nuopadoua71c" path="res://game_objects/enemy/spider/spider_attack_2.png" id="4_hc12o"]
+[ext_resource type="Texture2D" uid="uid://oq0t40ysuvmn" path="res://game_objects/enemy/spider/spider_idle_1.png" id="5_av5i8"]
+[ext_resource type="Script" uid="uid://bkswfck8okvcx" path="res://scripts/state_machine/state_machine.gd" id="5_je80a"]
+[ext_resource type="Texture2D" uid="uid://bed3d60by015g" path="res://game_objects/enemy/spider/spider_walk_1.png" id="6_e8l71"]
+[ext_resource type="Texture2D" uid="uid://c16pfcrt21w7v" path="res://game_objects/enemy/spider/spider_walk_2.png" id="7_gk7ow"]
+[ext_resource type="Texture2D" uid="uid://bhwx4pr3a2n2o" path="res://game_objects/enemy/spider/spider_walk_3.png" id="8_xd3k3"]
+[ext_resource type="Texture2D" uid="uid://cjvwsf0l7eayl" path="res://game_objects/enemy/spider/spider_walk_4.png" id="9_3cxfa"]
+[ext_resource type="PackedScene" uid="uid://cpqpp7ve1skp7" path="res://game_objects/components/health/health_component.tscn" id="10_a0j3f"]
+[ext_resource type="PackedScene" uid="uid://cgj4gtemd6bf7" path="res://game_objects/components/hitbox/hitbox_component.tscn" id="11_a0j3f"]
+[ext_resource type="PackedScene" uid="uid://b53rlrm08se48" path="res://game_objects/components/hurtbox/hurtbox_component.tscn" id="12_luhsj"]
+[ext_resource type="Script" uid="uid://3dptcunhmxbj" path="res://game_objects/enemy/enemy_idle.gd" id="14_luhsj"]
+[ext_resource type="Script" uid="uid://5xesclp0ls3a" path="res://game_objects/enemy/enemy_walk.gd" id="15_hc12o"]
+[ext_resource type="Script" uid="uid://dfvvtpwk4jiqj" path="res://game_objects/enemy/enemy_attack.gd" id="16_av5i8"]
+[ext_resource type="Script" uid="uid://dtjkalvqlwjh6" path="res://game_objects/enemy/enemy_spawn.gd" id="17_av5i8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tnl36"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a0j3f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_luhsj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hc12o")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a0j3f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_av5i8")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a0j3f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_e8l71")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gk7ow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xd3k3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3cxfa")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ew3r8"]
+size = Vector2(16, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_av5i8"]
+size = Vector2(16, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8l71"]
+size = Vector2(16, 10)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_koftu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tnl36")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ew3r8")
+
+[node name="HealthComponent" parent="." instance=ExtResource("10_a0j3f")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_collision_shape") instance=ExtResource("11_a0j3f")]
+collision_layer = 8
+damage = 1
+_collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_av5i8")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("12_luhsj")]
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_e8l71")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_je80a")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bkswfck8okvcx"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("14_luhsj")
+animation_name = "Idle"
+metadata/_custom_type_script = "uid://drjjmpmo11a5q"
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("15_hc12o")
+animation_name = "Walk"
+metadata/_custom_type_script = "uid://drjjmpmo11a5q"
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("16_av5i8")
+animation_name = "Attack"
+metadata/_custom_type_script = "uid://drjjmpmo11a5q"
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource("17_av5i8")
+animation_name = "Spawn"
+metadata/_custom_type_script = "uid://drjjmpmo11a5q"
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="TargetAcquisitionTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="AttackCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="ReadyAttackTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
