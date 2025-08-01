@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4sg4uooh0cls"]
+
+[ext_resource type="PackedScene" uid="uid://b7j66qyrx0gp0" path="res://game_objects/enemy/enemy.tscn" id="1_50m3c"]
+
+[node name="Spider" instance=ExtResource("1_50m3c")]
+near_target_distance = 5.0
+target_distance = 15.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+frame_progress = 0.600286
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 3)
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+position = Vector2(0, 3)
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, 3)
