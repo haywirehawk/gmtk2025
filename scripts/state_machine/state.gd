@@ -26,8 +26,7 @@ func init():
 ## Use [param super()] to use the base function (such as animations)
 ## in addition to extended class overrides.
 func enter() -> void:
-	if animations:
-		animations.play(animation_name)
+	pass
 
 
 ## Called when exiting this state.

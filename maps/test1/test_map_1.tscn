@@ -1,14 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://dspgucdg0i66x"]
+[gd_scene load_steps=11 format=3 uid="uid://dspgucdg0i66x"]
 
 [ext_resource type="Texture2D" uid="uid://4vbrdlx8amd1" path="res://icon.svg" id="1_cjpbq"]
+[ext_resource type="PackedScene" uid="uid://b574qxdeclqad" path="res://game_objects/manager/upgrade_manager/upgrade_manager.tscn" id="1_fyp3o"]
 [ext_resource type="PackedScene" uid="uid://bbs6thqicl6be" path="res://game_objects/player/player.tscn" id="2_i4lod"]
 [ext_resource type="PackedScene" uid="uid://p86bjl8eh3bk" path="res://game_objects/components/grabbable/grabbable_component.tscn" id="2_wwfj4"]
 [ext_resource type="PackedScene" uid="uid://c752gnmyuhq6i" path="res://game_objects/camera/game_camera.tscn" id="3_i4lod"]
+[ext_resource type="PackedScene" uid="uid://bt2iv73fklqb1" path="res://game_objects/collectable/upgrades/fire_upgrade/fire_upgrade.tscn" id="6_mdvf0"]
+[ext_resource type="PackedScene" uid="uid://d0nhuv8a8es4l" path="res://game_objects/collectable/upgrades/rubber_upgrade/rubber_upgrade.tscn" id="7_gfwpi"]
+[ext_resource type="PackedScene" uid="uid://d3s7a6g1gmhdt" path="res://game_objects/collectable/upgrades/ghost_upgrade/ghost_upgrade.tscn" id="8_55u35"]
+[ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="9_gfwpi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwfj4"]
 size = Vector2(900, 100)
 
 [node name="TestMap1" type="Node"]
+
+[node name="UpgradeManager" parent="." instance=ExtResource("1_fyp3o")]
 
 [node name="GameCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_i4lod")]
 target = NodePath("../Entities/Player")
@@ -17,14 +24,58 @@ target = NodePath("../Entities/Player")
 position = Vector2(240, 85)
 texture = ExtResource("1_cjpbq")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="groundstatic" type="StaticBody2D" parent="."]
 position = Vector2(318, 302)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="groundstatic"]
 shape = SubResource("RectangleShape2D_wwfj4")
 
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+[node name="ColorRect" type="ColorRect" parent="groundstatic"]
+custom_minimum_size = Vector2(900, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -50.0
+offset_right = 450.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.118146, 0.342449, 0.150929, 1)
+
+[node name="groundstatic2" type="StaticBody2D" parent="."]
+position = Vector2(1688, 306)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="groundstatic2"]
+shape = SubResource("RectangleShape2D_wwfj4")
+
+[node name="ColorRect" type="ColorRect" parent="groundstatic2"]
+custom_minimum_size = Vector2(900, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -50.0
+offset_right = 450.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.118146, 0.342449, 0.150929, 1)
+
+[node name="groundstatic3" type="StaticBody2D" parent="."]
+position = Vector2(944, 399)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="groundstatic3"]
+shape = SubResource("RectangleShape2D_wwfj4")
+
+[node name="ColorRect" type="ColorRect" parent="groundstatic3"]
 custom_minimum_size = Vector2(900, 100)
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,10 +125,13 @@ position = Vector2(-213, 64)
 position = Vector2(352, 182)
 
 [node name="GrabbableComponent5" parent="TestGrababbles" instance=ExtResource("2_wwfj4")]
-position = Vector2(578, 78)
+position = Vector2(504, 90)
 
 [node name="GrabbableComponent6" parent="TestGrababbles" instance=ExtResource("2_wwfj4")]
 position = Vector2(553, 259)
+
+[node name="GrabbableComponent7" parent="TestGrababbles" instance=ExtResource("2_wwfj4")]
+position = Vector2(-537, 151)
 
 [node name="GrabbableComponent3" parent="TestGrababbles" instance=ExtResource("2_wwfj4")]
 position = Vector2(-33, 51)
@@ -86,3 +140,15 @@ position = Vector2(-33, 51)
 
 [node name="Player" parent="Entities" instance=ExtResource("2_i4lod")]
 position = Vector2(267, 244)
+
+[node name="FireUpgrade" parent="Entities" instance=ExtResource("6_mdvf0")]
+position = Vector2(-110, 213)
+
+[node name="RubberUpgrade" parent="Entities" instance=ExtResource("7_gfwpi")]
+position = Vector2(834, 306)
+
+[node name="GhostUpgrade" parent="Entities" instance=ExtResource("8_55u35")]
+position = Vector2(532, 239)
+
+[node name="Upgrade" parent="Entities" instance=ExtResource("9_gfwpi")]
+position = Vector2(190, 243)

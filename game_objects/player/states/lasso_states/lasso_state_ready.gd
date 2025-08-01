@@ -36,7 +36,7 @@ func _play_ready_effects() -> void:
 		_shader_tween.kill()
 	
 	_shader_tween = create_tween()
-	_shader_tween.tween_property(parent.lasso_honda.material, "shader_parameter/flash_intensity", 0, 0.3)\
+	_shader_tween.tween_property(parent.lasso_honda_sprite.material, "shader_parameter/flash_intensity", 0, 0.3)\
 		.from(1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
 
 

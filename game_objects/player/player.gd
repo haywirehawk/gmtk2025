@@ -122,8 +122,10 @@ func animate_lasso_slack() -> void:
 ## Wrapper for accessing the LassoController's change_lasso function with only a player reference.
 ## Returns true if successful, false otherwise. Checks on the lasso_controller's state_machine first.
 func try_change_lasso(new_lasso: LassoResource) -> bool:
-	print(lasso_controller.state_machine.current_state.name)
-	if lasso_controller.state_machine.current_state.name.to_lower() == "idle":
+	if new_lasso == null: return false
+	
+	if lasso_controller.state_machine.current_state.name.to_lower() == "idle"\
+		or lasso_controller.state_machine.current_state.name.to_lower() == "locked":
 		_change_lasso(new_lasso)
 		return true
 	return false

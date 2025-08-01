@@ -5,6 +5,8 @@ var current_position: Vector2
 var max_distance: float
 var old_raycast_target: Vector2
 var old_honda_offset: Vector2
+var lasso_honda: CharacterBody2D
+var lasso_sprite: AnimatedSprite2D
 
 func enter() -> void:
 	old_raycast_target = parent.lasso_raycast.target_position
@@ -12,30 +14,37 @@ func enter() -> void:
 	parent.lasso_raycast.target_position = Vector2.ZERO
 	parent.lasso_raycast.force_raycast_update()
 	
-	old_honda_offset = parent.lasso_honda.offset
-	parent.lasso_honda.play("thrown")
-	parent.lasso_honda.show()
+	
+	lasso_honda = parent.lasso_honda_area
+	lasso_sprite = parent.lasso_honda_sprite
+	old_honda_offset = lasso_sprite.offset
+	lasso_sprite.play("thrown")
+	lasso_honda.show()
 	parent.lasso_line.show()
 	
 	max_distance = parent.max_length
-	current_position = parent.lasso_honda.global_position
+	current_position = lasso_honda.global_position
 	get_tree().create_timer(2.0).timeout.connect(_timer_timeout)
+	
+	#var direction = lasso_honda.global_position.direction_to(target).normalized()
+	#lasso_honda.velocity = direction * parent.throw_speed
 
 
 func exit() -> void:
-	parent.lasso_honda.hide()
-	parent.lasso_honda.stop()
-	parent.lasso_honda.position = Vector2.ZERO
-	parent.lasso_honda.offset = old_honda_offset
+	lasso_honda.hide()
+	parent.lasso_honda_sprite.stop()
+	lasso_honda.position = Vector2.ZERO
+	parent.lasso_honda_sprite.offset = old_honda_offset
 	parent.lasso_raycast.target_position = old_raycast_target
 	parent.reset_rope()
 
 
 func update(_delta: float) -> void:
 	var delta = get_process_delta_time()
-	parent.lasso_honda.global_position = current_position.move_toward(target, parent.throw_speed * 4 * delta)
-	parent.lasso_honda.offset = lerp(parent.lasso_honda.offset, Vector2(0, 0), 1- exp(-10 * delta))
-	current_position = parent.lasso_honda.global_position
+	lasso_honda.global_position = current_position.move_toward(target, parent.throw_speed * 2 * delta)
+	lasso_sprite.offset = lerp(lasso_sprite.offset, Vector2(0, 0), 1- exp(-10 * delta))
+	#lasso_honda.move_and_slide() # Some wonkiness with it being attached to the player
+	current_position = lasso_honda.global_position
 	var current_player_distance = parent.global_position.distance_to(current_position)
 	parent.lasso_raycast.target_position = Vector2.RIGHT * current_player_distance
 	
@@ -51,10 +60,6 @@ func update(_delta: float) -> void:
 		return
 	
 	parent.update_rope(0.0, current_position)
-
-
-func physics_update(_delta: float) -> void:
-	pass
 
 
 func _timer_timeout() -> void:
