@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="LassoResource" load_steps=6 format=3 uid="uid://c2w7a28n6wgi6"]
+[gd_resource type="Resource" script_class="LassoResource" load_steps=7 format=3 uid="uid://c2w7a28n6wgi6"]
 
 [ext_resource type="Texture2D" uid="uid://dx4xokayh3q8b" path="res://resources/lassos/fire_lasso/assets/fire_lasso_hitched.png" id="1_3wxh8"]
+[ext_resource type="PackedScene" uid="uid://crkjamiu85wp" path="res://game_objects/particles/fire/fire.tscn" id="2_8h74o"]
 [ext_resource type="SpriteFrames" uid="uid://bbhw1c478ptg3" path="res://resources/lassos/fire_lasso/fire_lasso_frames.tres" id="2_au2ue"]
 [ext_resource type="Texture2D" uid="uid://chchbf3342dos" path="res://resources/lassos/fire_lasso/assets/fire_lasso_segment.png" id="3_8h74o"]
 [ext_resource type="Texture2D" uid="uid://1as4e83okm7l" path="res://resources/lassos/fire_lasso/assets/fire_lasso_slack.png" id="3_au2ue"]
@@ -15,6 +16,7 @@ rope_texture = ExtResource("3_8h74o")
 hitched_texture = ExtResource("1_3wxh8")
 rope_honda_frames = ExtResource("2_au2ue")
 rope_slack_texture = ExtResource("3_au2ue")
+particles = ExtResource("2_8h74o")
 max_length = 80.0
 rest_length = 70.0
 throw_speed = 150.0

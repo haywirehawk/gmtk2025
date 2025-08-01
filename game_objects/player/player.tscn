@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bgx88nkg7ilmm" path="res://game_objects/player/states/lasso_states/lasso_state_ready.gd" id="3_kke0l"]
 [ext_resource type="Script" uid="uid://d2xmhmq8mvtfh" path="res://game_objects/player/lasso_controller.gd" id="4_f4exj"]
 [ext_resource type="Script" uid="uid://bkswfck8okvcx" path="res://scripts/state_machine/state_machine.gd" id="4_na85j"]
-[ext_resource type="Script" uid="uid://bwm2bgtxhbkem" path="res://game_objects/player/states/lasso_states/lasso_state_locked.gd" id="5_d4pf5"]
+[ext_resource type="Script" path="res://game_objects/player/states/lasso_states/lasso_state_locked.gd" id="5_d4pf5"]
 [ext_resource type="Script" uid="uid://dlytvej05y5wb" path="res://game_objects/player/states/lasso_states/lasso_state_throw.gd" id="5_o7l5b"]
 [ext_resource type="SpriteFrames" uid="uid://c4ed088crepqs" path="res://resources/lassos/basic_lasso/basic_lasso_frames.tres" id="6_b08t1"]
 [ext_resource type="Script" uid="uid://yxstrfumgx6p" path="res://game_objects/player/states/lasso_states/lasso_state_hitched.gd" id="6_cuamp"]

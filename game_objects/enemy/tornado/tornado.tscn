@@ -1,11 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0qvyu1crjo2y"]
+[gd_scene load_steps=9 format=3 uid="uid://b0qvyu1crjo2y"]
 
 [ext_resource type="Texture2D" uid="uid://b3s0onjqtcd08" path="res://game_objects/enemy/tornado/tornado.png" id="1_fmfmv"]
 [ext_resource type="Script" uid="uid://vtdf276wndwl" path="res://game_objects/enemy/tornado/tornado.gd" id="1_l0ex7"]
+[ext_resource type="Shader" uid="uid://cpdy4o1gkp8j5" path="res://game_objects/enemy/tornado/tornado.gdshader" id="2_n22e1"]
 [ext_resource type="Script" uid="uid://crrs6vyewl7u6" path="res://game_objects/components/hitbox/hitbox_component.gd" id="2_r242n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dx4xg"]
+shader = ExtResource("2_n22e1")
+shader_parameter/tile_scale = Vector2(2, 5)
+shader_parameter/pan_speed = Vector2(2, -1.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ex7"]
 size = Vector2(17.955, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3b81r"]
+shader = ExtResource("2_n22e1")
+shader_parameter/tile_scale = Vector2(2, 5)
+shader_parameter/pan_speed = Vector2(-2, -1.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n22e1"]
 size = Vector2(17.9198, 20)
@@ -17,6 +28,7 @@ script = ExtResource("1_l0ex7")
 wait_time = 3.0
 
 [node name="LeftSprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dx4xg")
 position = Vector2(0, 180)
 rotation = -0.141896
 scale = Vector2(20, -120.968)
@@ -32,10 +44,10 @@ metadata/_custom_type_script = "uid://crrs6vyewl7u6"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSprite2D/HitboxComponent"]
 position = Vector2(-1.02252, 0)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_l0ex7")
 
 [node name="RightSprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3b81r")
 position = Vector2(650, 180)
 rotation = 0.141372
 scale = Vector2(20, -120.969)
@@ -51,5 +63,4 @@ metadata/_custom_type_script = "uid://crrs6vyewl7u6"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightSprite2D/HitboxComponent"]
 position = Vector2(1.04009, -5.96046e-08)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_n22e1")
