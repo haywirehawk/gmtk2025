@@ -31,13 +31,18 @@ func update(_delta: float) -> void:
 		return
 
 
+func set_shader(value: float) -> void:
+	value = clamp(value, 0.0, 1.0)
+	parent.lasso_honda_sprite.material.set_shader_parameter("shader_parameter/flash_intensity", value)
+
+
 func _play_ready_effects() -> void:
 	if _shader_tween and _shader_tween.is_valid():
 		_shader_tween.kill()
 	
 	_shader_tween = create_tween()
-	_shader_tween.tween_property(parent.lasso_honda_sprite.material, "shader_parameter/flash_intensity", 0, 0.3)\
-		.from(1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
+	_shader_tween.tween_method(set_shader, 1, 0, 0.3)\
+	.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
 
 
 func _reset_variables() -> void:

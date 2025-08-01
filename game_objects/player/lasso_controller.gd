@@ -1,6 +1,8 @@
 class_name LassoController
 extends Node2D
 
+const DEFAULT_SHADER: Shader = preload("uid://bxa23hv7qmfki")
+
 @export var default_lasso: LassoResource
 # Lasso Stats
 var max_length = 120.0
@@ -62,6 +64,8 @@ func set_shaders_and_particles(lasso: LassoResource) -> void:
 	var new_material := ShaderMaterial.new()
 	if lasso.shader:
 		new_material.shader = lasso.shader
+	else:
+		new_material.shader = DEFAULT_SHADER
 	lasso_honda_sprite.material = new_material
 	lasso_slack.material = new_material
 	
