@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0qvyu1crjo2y"]
+
+[ext_resource type="Texture2D" uid="uid://b3s0onjqtcd08" path="res://game_objects/enemy/tornado/tornado.png" id="1_fmfmv"]
+[ext_resource type="Script" uid="uid://vtdf276wndwl" path="res://game_objects/enemy/tornado/tornado.gd" id="1_l0ex7"]
+[ext_resource type="Script" uid="uid://crrs6vyewl7u6" path="res://game_objects/components/hitbox/hitbox_component.gd" id="2_r242n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ex7"]
+size = Vector2(17.955, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n22e1"]
+size = Vector2(17.9198, 20)
+
+[node name="Tornado" type="CharacterBody2D"]
+script = ExtResource("1_l0ex7")
+
+[node name="MovementTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="LeftSprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 180)
+rotation = -0.141896
+scale = Vector2(20, -120.968)
+texture = ExtResource("1_fmfmv")
+
+[node name="HitboxComponent" type="Area2D" parent="LeftSprite2D" node_paths=PackedStringArray("_collision_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("2_r242n")
+damage = 5
+_collision_shape = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://crrs6vyewl7u6"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSprite2D/HitboxComponent"]
+position = Vector2(-1.02252, 0)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_l0ex7")
+
+[node name="RightSprite2D" type="Sprite2D" parent="."]
+position = Vector2(650, 180)
+rotation = 0.141372
+scale = Vector2(20, -120.969)
+texture = ExtResource("1_fmfmv")
+
+[node name="HitboxComponent" type="Area2D" parent="RightSprite2D" node_paths=PackedStringArray("_collision_shape")]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("2_r242n")
+damage = 5
+_collision_shape = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://crrs6vyewl7u6"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSprite2D/HitboxComponent"]
+position = Vector2(1.04009, -5.96046e-08)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_n22e1")

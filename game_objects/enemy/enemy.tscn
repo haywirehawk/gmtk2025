@@ -13,10 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://cpqpp7ve1skp7" path="res://game_objects/components/health/health_component.tscn" id="10_a0j3f"]
 [ext_resource type="PackedScene" uid="uid://cgj4gtemd6bf7" path="res://game_objects/components/hitbox/hitbox_component.tscn" id="11_a0j3f"]
 [ext_resource type="PackedScene" uid="uid://b53rlrm08se48" path="res://game_objects/components/hurtbox/hurtbox_component.tscn" id="12_luhsj"]
-[ext_resource type="Script" uid="uid://3dptcunhmxbj" path="res://game_objects/enemy/enemy_idle.gd" id="14_luhsj"]
-[ext_resource type="Script" uid="uid://5xesclp0ls3a" path="res://game_objects/enemy/enemy_walk.gd" id="15_hc12o"]
-[ext_resource type="Script" uid="uid://dfvvtpwk4jiqj" path="res://game_objects/enemy/enemy_attack.gd" id="16_av5i8"]
-[ext_resource type="Script" uid="uid://dtjkalvqlwjh6" path="res://game_objects/enemy/enemy_spawn.gd" id="17_av5i8"]
+[ext_resource type="Script" uid="uid://3dptcunhmxbj" path="res://game_objects/enemy/states/enemy_idle.gd" id="14_luhsj"]
+[ext_resource type="Script" uid="uid://5xesclp0ls3a" path="res://game_objects/enemy/states/enemy_walk.gd" id="15_hc12o"]
+[ext_resource type="Script" uid="uid://dfvvtpwk4jiqj" path="res://game_objects/enemy/states/enemy_attack.gd" id="16_av5i8"]
+[ext_resource type="Script" uid="uid://dtjkalvqlwjh6" path="res://game_objects/enemy/states/enemy_spawn.gd" id="17_av5i8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tnl36"]
 animations = [{
