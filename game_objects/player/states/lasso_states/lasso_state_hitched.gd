@@ -9,6 +9,7 @@ func enter() -> void:
 	hitch_component = hitch_component_scene.instantiate()
 	hitch_component.global_position = parent.target
 	hitch_component.origin_point = parent.global_position
+	hitch_component.sprite_texture = parent.hitched_texture
 	hitch_component.show()
 	get_tree().get_first_node_in_group("entities_layer").add_child(hitch_component)
 

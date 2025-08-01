@@ -13,7 +13,7 @@ var aim_direction: Vector2
 var target: Vector2
 var target_collider: Area2D
 var hitch_point: Node2D
-var hitched_sprite: Sprite2D
+var hitched_texture: Texture2D
 var is_hitched: bool
 var is_throwing: bool
 var strength_percent: float
@@ -48,6 +48,7 @@ func change_lasso(new_lasso: LassoResource) -> void:
 	lasso_honda.sprite_frames = new_lasso.rope_honda_frames
 	lasso_raycast.target_position = Vector2.RIGHT * max_length
 	lasso_slack.texture = new_lasso.rope_slack_texture
+	hitched_texture = new_lasso.hitched_texture
 
 
 func aim_lasso() -> void:
