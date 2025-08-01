@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="LassoResource" load_steps=5 format=3 uid="uid://cpsmdwr31ljb8"]
+[gd_resource type="Resource" script_class="LassoResource" load_steps=6 format=3 uid="uid://cpsmdwr31ljb8"]
 
 [ext_resource type="SpriteFrames" uid="uid://c4ed088crepqs" path="res://resources/lassos/basic_lasso/basic_lasso_frames.tres" id="1_lhe06"]
 [ext_resource type="Texture2D" uid="uid://rdoh4po4mtug" path="res://resources/lassos/basic_lasso/assets/base_lasso_hitched.png" id="1_t4vfq"]
 [ext_resource type="Script" uid="uid://bqwr6lu7hmc7b" path="res://resources/lassos/lasso.gd" id="1_wj4da"]
+[ext_resource type="Texture2D" uid="uid://cpiqxw4rf3ggd" path="res://resources/lassos/basic_lasso/assets/base_lasso_slack.png" id="3_2mcre"]
 [ext_resource type="Texture2D" uid="uid://l2lqgxmxref2" path="res://resources/lassos/basic_lasso/assets/base_lasso_segment.png" id="3_o8rhp"]
 
 [resource]
 script = ExtResource("1_wj4da")
 id = "basic"
-name = "Lasso"
-description = "Just a normal lasso."
+name = "Trusty Lasso"
+description = "Just a normal lasso that's been through a lot."
 rope_texture = ExtResource("3_o8rhp")
 hitched_texture = ExtResource("1_t4vfq")
 rope_honda_frames = ExtResource("1_lhe06")
+rope_slack_texture = ExtResource("3_2mcre")
 max_length = 80.0
 rest_length = 60.0
 throw_speed = 80.0

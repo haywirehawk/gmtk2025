@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="LassoResource" load_steps=5 format=3 uid="uid://cl1e47e3dxj5"]
+[gd_resource type="Resource" script_class="LassoResource" load_steps=6 format=3 uid="uid://cl1e47e3dxj5"]
 
-[ext_resource type="Texture2D" uid="uid://rdoh4po4mtug" path="res://resources/lassos/basic_lasso/assets/base_lasso_hitched.png" id="1_574es"]
-[ext_resource type="SpriteFrames" uid="uid://c4ed088crepqs" path="res://resources/lassos/basic_lasso/basic_lasso_frames.tres" id="2_tq0bu"]
-[ext_resource type="Texture2D" uid="uid://l2lqgxmxref2" path="res://resources/lassos/basic_lasso/assets/base_lasso_segment.png" id="3_c0gql"]
+[ext_resource type="Texture2D" uid="uid://whpmlpwxmgw3" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_hitched.png" id="1_oxng2"]
+[ext_resource type="SpriteFrames" uid="uid://blaswv6hlcsn6" path="res://resources/lassos/ghost_lasso/ghost_lasso_frames.tres" id="2_ci6wr"]
+[ext_resource type="Texture2D" uid="uid://cni14bnqmw2y" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_segment.png" id="3_ci6wr"]
+[ext_resource type="Texture2D" uid="uid://cokvdjhfbio85" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_slack.png" id="3_xpkua"]
 [ext_resource type="Script" uid="uid://bqwr6lu7hmc7b" path="res://resources/lassos/lasso.gd" id="4_aqjc4"]
 
 [resource]
 script = ExtResource("4_aqjc4")
-id = "basic"
-name = "Lasso"
-description = "Just a normal lasso."
-rope_texture = ExtResource("3_c0gql")
-hitched_texture = ExtResource("1_574es")
-rope_honda_frames = ExtResource("2_tq0bu")
+id = "ghost"
+name = "Ghost Lasso"
+description = "This lasso is very light, almost like it's not even real."
+rope_texture = ExtResource("3_ci6wr")
+hitched_texture = ExtResource("1_oxng2")
+rope_honda_frames = ExtResource("2_ci6wr")
+rope_slack_texture = ExtResource("3_xpkua")
 max_length = 120.0
 rest_length = 100.0
 throw_speed = 80.0

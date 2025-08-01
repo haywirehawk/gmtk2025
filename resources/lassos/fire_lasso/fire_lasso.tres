@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="LassoResource" load_steps=5 format=3 uid="uid://c2w7a28n6wgi6"]
+[gd_resource type="Resource" script_class="LassoResource" load_steps=6 format=3 uid="uid://c2w7a28n6wgi6"]
 
-[ext_resource type="Texture2D" uid="uid://rdoh4po4mtug" path="res://resources/lassos/basic_lasso/assets/base_lasso_hitched.png" id="1_m3gcd"]
-[ext_resource type="SpriteFrames" uid="uid://c4ed088crepqs" path="res://resources/lassos/basic_lasso/basic_lasso_frames.tres" id="2_huko7"]
-[ext_resource type="Texture2D" uid="uid://l2lqgxmxref2" path="res://resources/lassos/basic_lasso/assets/base_lasso_segment.png" id="3_vv6vv"]
+[ext_resource type="Texture2D" uid="uid://dx4xokayh3q8b" path="res://resources/lassos/fire_lasso/assets/fire_lasso_hitched.png" id="1_3wxh8"]
+[ext_resource type="SpriteFrames" uid="uid://bbhw1c478ptg3" path="res://resources/lassos/fire_lasso/fire_lasso_frames.tres" id="2_au2ue"]
+[ext_resource type="Texture2D" uid="uid://chchbf3342dos" path="res://resources/lassos/fire_lasso/assets/fire_lasso_segment.png" id="3_8h74o"]
+[ext_resource type="Texture2D" uid="uid://1as4e83okm7l" path="res://resources/lassos/fire_lasso/assets/fire_lasso_slack.png" id="3_au2ue"]
 [ext_resource type="Script" uid="uid://bqwr6lu7hmc7b" path="res://resources/lassos/lasso.gd" id="4_a2tum"]
 
 [resource]
 script = ExtResource("4_a2tum")
-id = "basic"
-name = "Lasso"
-description = "Just a normal lasso."
-rope_texture = ExtResource("3_vv6vv")
-hitched_texture = ExtResource("1_m3gcd")
-rope_honda_frames = ExtResource("2_huko7")
+id = "fire"
+name = "Fire Lasso"
+description = "I always knew I had the hottest rope game in town."
+rope_texture = ExtResource("3_8h74o")
+hitched_texture = ExtResource("1_3wxh8")
+rope_honda_frames = ExtResource("2_au2ue")
+rope_slack_texture = ExtResource("3_au2ue")
 max_length = 60.0
 rest_length = 50.0
 throw_speed = 100.0

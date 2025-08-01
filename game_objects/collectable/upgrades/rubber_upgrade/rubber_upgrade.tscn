@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0nhuv8a8es4l"]
+
+[ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="1_w4qcc"]
+[ext_resource type="Resource" uid="uid://taf60tl0c3yx" path="res://resources/lassos/rubber_lasso/rubber_lasso.tres" id="2_g5ucu"]
+
+[node name="RubberUpgrade" instance=ExtResource("1_w4qcc")]
+modulate = Color(1, 0.666667, 1, 1)
+lasso = ExtResource("2_g5ucu")

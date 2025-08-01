@@ -1,41 +1,41 @@
 [gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bbhw1c478ptg3"]
 
-[ext_resource type="Texture2D" uid="uid://f1tv82gfhc6a" path="res://resources/lassos/basic_lasso/assets/base_lasso.png" id="1_y0j74"]
+[ext_resource type="Texture2D" uid="uid://dtcr3l0ul8vtk" path="res://resources/lassos/fire_lasso/assets/fire_lasso.png" id="1_6f4uk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2bmxs"]
-atlas = ExtResource("1_y0j74")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ud6i"]
+atlas = ExtResource("1_6f4uk")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wkgei"]
-atlas = ExtResource("1_y0j74")
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4gqa"]
+atlas = ExtResource("1_6f4uk")
 region = Rect2(0, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5tmce"]
-atlas = ExtResource("1_y0j74")
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mcn7"]
+atlas = ExtResource("1_6f4uk")
 region = Rect2(0, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yifxy"]
-atlas = ExtResource("1_y0j74")
+[sub_resource type="AtlasTexture" id="AtlasTexture_yww2c"]
+atlas = ExtResource("1_6f4uk")
 region = Rect2(0, 48, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_db7n2"]
-atlas = ExtResource("1_y0j74")
+[sub_resource type="AtlasTexture" id="AtlasTexture_pntfu"]
+atlas = ExtResource("1_6f4uk")
 region = Rect2(16, 16, 16, 16)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2bmxs")
+"texture": SubResource("AtlasTexture_6ud6i")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wkgei")
+"texture": SubResource("AtlasTexture_o4gqa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5tmce")
+"texture": SubResource("AtlasTexture_2mcn7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yifxy")
+"texture": SubResource("AtlasTexture_yww2c")
 }],
 "loop": true,
 "name": &"default",
@@ -43,7 +43,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_db7n2")
+"texture": SubResource("AtlasTexture_pntfu")
 }],
 "loop": true,
 "name": &"thrown",

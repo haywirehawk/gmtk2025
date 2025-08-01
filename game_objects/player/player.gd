@@ -8,9 +8,6 @@ const JUMP_VELOCITY: float = -250.0
 const JUMP_CANCEL_FACTOR: float = 0.75
 const AIRBORNE_MOVEMENT_FACTOR: float = 250.0
 
-# TODO: Remove, for testing only
-@export var starting_lasso: LassoResource
-
 # Movement
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var move_direction_x: float
@@ -29,18 +26,18 @@ var joystick_mode: bool
 @onready var aim_root: Node2D = %AimRoot
 @onready var direction_arrow: Sprite2D = %DirectionArrow
 @onready var lasso_controller: LassoController = %LassoController
-@onready var lasso_raycast: RayCast2D = %LassoRaycast
-@onready var lasso_line: Line2D = %LassoLine
+@onready var equip_root: Node2D = %EquipRoot
 
 
 func _ready() -> void:
 	lasso_controller.setup(self)
-	_change_lasso(starting_lasso)
+	GameEvents.emit_player_spawned(self)
 
 
 func _process(_delta: float) -> void:
 	update_aim_position()
 	move_and_slide()
+	animate_lasso_slack()
 	if check_out_of_bounds():
 		get_tree().reload_current_scene()
 
@@ -117,10 +114,16 @@ func handle_jump() -> void:
 		is_jumping = false
 
 
+func animate_lasso_slack() -> void:
+	var percent := velocity.x / MAX_MOVE_SPEED
+	equip_root.rotation_degrees = 60.0 * percent
+
+
 ## Wrapper for accessing the LassoController's change_lasso function with only a player reference.
 ## Returns true if successful, false otherwise. Checks on the lasso_controller's state_machine first.
 func try_change_lasso(new_lasso: LassoResource) -> bool:
-	if lasso_controller.state_machine.current_state.name == "idle":
+	print(lasso_controller.state_machine.current_state.name)
+	if lasso_controller.state_machine.current_state.name.to_lower() == "idle":
 		_change_lasso(new_lasso)
 		return true
 	return false

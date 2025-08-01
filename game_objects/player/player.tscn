@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dfc77vxsgp2f4" path="res://game_objects/player/player.gd" id="1_jcgnw"]
 [ext_resource type="PackedScene" uid="uid://cpqpp7ve1skp7" path="res://game_objects/components/health/health_component.tscn" id="2_3g2qd"]
-[ext_resource type="Resource" uid="uid://c2w7a28n6wgi6" path="res://resources/lassos/fire_lasso/fire_lasso.tres" id="2_d4pf5"]
 [ext_resource type="Texture2D" uid="uid://b5i7k7oayc3xp" path="res://game_objects/player/arrow.png" id="3_gnf7o"]
 [ext_resource type="Script" uid="uid://dvcdhgkg4nk1l" path="res://game_objects/player/states/lasso_states/lasso_state_idle.gd" id="3_kc3ei"]
 [ext_resource type="Script" uid="uid://bgx88nkg7ilmm" path="res://game_objects/player/states/lasso_states/lasso_state_ready.gd" id="3_kke0l"]
@@ -17,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b53rlrm08se48" path="res://game_objects/components/hurtbox/hurtbox_component.tscn" id="10_d4pf5"]
 [ext_resource type="Texture2D" uid="uid://dqitiwxht8r11" path="res://game_objects/player/Cowboy.png" id="10_kc3ei"]
 [ext_resource type="Shader" uid="uid://bxa23hv7qmfki" path="res://resources/shaders/flash.gdshader" id="14_o7l5b"]
+[ext_resource type="Texture2D" uid="uid://cpiqxw4rf3ggd" path="res://resources/lassos/basic_lasso/assets/base_lasso_slack.png" id="17_d4pf5"]
 
 [sub_resource type="Animation" id="Animation_kke0l"]
 length = 0.001
@@ -168,7 +168,6 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 platform_floor_layers = 4294967263
 script = ExtResource("1_jcgnw")
-starting_lasso = ExtResource("2_d4pf5")
 
 [node name="LassoAnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -266,7 +265,7 @@ collide_with_areas = true
 unique_name_in_owner = true
 texture_repeat = 2
 material = SubResource("ShaderMaterial_cuamp")
-width = 4.0
+width = 2.0
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2
@@ -286,3 +285,12 @@ offset = Vector2(0, -8)
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_cuamp")
+
+[node name="EquipRoot" type="Node2D" parent="Visuals"]
+unique_name_in_owner = true
+position = Vector2(-3, -5)
+
+[node name="LassoSlack" type="Sprite2D" parent="Visuals/EquipRoot"]
+unique_name_in_owner = true
+texture = ExtResource("17_d4pf5")
+offset = Vector2(0, 2)

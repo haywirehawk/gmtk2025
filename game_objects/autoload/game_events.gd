@@ -1,8 +1,22 @@
 extends Node
 
-
+signal player_spawned(player: Player)
+signal lasso_acquired(lasso: LassoResource)
+signal lasso_equipped(lasso: LassoResource)
 signal player_inventory_changed(inventory: Dictionary)
 signal player_inventory_add_to(item: InventoryObject, count: int)
+
+
+func emit_player_spawned(player: Player) -> void:
+	player_spawned.emit(player)
+
+
+func emit_lasso_acquired(lasso: LassoResource) -> void:
+	lasso_acquired.emit(lasso)
+
+
+func emit_lasso_equipped(lasso: LassoResource) -> void:
+	lasso_equipped.emit(lasso)
 
 
 func emit_player_inventory_changed(current_inventory: Dictionary):

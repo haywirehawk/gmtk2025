@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt2iv73fklqb1"]
+
+[ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="1_xp5st"]
+[ext_resource type="Resource" uid="uid://c2w7a28n6wgi6" path="res://resources/lassos/fire_lasso/fire_lasso.tres" id="2_kukxa"]
+
+[node name="FireUpgrade" instance=ExtResource("1_xp5st")]
+modulate = Color(1, 0.516667, 0, 1)
+lasso = ExtResource("2_kukxa")

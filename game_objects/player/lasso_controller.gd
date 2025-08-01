@@ -22,8 +22,9 @@ var strength_percent: float
 @onready var animation_player: AnimationPlayer = %LassoAnimationPlayer
 @onready var lasso_raycast: RayCast2D = %LassoRaycast
 @onready var lasso_line: Line2D = %LassoLine
-@onready var lasso_honda: AnimatedSprite2D = %LassoHonda
 @onready var lasso_root: Node2D = %LassoRoot
+@onready var lasso_honda: AnimatedSprite2D = %LassoHonda
+@onready var lasso_slack: Sprite2D = %LassoSlack
 
 
 func _ready() -> void:
@@ -34,7 +35,7 @@ func _ready() -> void:
 
 func setup(_player: Player) -> void:
 	player = _player
-	state_machine.setup(%LassoController, animation_player)
+	state_machine.setup(self, animation_player)
 
 
 func change_lasso(new_lasso: LassoResource) -> void:
@@ -46,6 +47,7 @@ func change_lasso(new_lasso: LassoResource) -> void:
 	lasso_line.texture = new_lasso.rope_texture
 	lasso_honda.sprite_frames = new_lasso.rope_honda_frames
 	lasso_raycast.target_position = Vector2.RIGHT * max_length
+	lasso_slack.texture = new_lasso.rope_slack_texture
 
 
 func aim_lasso() -> void:

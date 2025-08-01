@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="LassoResource" load_steps=5 format=3 uid="uid://taf60tl0c3yx"]
+[gd_resource type="Resource" script_class="LassoResource" load_steps=6 format=3 uid="uid://taf60tl0c3yx"]
 
-[ext_resource type="Texture2D" uid="uid://rdoh4po4mtug" path="res://resources/lassos/basic_lasso/assets/base_lasso_hitched.png" id="1_6ep0h"]
-[ext_resource type="SpriteFrames" uid="uid://c4ed088crepqs" path="res://resources/lassos/basic_lasso/basic_lasso_frames.tres" id="2_btjen"]
-[ext_resource type="Texture2D" uid="uid://l2lqgxmxref2" path="res://resources/lassos/basic_lasso/assets/base_lasso_segment.png" id="3_0x53v"]
+[ext_resource type="Texture2D" uid="uid://b2f3aailkebk1" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_hitched.png" id="1_lqisg"]
+[ext_resource type="SpriteFrames" uid="uid://ba7p7l1kmkv03" path="res://resources/lassos/rubber_lasso/rubber_lasso_frames.tres" id="2_lqisg"]
+[ext_resource type="Texture2D" uid="uid://byhupsk5h884f" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_segment.png" id="3_dtqjj"]
+[ext_resource type="Texture2D" uid="uid://b4h5ev0ccox2b" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_slack.png" id="3_h8xeh"]
 [ext_resource type="Script" uid="uid://bqwr6lu7hmc7b" path="res://resources/lassos/lasso.gd" id="4_tbshl"]
 
 [resource]
 script = ExtResource("4_tbshl")
-id = "basic"
-name = "Lasso"
-description = "Just a normal lasso."
-rope_texture = ExtResource("3_0x53v")
-hitched_texture = ExtResource("1_6ep0h")
-rope_honda_frames = ExtResource("2_btjen")
+id = "rubber"
+name = "Bungee Lasso"
+description = "This lasso is very stretchy, as if it has the properties of rubber."
+rope_texture = ExtResource("3_dtqjj")
+hitched_texture = ExtResource("1_lqisg")
+rope_honda_frames = ExtResource("2_lqisg")
+rope_slack_texture = ExtResource("3_h8xeh")
 max_length = 140.0
 rest_length = 30.0
 throw_speed = 60.0
