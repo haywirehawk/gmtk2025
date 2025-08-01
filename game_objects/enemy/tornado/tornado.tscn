@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0qvyu1crjo2y"]
+[gd_scene load_steps=10 format=3 uid="uid://b0qvyu1crjo2y"]
 
 [ext_resource type="Texture2D" uid="uid://b3s0onjqtcd08" path="res://game_objects/enemy/tornado/tornado.png" id="1_fmfmv"]
 [ext_resource type="Script" uid="uid://vtdf276wndwl" path="res://game_objects/enemy/tornado/tornado.gd" id="1_l0ex7"]
-[ext_resource type="Shader" uid="uid://cpdy4o1gkp8j5" path="res://game_objects/enemy/tornado/tornado.gdshader" id="2_n22e1"]
+[ext_resource type="Shader" path="res://game_objects/enemy/tornado/tornado.gdshader" id="2_n22e1"]
 [ext_resource type="Script" uid="uid://crrs6vyewl7u6" path="res://game_objects/components/hitbox/hitbox_component.gd" id="2_r242n"]
+[ext_resource type="Script" uid="uid://b84qtrax4ql6" path="res://game_objects/enemy/tornado/tornado_sprite_2d.gd" id="4_dx4xg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dx4xg"]
 shader = ExtResource("2_n22e1")
@@ -33,6 +34,7 @@ position = Vector2(0, 180)
 rotation = -0.141896
 scale = Vector2(20, -120.968)
 texture = ExtResource("1_fmfmv")
+script = ExtResource("4_dx4xg")
 
 [node name="HitboxComponent" type="Area2D" parent="LeftSprite2D" node_paths=PackedStringArray("_collision_shape")]
 collision_layer = 8
@@ -52,6 +54,7 @@ position = Vector2(650, 180)
 rotation = 0.141372
 scale = Vector2(20, -120.969)
 texture = ExtResource("1_fmfmv")
+script = ExtResource("4_dx4xg")
 
 [node name="HitboxComponent" type="Area2D" parent="RightSprite2D" node_paths=PackedStringArray("_collision_shape")]
 collision_layer = 8
