@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://caa770o25ysc7"]
+
+[ext_resource type="Script" uid="uid://yfl0syu1vlnc" path="res://game_objects/manager/game_manager/game_manager.gd" id="1_xiaf6"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_xiaf6")
+
+[node name="DoomStartTimer" type="Timer" parent="."]
+unique_name_in_owner = true

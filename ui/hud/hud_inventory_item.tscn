@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bkgs7rq2vqrtv"]
+
+[node name="HUDInventoryItem" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2

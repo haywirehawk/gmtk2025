@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bbhw1c478ptg3"]
 
-[ext_resource type="Texture2D" uid="uid://dtcr3l0ul8vtk" path="res://resources/lassos/fire_lasso/assets/fire_lasso.png" id="1_6f4uk"]
+[ext_resource type="Texture2D" uid="uid://buf0qq04r7frf" path="res://resources/lassos/fire_lasso/assets/fire_lasso.png" id="1_6f4uk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ud6i"]
 atlas = ExtResource("1_6f4uk")

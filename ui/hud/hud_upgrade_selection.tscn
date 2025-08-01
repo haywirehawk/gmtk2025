@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://ck64syesq4jbj"]
+
+[ext_resource type="Script" uid="uid://dh8tah1mk6noi" path="res://ui/hud/hud_upgrade_selection.gd" id="1_10crl"]
+[ext_resource type="Texture2D" uid="uid://dx4xokayh3q8b" path="res://resources/lassos/fire_lasso/assets/fire_lasso_hitched.png" id="2_x2xf6"]
+[ext_resource type="Texture2D" uid="uid://b2wl34kljek2m" path="res://ui/assets/ui9slices.png" id="3_v37fr"]
+[ext_resource type="Texture2D" uid="uid://rdoh4po4mtug" path="res://resources/lassos/basic_lasso/assets/base_lasso_hitched.png" id="4_31k0g"]
+[ext_resource type="Texture2D" uid="uid://whpmlpwxmgw3" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_hitched.png" id="5_gp4xj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i1iw"]
+atlas = ExtResource("3_v37fr")
+region = Rect2(51, 18, 11, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijaek"]
+atlas = ExtResource("3_v37fr")
+region = Rect2(32, 16, 16, 16)
+
+[node name="EquipmentContainer" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_10crl")
+
+[node name="PreviousContainer" type="AspectRatioContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="PreviousTexture" type="TextureRect" parent="PreviousContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_x2xf6")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="PreviousContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7i1iw")
+
+[node name="CurrentContainer" type="AspectRatioContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="CurrentTexture" type="TextureRect" parent="CurrentContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_31k0g")
+
+[node name="TextureRect3" type="TextureRect" parent="CurrentContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ijaek")
+
+[node name="NextContainer" type="AspectRatioContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="NextTexture" type="TextureRect" parent="NextContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_gp4xj")
+
+[node name="TextureRect" type="TextureRect" parent="NextContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7i1iw")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://cmy4xujejhlfw"]
+
+[ext_resource type="PackedScene" uid="uid://c1hg8vg83s6wv" path="res://ui/hud/hud.tscn" id="1_5gfxk"]
+[ext_resource type="PackedScene" uid="uid://c752gnmyuhq6i" path="res://game_objects/camera/game_camera.tscn" id="1_wcb2u"]
+[ext_resource type="PackedScene" uid="uid://b574qxdeclqad" path="res://game_objects/manager/upgrade_manager/upgrade_manager.tscn" id="2_a7cji"]
+[ext_resource type="PackedScene" uid="uid://caa770o25ysc7" path="res://game_objects/manager/game_manager/game_manager.tscn" id="2_n1a2d"]
+[ext_resource type="PackedScene" uid="uid://ba5arjpbjqef0" path="res://game_objects/manager/inventory_manager.tscn" id="4_7ucyl"]
+[ext_resource type="PackedScene" uid="uid://b0qvyu1crjo2y" path="res://game_objects/enemy/tornado/tornado.tscn" id="5_5gfxk"]
+[ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="7_hjb1d"]
+[ext_resource type="PackedScene" uid="uid://bt2iv73fklqb1" path="res://game_objects/collectable/upgrades/fire_upgrade/fire_upgrade.tscn" id="8_xwlcu"]
+[ext_resource type="PackedScene" uid="uid://d3s7a6g1gmhdt" path="res://game_objects/collectable/upgrades/ghost_upgrade/ghost_upgrade.tscn" id="9_4s324"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ucyl"]
+size = Vector2(800, 20)
+
+[node name="MainMap" type="Node"]
+
+[node name="HUD" parent="." node_paths=PackedStringArray("inventory_manager", "upgrade_manager") instance=ExtResource("1_5gfxk")]
+inventory_manager = NodePath("../InventoryManager")
+upgrade_manager = NodePath("../UpgradeManager")
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("camera", "hud", "upgrade_manager", "spawn_location") instance=ExtResource("2_n1a2d")]
+camera = NodePath("../GameCamera")
+hud = NodePath("../HUD")
+upgrade_manager = NodePath("../UpgradeManager")
+spawn_location = NodePath("../PlayerSpawn")
+
+[node name="UpgradeManager" parent="." instance=ExtResource("2_a7cji")]
+
+[node name="InventoryManager" parent="." instance=ExtResource("4_7ucyl")]
+
+[node name="GameCamera" parent="." instance=ExtResource("1_wcb2u")]
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment"]
+position = Vector2(346, 356)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/StaticBody2D"]
+shape = SubResource("RectangleShape2D_7ucyl")
+
+[node name="Tornado" parent="." instance=ExtResource("5_5gfxk")]
+
+[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+
+[node name="Upgrade" parent="Entities" instance=ExtResource("7_hjb1d")]
+position = Vector2(375, 329)
+
+[node name="FireUpgrade" parent="Entities" instance=ExtResource("8_xwlcu")]
+position = Vector2(244, 326)
+
+[node name="GhostUpgrade" parent="Entities" instance=ExtResource("9_4s324")]
+position = Vector2(452, 315)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(326, 301)

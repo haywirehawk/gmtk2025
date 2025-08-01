@@ -1,3 +1,4 @@
+class_name GameCamera
 extends Camera2D
 
 const MOTION_DAMPING: float = 3.0
@@ -12,6 +13,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	follow_target(delta)
+
+
+func assign_target(new_target: Node2D) -> void:
+	target = new_target
 
 
 func follow_target(delta: float) -> void:

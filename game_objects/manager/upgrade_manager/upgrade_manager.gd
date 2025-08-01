@@ -5,8 +5,6 @@ extends Node
 #signal lasso_equipped(lasso: LassoResource)
 signal lassos_updated
 
-@export var starting_lasso: LassoResource
-
 var player: Player
 var _current_lasso_collection: Array[LassoResource]
 var _current_index: int
@@ -34,7 +32,6 @@ func get_current_lasso(try_index: int = -1) -> LassoResource:
 	
 	var index := try_index if try_index >= 0 and try_index < _current_lasso_collection.size() else _current_index
 	var lasso := _current_lasso_collection[index]
-	print("Selected %s at index %d" % [lasso.title, _current_index])
 	return lasso
 
 
@@ -48,9 +45,10 @@ func get_next_lasso(set_current: bool = true) -> LassoResource:
 	else:
 		temp_index += 1
 	
+	var lasso := get_current_lasso(temp_index)
 	if set_current:
 		_current_index = temp_index
-	return get_current_lasso()
+	return lasso
 
 
 func get_previous_lasso(set_current: bool = true) -> LassoResource:
@@ -63,9 +61,14 @@ func get_previous_lasso(set_current: bool = true) -> LassoResource:
 	else:
 		temp_index -= 1
 	
+	var lasso := get_current_lasso(temp_index)
 	if set_current:
 		_current_index = temp_index
-	return get_current_lasso()
+	return lasso
+
+
+func get_collection_size() -> int:
+	return _current_lasso_collection.size()
 
 
 func _on_player_spawned(active_player: Player) -> void:
