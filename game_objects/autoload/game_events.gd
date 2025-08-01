@@ -6,6 +6,7 @@ signal lasso_equipped(lasso: LassoResource)
 signal player_inventory_changed(inventory: Dictionary)
 signal player_inventory_add_to(item: InventoryObject, count: int)
 signal enemy_died
+signal tornado_hit(hit_direction: Vector2)
 
 
 func emit_player_spawned(player: Player) -> void:
@@ -30,3 +31,7 @@ func emit_player_inventory_add_to(item: InventoryObject, count: int):
 
 func emit_enemy_died() -> void:
 	enemy_died.emit()
+
+
+func emit_tornado_hit(hit_direction: Vector2) -> void:
+	tornado_hit.emit(hit_direction)

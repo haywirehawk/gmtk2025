@@ -7,6 +7,8 @@ extends CharacterBody2D
 
 @onready var left_side: TornadoSprite = $LeftSprite2D
 @onready var right_side: TornadoSprite = $RightSprite2D
+@onready var left_hitbox: HitboxComponent = $LeftSprite2D/HitboxComponent
+@onready var right_hitbox: HitboxComponent = $RightSprite2D/HitboxComponent
 
 
 var movement_timer: Timer
@@ -18,6 +20,8 @@ func _ready() -> void:
 	movement_timer = $MovementTimer
 	movement_timer.timeout.connect(_update_direction)
 	movement_timer.start()
+	left_hitbox.successful_hit.connect(_tornado_hit)
+	right_hitbox.successful_hit.connect(_tornado_hit)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,3 +48,7 @@ func _move_sides_closer() -> void:
 func _move_sides_farther() -> void:
 	left_side.move(spread_speed, -1)
 	right_side.move(spread_speed, 1)
+
+
+func _tornado_hit(hit_direction: Vector2) -> void:
+	GameEvents.tornado_hit.emit(hit_direction)
