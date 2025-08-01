@@ -310,7 +310,8 @@ collision_layer = 0
 motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/LassoController/LassoRoot/LassoHondaArea"]
-position = Vector2(0, -8)
+visible = false
+position = Vector2(0, -4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_d4pf5")
 

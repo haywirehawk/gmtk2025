@@ -19,6 +19,8 @@ var is_hitched: bool
 var is_throwing: bool
 var strength_percent: float
 
+var particles_array: Array[Node]
+
 @onready var state_machine: StateMachine = %LassoStateMachine
 @onready var animation_player: AnimationPlayer = %LassoAnimationPlayer
 @onready var lasso_raycast: RayCast2D = %LassoRaycast
@@ -50,8 +52,30 @@ func change_lasso(new_lasso: LassoResource) -> void:
 	lasso_slack.texture = new_lasso.rope_slack_texture
 	hitched_texture = new_lasso.hitched_texture
 	
+	set_shaders_and_particles(new_lasso)
+	
 	if state_machine.current_state.name.to_lower() == "locked":
 		state_machine.change_state("idle")
+
+
+func set_shaders_and_particles(lasso: LassoResource) -> void:
+	var new_material := ShaderMaterial.new()
+	if lasso.shader:
+		new_material.shader = lasso.shader
+	lasso_honda_sprite.material = new_material
+	lasso_slack.material = new_material
+	
+	for node in particles_array:
+		node.queue_free()
+	particles_array.clear()
+	
+	if lasso.particles:
+		var particles1: Node = lasso.particles.instantiate()
+		var particles2: Node = lasso.particles.instantiate()
+		lasso_honda_area.add_child(particles1)
+		lasso_slack.add_child(particles2)
+		particles_array.append(particles1)
+		particles_array.append(particles2)
 
 
 func aim_lasso() -> void:

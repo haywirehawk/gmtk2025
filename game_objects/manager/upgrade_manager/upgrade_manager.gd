@@ -1,8 +1,8 @@
 class_name UpgradeManager
 extends Node
 
-signal new_lasso_acquired
-signal lasso_equipped(lasso: LassoResource)
+#signal new_lasso_acquired
+#signal lasso_equipped(lasso: LassoResource)
 signal lassos_updated
 
 @export var starting_lasso: LassoResource
@@ -20,15 +20,13 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("next_lasso"):
 		if player.try_change_lasso(get_next_lasso()):
-			GameEvents.emit_lasso_equipped(get_current_lasso())
+			lassos_updated.emit()
 		get_viewport().set_input_as_handled()
-		lassos_updated.emit()
 	
 	if event.is_action_pressed("previous_lasso"):
 		if player.try_change_lasso(get_previous_lasso()):
-			GameEvents.emit_lasso_equipped(get_current_lasso())
+			lassos_updated.emit()
 		get_viewport().set_input_as_handled()
-		lassos_updated.emit()
 
 
 func get_current_lasso(try_index: int = -1) -> LassoResource:
@@ -36,7 +34,7 @@ func get_current_lasso(try_index: int = -1) -> LassoResource:
 	
 	var index := try_index if try_index >= 0 and try_index < _current_lasso_collection.size() else _current_index
 	var lasso := _current_lasso_collection[index]
-	print("Selected %s at index %d" % [lasso.name, _current_index])
+	print("Selected %s at index %d" % [lasso.title, _current_index])
 	return lasso
 
 
@@ -81,7 +79,6 @@ func _add_lasso_to_collection(new_upgrade: LassoResource) -> void:
 	var new_index := _current_lasso_collection.find(new_upgrade)
 	if player:
 		if player.try_change_lasso(get_current_lasso(new_index)):
-			print("success?")
 			_current_index = new_index
 	
 	lassos_updated.emit()
@@ -89,5 +86,4 @@ func _add_lasso_to_collection(new_upgrade: LassoResource) -> void:
 
 func _on_lasso_acquired(new_upgrade: LassoResource) -> void:
 	_add_lasso_to_collection(new_upgrade)
-	print("Found %s" % new_upgrade.name)
-	new_lasso_acquired.emit()
+	#new_lasso_acquired.emit()

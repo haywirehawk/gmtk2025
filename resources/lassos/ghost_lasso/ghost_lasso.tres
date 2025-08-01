@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("4_aqjc4")
 id = "ghost"
-name = "Ghost Lasso"
+title = "Ghost Lasso"
 description = "This lasso is very light, almost like it's not even real."
 rope_texture = ExtResource("3_ci6wr")
 hitched_texture = ExtResource("1_oxng2")
