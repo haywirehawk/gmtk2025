@@ -7,6 +7,7 @@ signal player_inventory_changed(inventory: Dictionary)
 signal player_inventory_add_to(item: InventoryObject, count: int)
 signal enemy_died
 signal tornado_hit()
+signal win
 
 
 func emit_player_spawned(player: Player) -> void:
@@ -35,3 +36,7 @@ func emit_enemy_died() -> void:
 
 func emit_tornado_hit() -> void:
 	tornado_hit.emit()
+
+
+func emit_win() -> void:
+	win.emit()
