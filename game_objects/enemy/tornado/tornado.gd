@@ -13,30 +13,82 @@ extends CharacterBody2D
 
 var movement_timer: Timer
 var direction: int = 1
+var _delta: float
+var amount: float = 0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	movement_timer = $MovementTimer
-	movement_timer.timeout.connect(_update_direction)
-	movement_timer.start()
+	movement_timer.timeout.connect(_move_randomly)
 	left_hitbox.successful_hit.connect(_tornado_hit)
 	right_hitbox.successful_hit.connect(_tornado_hit)
+	GameEvents.tornado_switch.connect(_tornado_switch)
+	GameEvents.adjust_tornado_width.connect(_adjust_width)
+	GameEvents.move_tornado.connect(_move_manually)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	var target_velocity = speed * direction
-	velocity.x = lerp(velocity.x, target_velocity, 1 - exp(-movement_damping * delta))
+	_delta = delta
 	move_and_slide()
+	if amount != 0:
+		amount -= 1
+		if amount == 0:
+			velocity.x = 0
 
 
-func _update_direction() -> void:
+func _tornado_switch(on: bool) -> void:
+	if on:
+		_start_tornado()
+	else:
+		_stop_tornado()
+
+
+func _start_tornado() -> void:
+	movement_timer.start()
+	_move_randomly()
+
+
+func _stop_tornado() -> void:
+	movement_timer.stop()
+
+
+func _move_tornado() -> void:
+	var target_velocity = speed * direction
+	velocity.x = lerp(velocity.x, target_velocity, 1 - exp(-movement_damping * _delta))
+
+
+func _move_manually(_direction: int, _amount: float) -> void:
+	_update_direction(_direction)
+	amount = _amount
+	_move_tornado()
+
+
+func _move_randomly() -> void:
 	direction = randi_range(-1, 1)
 	var move_sides_closer = randi_range(-1, 1)
+	_update_direction(direction)
+	_move_tornado()
 	if move_sides_closer == 1:
-		_move_sides_closer()
+		_move_sides(true)
 	elif move_sides_closer == -1:
+		_move_sides(false)
+
+
+func _update_direction(_direction: int) -> void:
+	direction = _direction
+
+
+func _adjust_width(closer: bool, amount: float) -> void:
+	spread_speed = amount
+	_move_sides(closer)
+
+
+func _move_sides(closer: bool) -> void:
+	if closer:
+		_move_sides_closer()
+	else:
 		_move_sides_farther()
 
 
