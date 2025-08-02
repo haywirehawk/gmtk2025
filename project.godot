@@ -43,6 +43,7 @@ entities_layer=""
 [gui]
 
 theme/custom="uid://br3ey3vlx3c7m"
+theme/custom_font="uid://dmy6cbg7cm44j"
 
 [input]
 

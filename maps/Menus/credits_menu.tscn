@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://kdd14og66w30"]
+
+[ext_resource type="Script" uid="uid://c53luxnjyu5sg" path="res://maps/Menus/credits_menu.gd" id="1_l51ik"]
+
+[node name="CreditsMenu" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_l51ik")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -130.0
+offset_right = 132.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "Made by:
+haywirehawk
+deathlysamurai
+enahs
+
+Music:
+Sunrise in Antibes
+by Maarten Schellekens
+
+Sundown
+by SuperMash
+
+Caballero
+Jangwa
+
+The Get Away
+Mr Smith
+
+Just You Folk - Steelguitar (F 33)
+Lobo Loco
+
+Provided by Free Music Archive
+freemusicarchive.org
+Under CC BY 4.0 License
+creativecommons.org/licenses/by/4.0/
+
+Other Sounds by Kenney
+www.kenney.nl/"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Close"

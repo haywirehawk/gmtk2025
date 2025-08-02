@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://corj4jsms4hoo"
+path="res://.godot/imported/SuperMash - Sundown.mp3-924e9919a21127ed183a0944fc3d076b.mp3str"
+
+[deps]
+
+source_file="res://Audio/music/SuperMash - Sundown.mp3"
+dest_files=["res://.godot/imported/SuperMash - Sundown.mp3-924e9919a21127ed183a0944fc3d076b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

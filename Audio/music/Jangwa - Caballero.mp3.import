@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bypmk30tjpq6g"
+path="res://.godot/imported/Jangwa - Caballero.mp3-0975203d2c14f3dc220056d0b349b458.mp3str"
+
+[deps]
+
+source_file="res://Audio/music/Jangwa - Caballero.mp3"
+dest_files=["res://.godot/imported/Jangwa - Caballero.mp3-0975203d2c14f3dc220056d0b349b458.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

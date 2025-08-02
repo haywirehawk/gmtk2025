@@ -2,7 +2,7 @@ extends CanvasLayer
 
 var main_scene: PackedScene = preload("uid://cmy4xujejhlfw")
 var options_menu_scene: PackedScene =  preload("uid://dvhlk1kmxn4lj")
-var credits_scene: PackedScene
+var credits_scene: PackedScene = preload("uid://kdd14og66w30")
 
 @onready var play_button: Button = %PlayButton
 @onready var options_button: Button = %OptionsButton
@@ -19,6 +19,8 @@ func _ready() -> void:
 		credits_button,
 		quit_button,
 	])
+	
+	MusicManager.set_music_mode(MusicManager.MusicMode.MAIN_MENU)
 	
 	if OS.has_feature("web"):
 		quit_button.hide()
