@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://busys6f4flwpl"]
+
+[ext_resource type="Script" uid="uid://7bxsh5cjwpkw" path="res://game_objects/manager/music_manager/music_manager.gd" id="1_lqf8x"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_lqf8x")

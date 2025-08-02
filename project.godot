@@ -26,6 +26,7 @@ SaveData="*res://scripts/save_data.gd"
 LevelManager="*res://game_objects/manager/level_manager/level_manager.gd"
 UIAudioManager="*res://game_objects/manager/ui_audio_manager/ui_audio_manager.tscn"
 PauseMenu="*res://maps/Menus/Pause_Menu.tscn"
+MusicManager="*res://game_objects/manager/music_manager/music_manager.tscn"
 
 [display]
 
@@ -137,6 +138,8 @@ previous_lasso={
 2d_physics/layer_3="Collectable"
 2d_physics/layer_4="Enemy"
 2d_physics/layer_5="Grabbable"
+2d_physics/layer_6="Lasso"
+2d_physics/layer_7="FireLasso"
 
 [rendering]
 

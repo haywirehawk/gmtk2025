@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var options_menu_scene: PackedScene =  preload("uid://dvhlk1kmxn4lj")
+var options_menu: Node
 
 @onready var resume_button: Button = %ResumeButton
 @onready var options_button: Button = %OptionsButton
@@ -32,7 +33,7 @@ func _on_resume_button_pressed() -> void:
 
 
 func _on_options_button_pressed() -> void:
-	var options_menu := options_menu_scene.instantiate()
+	options_menu = options_menu_scene.instantiate()
 	add_child(options_menu)
 
 
@@ -51,5 +52,7 @@ func openPauseMenu():
 	
 	
 func closePauseMenu():
+	if options_menu:
+		options_menu.queue_free()
 	get_tree().paused = false
 	hide()
