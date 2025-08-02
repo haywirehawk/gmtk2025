@@ -3,4 +3,11 @@
 [ext_resource type="Script" uid="uid://7bxsh5cjwpkw" path="res://game_objects/manager/music_manager/music_manager.gd" id="1_lqf8x"]
 
 [node name="MusicManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_lqf8x")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -12.0
+bus = &"Music"
+
+[node name="Timer" type="Timer" parent="."]

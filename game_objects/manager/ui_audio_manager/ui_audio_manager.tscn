@@ -14,4 +14,5 @@ script = ExtResource("1_vvjh2")
 
 [node name="UIButtonAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_aud47")
-volume_db = -2.0
+volume_db = 2.0
+bus = &"SFX"

@@ -17,6 +17,8 @@ var player: Player
 func _ready() -> void:
 	GameEvents.tornado_hit.connect(_on_tornado_hit)
 	
+	MusicManager.set_music_mode(MusicManager.MusicMode.GAMEPLAY)
+	
 	spawn_player()
 
 
