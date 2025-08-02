@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dplqaim8ygmgf" path="res://game_objects/particles/particle_simple_small.png" id="1_h04yb"]
 
 [sub_resource type="Gradient" id="Gradient_e4eyc"]
-colors = PackedColorArray(0.774273, 0.694979, 0.542006, 1, 0.402898, 0.407883, 0.384654, 1)
+colors = PackedColorArray(0.827451, 0.627451, 0.407843, 1, 0.402898, 0.407883, 0.384654, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_0q4oc"]
 gradient = SubResource("Gradient_e4eyc")

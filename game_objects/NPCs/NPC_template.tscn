@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bx74u2cxmuxt3"]
 
 [ext_resource type="Script" uid="uid://bfi1rqp2j5ulq" path="res://game_objects/NPCs/npc_template.gd" id="1_130m6"]
-[ext_resource type="Texture2D" uid="uid://deoylh3dnpbwl" path="res://game_objects/player/character_beige_idle.svg" id="2_xrcap"]
+[ext_resource type="Texture2D" uid="uid://cilpukysdlu7f" path="res://game_objects/player/Falling.png" id="2_xrcap"]
 [ext_resource type="Texture2D" uid="uid://4vbrdlx8amd1" path="res://icon.svg" id="3_xrcap"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvut0"]

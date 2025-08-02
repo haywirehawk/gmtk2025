@@ -1,5 +1,7 @@
 extends Node2D
 
+signal collected
+
 @export var lasso: LassoResource
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -23,6 +25,7 @@ func tween_collect(percent: float, start_position: Vector2) -> void:
 
 func collect() -> void:
 	GameEvents.emit_lasso_acquired(lasso)
+	collected.emit()
 	queue_free()
 	
 	

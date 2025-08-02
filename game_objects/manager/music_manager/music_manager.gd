@@ -38,6 +38,18 @@ func set_music_mode(mode: MusicMode) -> void:
 	_play_music()
 
 
+func set_music_mode_with_delay(mode: MusicMode, delay: float = 0.0) -> void:
+	if _current_mode == mode: return
+	
+	_current_mode = mode
+	audio_stream_player.stop()
+	_set_audio_stream()
+	await  get_tree().create_timer(delay).timeout
+	if audio_stream_player.playing:
+		return
+	_play_music()
+
+
 func _set_audio_stream() -> void:
 	var stream: AudioStream
 	if _current_mode == MusicMode.MAIN_MENU:

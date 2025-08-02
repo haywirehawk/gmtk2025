@@ -1,6 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://crkjamiu85wp"]
+[gd_scene load_steps=8 format=3 uid="uid://crkjamiu85wp"]
 
-[ext_resource type="Texture2D" uid="uid://dplqaim8ygmgf" path="res://game_objects/particles/particle_simple_small.png" id="1_lmy4l"]
+[ext_resource type="Texture2D" uid="uid://f5ljwyatnjrn" path="res://assets/particles.png" id="1_lmy4l"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e5eyy"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="Gradient" id="Gradient_e4eyc"]
 colors = PackedColorArray(1, 0.592157, 0, 1, 1, 0, 0, 1)
@@ -9,25 +15,33 @@ colors = PackedColorArray(1, 0.592157, 0, 1, 1, 0, 0, 1)
 gradient = SubResource("Gradient_e4eyc")
 
 [sub_resource type="Curve" id="Curve_ifeey"]
-_data = [Vector2(0.195965, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.217045), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0.0180258), 0.0, 13.7397, 0, 0, Vector2(0.0475113, 0.838198), 2.7401, 2.7401, 0, 0, Vector2(1, 0.218884), 0.595264, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_dp1jn"]
 curve = SubResource("Curve_ifeey")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cff40"]
 particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+angle_min = -360.0
+angle_max = 360.0
 direction = Vector3(0, -1, 0)
 spread = 15.0
-initial_velocity_min = 10.0
-initial_velocity_max = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
+scale_min = 0.75
 scale_curve = SubResource("CurveTexture_dp1jn")
 color_ramp = SubResource("GradientTexture1D_0q4oc")
+anim_offset_max = 1.0
 
 [node name="Fire" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_e5eyy")
 amount = 16
 texture = ExtResource("1_lmy4l")
 lifetime = 1.5
+randomness = 0.25
 draw_order = 2
 process_material = SubResource("ParticleProcessMaterial_cff40")

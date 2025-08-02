@@ -23,10 +23,10 @@ buses/default_bus_layout="uid://conoialec7bi6"
 
 GameEvents="*res://game_objects/autoload/game_events.tscn"
 SaveData="*res://scripts/save_data.gd"
-LevelManager="*res://game_objects/manager/level_manager/level_manager.gd"
 UIAudioManager="*res://game_objects/manager/ui_audio_manager/ui_audio_manager.tscn"
-PauseMenu="*res://maps/Menus/Pause_Menu.tscn"
 MusicManager="*res://game_objects/manager/music_manager/music_manager.tscn"
+LevelManager="*res://game_objects/manager/level_manager/level_manager.gd"
+PauseMenu="*res://maps/Menus/Pause_Menu.tscn"
 
 [display]
 
@@ -39,6 +39,7 @@ window/stretch/mode="viewport"
 [global_group]
 
 entities_layer=""
+particles_layer=""
 
 [gui]
 
@@ -146,3 +147,4 @@ previous_lasso={
 
 textures/canvas_textures/default_texture_filter=0
 textures/canvas_textures/default_texture_repeat=1
+environment/defaults/default_clear_color=Color(0.270588, 0.266667, 0.309804, 1)

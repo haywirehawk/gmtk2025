@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 
 
 @export var speed: float = 10
@@ -24,11 +24,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	_delta = delta
-	move_and_slide()
-	if amount != 0:
-		amount -= 1
-		if amount == 0:
-			velocity.x = 0
+	#move_and_slide()
+	#if amount != 0:
+		#amount -= 1
+		#if amount == 0:
+			#velocity.x = 0
 
 
 #turns on/off random movement, can still move manually when off
@@ -51,7 +51,7 @@ func _stop_tornado() -> void:
 
 func _move_tornado() -> void:
 	var target_velocity = speed * direction
-	velocity.x = lerp(velocity.x, target_velocity, 1 - exp(-movement_damping * _delta))
+	#velocity.x = lerp(velocity.x, target_velocity, 1 - exp(-movement_damping * _delta))
 
 
 #direction 1 = right, -1 = left

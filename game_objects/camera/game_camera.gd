@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 	var offset_sample_y := noise_texture.get_noise_2d(0, noise_offset_y)
 	
 	offset = Vector2(offset_sample_x, offset_sample_y) * shake_strength\
-		 * current_shake_percentage * current_shake_percentage
+		 * current_shake_percentage * current_shake_percentage + Vector2(0.0, -50.0)
 	
 	current_shake_percentage = max(current_shake_percentage - (SHAKE_DECAY_RATE * delta), 0)
 

@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnio431nqamq3"]
+
+[ext_resource type="Texture2D" uid="uid://oe4mj2frwocl" path="res://assets/items/Items-06.png" id="1_1ipwq"]
+[ext_resource type="Script" uid="uid://b2f1fulb6ymcf" path="res://game_objects/environment/poi/upgrade_altar.gd" id="1_mt3xn"]
+
+[sub_resource type="Animation" id="Animation_kht25"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeLocation:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeLocation:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.75, 2),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_8vcgd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UpgradeLocation:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UpgradeLocation:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pu268"]
+_data = {
+&"RESET": SubResource("Animation_8vcgd"),
+&"idle": SubResource("Animation_kht25")
+}
+
+[node name="UpgradeAltar" type="Node2D"]
+script = ExtResource("1_mt3xn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_pu268")
+}
+autoplay = "idle"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1ipwq")
+offset = Vector2(0, -8)
+
+[node name="UpgradeLocation" type="Node2D" parent="."]

@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-var main_scene: PackedScene = preload("uid://cmy4xujejhlfw")
-var options_menu_scene: PackedScene =  preload("uid://dvhlk1kmxn4lj")
-var credits_scene: PackedScene = preload("uid://kdd14og66w30")
+@onready var main_scene: PackedScene = preload("uid://cmy4xujejhlfw")
+@onready var options_menu_scene: PackedScene =  preload("uid://dvhlk1kmxn4lj")
+@onready var credits_scene: PackedScene = preload("uid://kdd14og66w30")
 
 @onready var play_button: Button = %PlayButton
 @onready var options_button: Button = %OptionsButton
