@@ -50,5 +50,5 @@ func _move_sides_farther() -> void:
 	right_side.move(spread_speed, 1)
 
 
-func _tornado_hit(hit_direction: Vector2) -> void:
-	GameEvents.tornado_hit.emit(hit_direction)
+func _tornado_hit(_direction: Vector2) -> void:
+	GameEvents.tornado_hit.emit()

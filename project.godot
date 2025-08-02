@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GMTK2025"
-run/main_scene="uid://dspgucdg0i66x"
+run/main_scene="uid://cpowjgf1nm8rp"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,8 +21,10 @@ buses/default_bus_layout="uid://conoialec7bi6"
 
 [autoload]
 
-OptionsManager="*res://maps/Menus/Options_Manager.gd"
 GameEvents="*res://game_objects/autoload/game_events.tscn"
+SaveData="*res://scripts/save_data.gd"
+LevelManager="*res://game_objects/manager/level_manager/level_manager.gd"
+UIAudioManager="*res://game_objects/manager/ui_audio_manager/ui_audio_manager.tscn"
 PauseMenu="*res://maps/Menus/Pause_Menu.tscn"
 
 [display]
@@ -32,6 +34,10 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
+
+[global_group]
+
+entities_layer=""
 
 [gui]
 

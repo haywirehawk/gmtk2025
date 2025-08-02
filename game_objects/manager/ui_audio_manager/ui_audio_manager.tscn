@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdq5edso0uj11"]
+
+[ext_resource type="Script" uid="uid://bom2q4co04tlw" path="res://game_objects/manager/ui_audio_manager/ui_audio_manager.gd" id="1_vvjh2"]
+[ext_resource type="AudioStream" uid="uid://6jyx2jcc0j4m" path="res://Audio/sfx/click5.ogg" id="2_f7udv"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aud47"]
+random_pitch = 1.1
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("2_f7udv")
+
+[node name="UIAudioManager" type="Node"]
+script = ExtResource("1_vvjh2")
+
+[node name="UIButtonAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_aud47")
+volume_db = -2.0

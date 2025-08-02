@@ -15,12 +15,12 @@ var player: Player
 
 
 func _ready() -> void:
-	hud.upgrade_manager = upgrade_manager
+	GameEvents.tornado_hit.connect(_on_tornado_hit)
 	
 	spawn_player()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player:
 		if player.check_out_of_bounds():
 			player.queue_free()
@@ -31,7 +31,8 @@ func spawn_player() -> void:
 	player = PLAYER_SCENE.instantiate()
 	player.global_position = spawn_location.global_position
 	get_tree().get_first_node_in_group("entities_layer").add_child(player)
-	camera.assign_target(player)
+	camera.set_target(player, false)
+	camera.shake(1.0)
 	GameEvents.emit_player_spawned(player)
 
 
@@ -41,7 +42,7 @@ func reset_doom() -> void:
 
 #func filler() -> void:
 	#pass
-#
-#
-#func filler() -> void:
-	#pass
+
+
+func _on_tornado_hit() -> void:
+	print("Tornado hit!")

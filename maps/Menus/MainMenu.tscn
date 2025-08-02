@@ -5,60 +5,75 @@
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_700jq")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = -50.0
-offset_right = 75.0
-offset_bottom = 86.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-text = "Play"
+size_flags_vertical = 4
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="Title Container" type="VBoxContainer" parent="MarginContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Options"
 
-[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer2/Title Container"]
 layout_mode = 2
-text = "Credits"
-
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Quit"
-
-[node name="BackButton" type="Button" parent="."]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -27.0
-offset_top = -38.17
-offset_right = 27.0
-offset_bottom = -5.16998
-grow_horizontal = 2
-grow_vertical = 0
-text = "Back"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_right = 640.0
-offset_bottom = 130.0
-text = "Cool Game Title"
-scroll_active = false
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"TitleLabel"
+text = "Larry At"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[node name="Subtitle Label" type="Label" parent="MarginContainer/VBoxContainer2/Title Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"SubtitleLabel"
+text = "The eye of the storM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="BackButton" type="Button" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer2/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/BackButton" to="." method="_on_back_button_pressed"]

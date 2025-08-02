@@ -129,9 +129,9 @@ func flip() -> void:
 
 
 func animate_lasso_slack() -> void:
-	var sign = visuals.scale.x
+	var move_sign = visuals.scale.x
 	var percent := velocity.x / MAX_MOVE_SPEED
-	equip_root.rotation_degrees = 60.0 * percent * sign
+	equip_root.rotation_degrees = 60.0 * percent * move_sign
 
 
 ## Wrapper for accessing the LassoController's change_lasso function with only a player reference.

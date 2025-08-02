@@ -2,46 +2,59 @@
 
 [ext_resource type="Script" uid="uid://bm3y8a4qnr6vw" path="res://maps/Menus/options_menu.gd" id="1_vhqai"]
 
-[node name="OptionsMenu" type="Node2D"]
+[node name="OptionsMenu" type="CanvasLayer"]
+layer = 5
 script = ExtResource("1_vhqai")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 144.0
-offset_top = 17.0
-offset_right = 503.0
-offset_bottom = 282.0
+[node name="Panel" type="PanelContainer" parent="."]
+offset_left = 227.0
+offset_top = 97.0
+offset_right = 412.0
+offset_bottom = 263.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="MasterVolLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+[node name="MasterVolLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Master Volume"
-scroll_active = false
 
-[node name="MasterVolSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+[node name="MasterVolSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 max_value = 1.0
-step = 0.01
+step = 0.1
 value = 1.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="MusicVolLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
+[node name="MusicVolLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Music Volume"
-scroll_active = false
 
-[node name="MusicVolSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+[node name="MusicVolSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -49,18 +62,18 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="SFXVolLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer4"]
+[node name="SFXVolLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SFX Volume"
-scroll_active = false
 
-[node name="SFXVolSlider" type="HSlider" parent="VBoxContainer/HBoxContainer4"]
+[node name="SFXVolSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -68,29 +81,52 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="Fullscreen Mode" type="RichTextLabel" parent="VBoxContainer/HBoxContainer3"]
+[node name="Fullscreen Mode" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Fullscreen Mode"
-scroll_active = false
 
-[node name="FullscreenModeSelect" type="OptionButton" parent="VBoxContainer/HBoxContainer3"]
+[node name="FullscreenModeSelect" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
 selected = 1
 item_count = 3
 popup/item_0/text = "Fullscreen"
-popup/item_0/id = 0
-popup/item_1/text = "Boarderless"
-popup/item_1/id = 1
+popup/item_0/id = 4
+popup/item_1/text = "Borderless"
+popup/item_1/id = 3
 popup/item_2/text = "Windowed"
-popup/item_2/id = 2
+popup/item_2/id = 0
 
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/MasterVolSlider" to="." method="_on_master_vol_slider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer2/MusicVolSlider" to="." method="_on_music_vol_slider_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer4/SFXVolSlider" to="." method="_on_sfx_vol_slider_value_changed"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer3/FullscreenModeSelect" to="." method="_on_fullscreen_mode_select_item_selected"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ConfirmButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Confirm"
+
+[node name="CancelButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="DefaultButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Reset to Defaults
+"
+
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/MasterVolSlider" to="." method="_on_master_vol_slider_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/MusicVolSlider" to="." method="_on_music_vol_slider_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer4/SFXVolSlider" to="." method="_on_sfx_vol_slider_value_changed"]
+[connection signal="item_selected" from="Panel/MarginContainer/VBoxContainer/HBoxContainer3/FullscreenModeSelect" to="." method="_on_fullscreen_mode_select_item_selected"]

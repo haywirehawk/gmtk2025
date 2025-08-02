@@ -1,8 +1,13 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://br3ey3vlx3c7m"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://br3ey3vlx3c7m"]
 
 [ext_resource type="Texture2D" uid="uid://b2wl34kljek2m" path="res://ui/assets/ui9slices.png" id="1_rqugq"]
+[ext_resource type="FontFile" uid="uid://dmy6cbg7cm44j" path="res://resources/fonts/Ithaca.ttf" id="2_iqtc0"]
+[ext_resource type="FontFile" uid="uid://c5trnmmmqr3ul" path="res://resources/fonts/Vanilla Whale.otf" id="2_jf26r"]
+[ext_resource type="FontFile" uid="uid://bs73jeidhka7s" path="res://resources/fonts/Unbalanced.ttf" id="3_6lx7k"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jf26r"]
+content_margin_left = 12.0
+content_margin_right = 12.0
 texture = ExtResource("1_rqugq")
 texture_margin_left = 3.0
 texture_margin_top = 3.0
@@ -11,6 +16,8 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(48, 0, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6lx7k"]
+content_margin_left = 12.0
+content_margin_right = 12.0
 texture = ExtResource("1_rqugq")
 texture_margin_left = 3.0
 texture_margin_top = 3.0
@@ -19,6 +26,8 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(16, 0, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iqtc0"]
+content_margin_left = 12.0
+content_margin_right = 12.0
 texture = ExtResource("1_rqugq")
 texture_margin_left = 3.0
 texture_margin_top = 3.0
@@ -27,6 +36,8 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(16, 0, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7any1"]
+content_margin_left = 12.0
+content_margin_right = 12.0
 texture = ExtResource("1_rqugq")
 texture_margin_left = 3.0
 texture_margin_top = 3.0
@@ -34,9 +45,90 @@ texture_margin_right = 3.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(32, 0, 16, 16)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7any1"]
+size = Vector2(0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3fgq6"]
+size = Vector2(0, 0)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y5ki2"]
+size = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rtqkv"]
+texture = ExtResource("1_rqugq")
+texture_margin_left = 3.0
+texture_margin_top = 2.0
+texture_margin_right = 3.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(4, 21, 8, 6)
+modulate_color = Color(0.705882, 0.321569, 0.321569, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_47c11"]
+texture = ExtResource("1_rqugq")
+texture_margin_left = 3.0
+texture_margin_top = 2.0
+texture_margin_right = 3.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(4, 21, 8, 6)
+modulate_color = Color(0.705882, 0.321569, 0.321569, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2j8s8"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("1_rqugq")
+texture_margin_left = 3.0
+texture_margin_top = 2.0
+texture_margin_right = 3.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(20, 21, 8, 6)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3fgq6"]
+texture = ExtResource("1_rqugq")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqtc0"]
+bg_color = Color(0.415686, 0.32549, 0.431373, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y5ki2"]
+texture = ExtResource("1_rqugq")
+texture_margin_left = 3.0
+texture_margin_top = 4.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(32, 0, 16, 16)
+
 [resource]
 Button/constants/outline_size = 4
+Button/fonts/font = ExtResource("2_iqtc0")
 Button/styles/disabled = SubResource("StyleBoxTexture_jf26r")
 Button/styles/hover = SubResource("StyleBoxTexture_6lx7k")
 Button/styles/normal = SubResource("StyleBoxTexture_iqtc0")
 Button/styles/pressed = SubResource("StyleBoxTexture_7any1")
+HSlider/icons/grabber = SubResource("PlaceholderTexture2D_7any1")
+HSlider/icons/grabber_disabled = SubResource("PlaceholderTexture2D_3fgq6")
+HSlider/icons/grabber_highlight = SubResource("PlaceholderTexture2D_y5ki2")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_rtqkv")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_47c11")
+HSlider/styles/slider = SubResource("StyleBoxTexture_2j8s8")
+Label/colors/font_color = Color(0.94902, 0.941176, 0.898039, 1)
+Label/colors/font_outline_color = Color(0.129412, 0.129412, 0.137255, 1)
+Label/constants/outline_size = 4
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("2_iqtc0")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_3fgq6")
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_iqtc0")
+PopupMenu/styles/panel = SubResource("StyleBoxTexture_y5ki2")
+SubtitleLabel/base_type = &"Label"
+SubtitleLabel/colors/font_color = Color(0.827451, 0.627451, 0.407843, 1)
+SubtitleLabel/constants/outline_size = 16
+SubtitleLabel/font_sizes/font_size = 48
+SubtitleLabel/fonts/font = ExtResource("2_jf26r")
+TitleLabel/base_type = &"Label"
+TitleLabel/colors/font_color = Color(0.827451, 0.627451, 0.407843, 1)
+TitleLabel/constants/outline_size = 12
+TitleLabel/font_sizes/font_size = 32
+TitleLabel/fonts/font = ExtResource("3_6lx7k")
