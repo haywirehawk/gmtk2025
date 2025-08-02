@@ -23,9 +23,6 @@ func _ready() -> void:
 	movement_timer.timeout.connect(_move_randomly)
 	left_hitbox.successful_hit.connect(_tornado_hit)
 	right_hitbox.successful_hit.connect(_tornado_hit)
-	GameEvents.tornado_switch.connect(_tornado_switch)
-	GameEvents.adjust_tornado_width.connect(_adjust_width)
-	GameEvents.move_tornado.connect(_move_manually)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,7 +35,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 
 
-func _tornado_switch(on: bool) -> void:
+#turns on/off random movement, can still move manually when off
+func tornado_switch(on: bool) -> void:
 	if on:
 		_start_tornado()
 	else:
@@ -59,7 +57,8 @@ func _move_tornado() -> void:
 	velocity.x = lerp(velocity.x, target_velocity, 1 - exp(-movement_damping * _delta))
 
 
-func _move_manually(_direction: int, _amount: float) -> void:
+#direction 1 = right, -1 = left
+func move_manually(_direction: int, _amount: float) -> void:
 	_update_direction(_direction)
 	amount = _amount
 	_move_tornado()
@@ -80,7 +79,7 @@ func _update_direction(_direction: int) -> void:
 	direction = _direction
 
 
-func _adjust_width(closer: bool, amount: float) -> void:
+func adjust_width(closer: bool, amount: float) -> void:
 	spread_speed = amount
 	_move_sides(closer)
 

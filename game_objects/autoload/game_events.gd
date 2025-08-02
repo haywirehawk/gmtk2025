@@ -7,9 +7,6 @@ signal player_inventory_changed(inventory: Dictionary)
 signal player_inventory_add_to(item: InventoryObject, count: int)
 signal enemy_died
 signal tornado_hit()
-signal tornado_switch(on: bool) #turns on/off random movement, can still move manually when off
-signal adjust_tornado_width(closer: bool, amount: float)
-signal move_tornado(direction: int, amount: float) #direction 1 = right, -1 = left
 
 
 func emit_player_spawned(player: Player) -> void:
@@ -38,15 +35,3 @@ func emit_enemy_died() -> void:
 
 func emit_tornado_hit() -> void:
 	tornado_hit.emit()
-
-
-func emit_tornado_switch(on: bool) -> void:
-	tornado_switch.emit(on)
-
-
-func emit_adjust_tornado_width(closer: bool, amount: float) -> void:
-	adjust_tornado_width.emit(closer, amount)
-
-
-func emit_move_tornado(direction: int, amount: float) -> void:
-	move_tornado.emit(direction, amount)
