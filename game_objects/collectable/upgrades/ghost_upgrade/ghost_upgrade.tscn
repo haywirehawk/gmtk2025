@@ -1,8 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3s7a6g1gmhdt"]
+[gd_scene load_steps=5 format=3 uid="uid://d3s7a6g1gmhdt"]
 
 [ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="1_gubqt"]
 [ext_resource type="Resource" uid="uid://cl1e47e3dxj5" path="res://resources/lassos/ghost_lasso/ghost_lasso.tres" id="2_fcctv"]
+[ext_resource type="Texture2D" uid="uid://c5tcvk540y1fb" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso.png" id="3_fcctv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd8qj"]
+atlas = ExtResource("3_fcctv")
+region = Rect2(16, 16, 16, 16)
 
 [node name="GhostUpgrade" instance=ExtResource("1_gubqt")]
-modulate = Color(0.721569, 0.490196, 1, 1)
 lasso = ExtResource("2_fcctv")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("AtlasTexture_sd8qj")

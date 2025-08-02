@@ -1,8 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt2iv73fklqb1"]
+[gd_scene load_steps=5 format=3 uid="uid://bt2iv73fklqb1"]
 
 [ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="1_xp5st"]
 [ext_resource type="Resource" uid="uid://c2w7a28n6wgi6" path="res://resources/lassos/fire_lasso/fire_lasso.tres" id="2_kukxa"]
+[ext_resource type="Texture2D" uid="uid://buf0qq04r7frf" path="res://resources/lassos/fire_lasso/assets/fire_lasso.png" id="3_kukxa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvbje"]
+atlas = ExtResource("3_kukxa")
+region = Rect2(16, 16, 16, 16)
 
 [node name="FireUpgrade" instance=ExtResource("1_xp5st")]
 modulate = Color(1, 0.516667, 0, 1)
 lasso = ExtResource("2_kukxa")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("AtlasTexture_wvbje")
+
+[node name="PickupArea2D" parent="." index="1"]
+visible = false

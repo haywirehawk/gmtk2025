@@ -23,6 +23,7 @@ var input_lasso_just_pressed: bool
 var joystick_mode: bool
 
 @onready var visuals: Node2D = $Visuals
+@onready var player_sprite: AnimatedSprite2D = %PlayerSprite
 @onready var aim_root: Node2D = %AimRoot
 @onready var direction_arrow: Sprite2D = %DirectionArrow
 @onready var lasso_controller: LassoController = %LassoController
@@ -37,9 +38,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	update_aim_position()
 	move_and_slide()
-	animate_lasso_slack()
-	if check_out_of_bounds():
-		get_tree().reload_current_scene()
+	flip()
+	handle_animations()
 
 
 func _physics_process(delta: float) -> void:
@@ -61,7 +61,7 @@ func setup(lasso: LassoResource) -> void:
 
 
 func check_out_of_bounds() -> bool:
-	if global_position.y > 5_000: return true
+	if global_position.y > 3_000: return true
 	else: return false
 
 
@@ -83,7 +83,6 @@ func get_inputs() -> void:
 
 
 func update_aim_position() -> void:
-	visuals.scale = Vector2.ONE if aim_vector.x >= 0 else Vector2(-1, 1)
 	if is_zero_approx(aim_vector.length_squared()):
 		direction_arrow.hide()
 	else:
@@ -114,9 +113,25 @@ func handle_jump() -> void:
 		is_jumping = false
 
 
+func handle_animations() -> void:
+	if is_on_floor():
+		if not is_zero_approx(move_direction_x):
+			player_sprite.play("walking")
+		else:
+			player_sprite.play("idle")
+	else:
+		player_sprite.play("airborne")
+	animate_lasso_slack()
+
+
+func flip() -> void:
+	visuals.scale = Vector2.ONE if aim_vector.x >= 0 else Vector2(-1, 1)
+
+
 func animate_lasso_slack() -> void:
+	var sign = visuals.scale.x
 	var percent := velocity.x / MAX_MOVE_SPEED
-	equip_root.rotation_degrees = 60.0 * percent
+	equip_root.rotation_degrees = 60.0 * percent * sign
 
 
 ## Wrapper for accessing the LassoController's change_lasso function with only a player reference.

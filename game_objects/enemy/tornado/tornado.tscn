@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b3s0onjqtcd08" path="res://game_objects/enemy/tornado/tornado.png" id="1_fmfmv"]
 [ext_resource type="Script" uid="uid://vtdf276wndwl" path="res://game_objects/enemy/tornado/tornado.gd" id="1_l0ex7"]
-[ext_resource type="Shader" path="res://game_objects/enemy/tornado/tornado.gdshader" id="2_n22e1"]
+[ext_resource type="Shader" uid="uid://cpdy4o1gkp8j5" path="res://game_objects/enemy/tornado/tornado.gdshader" id="2_n22e1"]
 [ext_resource type="Script" uid="uid://crrs6vyewl7u6" path="res://game_objects/components/hitbox/hitbox_component.gd" id="2_r242n"]
 [ext_resource type="Script" uid="uid://b84qtrax4ql6" path="res://game_objects/enemy/tornado/tornado_sprite_2d.gd" id="4_dx4xg"]
 

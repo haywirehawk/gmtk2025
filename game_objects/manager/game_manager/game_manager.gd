@@ -20,6 +20,13 @@ func _ready() -> void:
 	spawn_player()
 
 
+func _process(delta: float) -> void:
+	if player:
+		if player.check_out_of_bounds():
+			player.queue_free()
+			spawn_player()
+
+
 func spawn_player() -> void:
 	player = PLAYER_SCENE.instantiate()
 	player.global_position = spawn_location.global_position

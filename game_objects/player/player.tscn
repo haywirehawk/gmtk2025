@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bbs6thqicl6be"]
+[gd_scene load_steps=35 format=3 uid="uid://bbs6thqicl6be"]
 
 [ext_resource type="Script" uid="uid://dfc77vxsgp2f4" path="res://game_objects/player/player.gd" id="1_jcgnw"]
 [ext_resource type="PackedScene" uid="uid://cpqpp7ve1skp7" path="res://game_objects/components/health/health_component.tscn" id="2_3g2qd"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bgx88nkg7ilmm" path="res://game_objects/player/states/lasso_states/lasso_state_ready.gd" id="3_kke0l"]
 [ext_resource type="Script" uid="uid://d2xmhmq8mvtfh" path="res://game_objects/player/lasso_controller.gd" id="4_f4exj"]
 [ext_resource type="Script" uid="uid://bkswfck8okvcx" path="res://scripts/state_machine/state_machine.gd" id="4_na85j"]
-[ext_resource type="Script" path="res://game_objects/player/states/lasso_states/lasso_state_locked.gd" id="5_d4pf5"]
+[ext_resource type="Script" uid="uid://bwm2bgtxhbkem" path="res://game_objects/player/states/lasso_states/lasso_state_locked.gd" id="5_d4pf5"]
 [ext_resource type="Script" uid="uid://dlytvej05y5wb" path="res://game_objects/player/states/lasso_states/lasso_state_throw.gd" id="5_o7l5b"]
 [ext_resource type="SpriteFrames" uid="uid://c4ed088crepqs" path="res://resources/lassos/basic_lasso/basic_lasso_frames.tres" id="6_b08t1"]
 [ext_resource type="Script" uid="uid://yxstrfumgx6p" path="res://game_objects/player/states/lasso_states/lasso_state_hitched.gd" id="6_cuamp"]
@@ -16,7 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://b53rlrm08se48" path="res://game_objects/components/hurtbox/hurtbox_component.tscn" id="10_d4pf5"]
 [ext_resource type="Texture2D" uid="uid://dqitiwxht8r11" path="res://game_objects/player/Cowboy.png" id="10_kc3ei"]
 [ext_resource type="Shader" uid="uid://bxa23hv7qmfki" path="res://resources/shaders/flash.gdshader" id="14_o7l5b"]
-[ext_resource type="Texture2D" uid="uid://cpiqxw4rf3ggd" path="res://resources/lassos/basic_lasso/assets/base_lasso_slack.png" id="17_d4pf5"]
+[ext_resource type="Texture2D" uid="uid://cilpukysdlu7f" path="res://game_objects/player/Falling.png" id="16_qh24s"]
+[ext_resource type="Texture2D" uid="uid://drchecylmilrg" path="res://game_objects/player/Cowboy walk.png" id="18_nl4u6"]
 
 [sub_resource type="Animation" id="Animation_kke0l"]
 length = 0.001
@@ -153,8 +154,9 @@ _data = {
 &"ready_lasso": SubResource("Animation_wktog")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qh24s"]
-size = Vector2(6, 12)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qh24s"]
+radius = 3.0
+height = 12.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl4u6"]
 size = Vector2(8, 14)
@@ -178,22 +180,68 @@ shader = ExtResource("14_o7l5b")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_intensity = 0.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4l60"]
+atlas = ExtResource("16_qh24s")
+region = Rect2(0, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_o7l5b"]
 atlas = ExtResource("10_kc3ei")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on823"]
+atlas = ExtResource("18_nl4u6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5r2k"]
+atlas = ExtResource("18_nl4u6")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip10g"]
+atlas = ExtResource("18_nl4u6")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4nmx"]
+atlas = ExtResource("18_nl4u6")
+region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cuamp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_p4l60")
+}],
+"loop": true,
+"name": &"airborne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_o7l5b")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on823")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5r2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip10g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4nmx")
+}],
+"loop": true,
+"name": &"walking",
 "speed": 5.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
+floor_max_angle = 0.872665
 platform_floor_layers = 4294967263
 script = ExtResource("1_jcgnw")
 
@@ -246,9 +294,8 @@ script = ExtResource("7_3g2qd")
 script = ExtResource("8_d4pf5")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_qh24s")
+shape = SubResource("CapsuleShape2D_qh24s")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_d4pf5")]
 visible = false
@@ -322,8 +369,11 @@ sprite_frames = ExtResource("6_b08t1")
 offset = Vector2(0, -8)
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Visuals"]
+unique_name_in_owner = true
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_cuamp")
+animation = &"airborne"
+autoplay = "idle"
 
 [node name="EquipRoot" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true
@@ -331,5 +381,4 @@ position = Vector2(-3, -5)
 
 [node name="LassoSlack" type="Sprite2D" parent="Visuals/EquipRoot"]
 unique_name_in_owner = true
-texture = ExtResource("17_d4pf5")
 offset = Vector2(0, 2)

@@ -1,19 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxn5li1hk61b5"]
+[gd_scene load_steps=6 format=3 uid="uid://dxn5li1hk61b5"]
 
 [ext_resource type="Script" uid="uid://bl1kjlutp88nh" path="res://game_objects/collectable/upgrades/upgrade_base.gd" id="1_esjxl"]
 [ext_resource type="Resource" uid="uid://cpsmdwr31ljb8" path="res://resources/lassos/basic_lasso/basic_lasso.tres" id="2_wu7yd"]
-[ext_resource type="Texture2D" uid="uid://cgipkxjffayke" path="res://game_objects/collectable/coin_gold.png" id="3_kadav"]
+[ext_resource type="Texture2D" uid="uid://f1tv82gfhc6a" path="res://resources/lassos/basic_lasso/assets/base_lasso.png" id="3_wu7yd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g27gi"]
+atlas = ExtResource("3_wu7yd")
+region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_58sku"]
 
 [node name="Upgrade" type="Node2D"]
-modulate = Color(0.16, 0.16, 0.16, 1)
 script = ExtResource("1_esjxl")
 lasso = ExtResource("2_wu7yd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("3_kadav")
+texture = SubResource("AtlasTexture_g27gi")
+offset = Vector2(0, -10)
 
 [node name="PickupArea2D" type="Area2D" parent="."]
 position = Vector2(0, -10)

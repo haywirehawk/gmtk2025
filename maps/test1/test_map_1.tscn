@@ -31,8 +31,7 @@ spawn_location = NodePath("../Marker2D")
 
 [node name="UpgradeManager" parent="." instance=ExtResource("1_fyp3o")]
 
-[node name="GameCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_i4lod")]
-target = NodePath("")
+[node name="GameCamera" parent="." instance=ExtResource("3_i4lod")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(240, 85)

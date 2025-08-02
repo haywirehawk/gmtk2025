@@ -1,8 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0nhuv8a8es4l"]
+[gd_scene load_steps=5 format=3 uid="uid://d0nhuv8a8es4l"]
 
 [ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="1_w4qcc"]
 [ext_resource type="Resource" uid="uid://taf60tl0c3yx" path="res://resources/lassos/rubber_lasso/rubber_lasso.tres" id="2_g5ucu"]
+[ext_resource type="Texture2D" uid="uid://2p7aknlt4x51" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso.png" id="3_d0q4o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w72li"]
+atlas = ExtResource("3_d0q4o")
+region = Rect2(16, 16, 16, 16)
 
 [node name="RubberUpgrade" instance=ExtResource("1_w4qcc")]
-modulate = Color(1, 0.666667, 1, 1)
 lasso = ExtResource("2_g5ucu")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("AtlasTexture_w72li")
+
+[node name="PickupArea2D" parent="." index="1"]
+visible = false
