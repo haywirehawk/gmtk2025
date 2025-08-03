@@ -3,6 +3,13 @@ extends Node2D
 
 const DEFAULT_SHADER: Shader = preload("uid://bxa23hv7qmfki")
 
+enum LassoTag {
+	NONE,
+	FIRE,
+	GHOST,
+	RUBBER,
+}
+
 @export var default_lasso: LassoResource
 # Lasso Stats
 var max_length = 120.0
@@ -17,9 +24,10 @@ var target: Vector2
 var target_collider: Area2D
 var hitch_point: Node2D
 var hitched_texture: Texture2D
-var is_hitched: bool
-var is_throwing: bool
 var strength_percent: float
+var tag: LassoTag = LassoTag.NONE
+var is_rubber: bool = false
+
 
 var particles_array: Array[Node]
 
@@ -53,11 +61,21 @@ func change_lasso(new_lasso: LassoResource) -> void:
 	lasso_raycast.target_position = Vector2.RIGHT * max_length
 	lasso_slack.texture = new_lasso.rope_slack_texture
 	hitched_texture = new_lasso.hitched_texture
+	tag = new_lasso.tag
 	
+	is_rubber = tag == LassoTag.RUBBER
+	change_collision_from_tag()
 	set_shaders_and_particles(new_lasso)
 	
 	if state_machine.current_state.name.to_lower() == "locked":
 		state_machine.change_state("idle")
+
+
+func change_collision_from_tag() -> void:
+	if tag == LassoTag.FIRE:
+		lasso_honda_area.collision_layer = 96
+	else:
+		lasso_honda_area.collision_layer = 32
 
 
 func set_shaders_and_particles(lasso: LassoResource) -> void:
@@ -93,7 +111,6 @@ func get_target_from_collision() -> void:
 
 func hitch_lasso() -> bool:
 	if lasso_raycast.is_colliding():
-		is_hitched = true
 		target_collider = lasso_raycast.get_collider()
 		target = target_collider.global_position
 		lasso_line.show()
@@ -106,11 +123,15 @@ func release_lasso() -> void:
 	state_machine.change_state("idle")
 
 
+func get_climb_direction() -> float:
+	return -player.move_direction_y
+
+
 ## Strain should be useful for rubber and ghost lassos
 func swing(delta: float) -> void:
-	var target_dir = global_position.direction_to(target)
-	var target_dist = global_position.distance_to(target)
-	var displacement = target_dist - rest_length
+	var target_direction = global_position.direction_to(target)
+	var target_distance = global_position.distance_to(target)
+	var displacement = target_distance - rest_length
 	var strain = displacement / max_length
 	if strain > 0.9:
 		release_lasso()
@@ -120,14 +141,24 @@ func swing(delta: float) -> void:
 	
 	if displacement > 0:
 		var spring_force_magnitude = stiffness * displacement
-		var spring_force = target_dir * spring_force_magnitude
+		var spring_force = target_direction * spring_force_magnitude
 		
-		var vel_dot = player.velocity.dot(target_dir)
-		var damping = -damping_factor * vel_dot * target_dir
+		var vel_dot = player.velocity.dot(target_direction)
+		var damping = -damping_factor * vel_dot * target_direction
 		
-		force = spring_force + damping
+		if is_rubber and player.input_jump_just_pressed:
+			force = spring_force * 2
+			release_lasso()
+		else:
+			force = spring_force + damping
 	
-	player.velocity += force * delta
+	if player.is_on_floor():
+		force *= .75
+	
+	var climb_direction = get_climb_direction()
+	var climb_velocity = climb_direction * target_direction * 100
+	
+	player.velocity += (force + climb_velocity) * delta
 	update_rope(strain)
 
 

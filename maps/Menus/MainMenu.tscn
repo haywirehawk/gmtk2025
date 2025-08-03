@@ -1,9 +1,108 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpowjgf1nm8rp"]
+[gd_scene load_steps=16 format=4 uid="uid://cpowjgf1nm8rp"]
 
 [ext_resource type="Script" uid="uid://djp1ds0oggdu1" path="res://maps/Menus/main_menu.gd" id="1_700jq"]
+[ext_resource type="TileSet" uid="uid://bb1ih6gruci4e" path="res://resources/tilemaps/foreground_tilemap.tres" id="2_xkfny"]
+[ext_resource type="PackedScene" uid="uid://cjcfv1uwjlf7o" path="res://game_objects/particles/fire/fire_particles.tscn" id="3_tat3g"]
+[ext_resource type="TileSet" uid="uid://ccytbqj6i5xje" path="res://resources/tilemaps/platform_tilemap.tres" id="3_wdfum"]
+[ext_resource type="Texture2D" uid="uid://cilpukysdlu7f" path="res://game_objects/player/Falling.png" id="5_np307"]
+[ext_resource type="Texture2D" uid="uid://dqitiwxht8r11" path="res://game_objects/player/Cowboy.png" id="6_obhag"]
+[ext_resource type="Texture2D" uid="uid://drchecylmilrg" path="res://game_objects/player/Cowboy walk.png" id="7_oohd1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4l60"]
+atlas = ExtResource("5_np307")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7l5b"]
+atlas = ExtResource("6_obhag")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lakk"]
+atlas = ExtResource("6_obhag")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on823"]
+atlas = ExtResource("7_oohd1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5r2k"]
+atlas = ExtResource("7_oohd1")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip10g"]
+atlas = ExtResource("7_oohd1")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4nmx"]
+atlas = ExtResource("7_oohd1")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iepig"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4l60")
+}],
+"loop": true,
+"name": &"airborne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 14.0,
+"texture": SubResource("AtlasTexture_o7l5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lakk")
+}, {
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_o7l5b")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6lakk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on823")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5r2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip10g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4nmx")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_700jq")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAoABcAAwAJAAMAAAAoABYAAwAJAAMAAAAoABUAAwACAAIAAAAnABcAAwAJAAMAAAAnABYAAwAJAAMAAAAnABUAAwAJAAMAAAAmABcAAwAJAAMAAAAmABYAAwAJAAMAAAAmABUAAwAJAAMAAAAlABcAAwAJAAMAAAAlABYAAwAJAAMAAAAlABUAAwAJAAMAAAAkABcAAwAJAAMAAAAkABYAAwAJAAMAAAAkABUAAwAJAAMAAAAjABcAAwAJAAMAAAAjABYAAwAJAAMAAAAjABUAAwAJAAMAAAAiABcAAwAJAAMAAAAiABYAAwAJAAMAAAAiABUAAwAJAAMAAAAhABcAAwAJAAMAAAAhABYAAwAJAAMAAAAhABUAAwAJAAMAAAAgABcAAwAJAAMAAAAgABYAAwAJAAMAAAAgABUAAwAJAAMAAAAfABcAAwAJAAMAAAAfABYAAwAJAAMAAAAfABUAAwAJAAMAAAAeABcAAwAJAAMAAAAeABYAAwAJAAMAAAAeABUAAwAJAAMAAAAdABcAAwAJAAMAAAAdABYAAwAJAAMAAAAdABUAAwAJAAMAAAAcABcAAwAJAAMAAAAcABYAAwAJAAMAAAAcABUAAwAJAAMAAAAbABcAAwAJAAMAAAAbABYAAwAJAAMAAAAbABUAAwAJAAMAAAAaABcAAwAJAAMAAAAaABYAAwAJAAMAAAAaABUAAwAJAAMAAAAZABcAAwAJAAMAAAAZABYAAwAJAAMAAAAZABUAAwAJAAMAAAAYABcAAwAJAAMAAAAYABYAAwAJAAMAAAAYABUAAwAJAAMAAAAXABcAAwAJAAMAAAAXABYAAwAJAAMAAAAXABUAAwAJAAMAAAAWABcAAwAJAAMAAAAWABYAAwAJAAMAAAAWABUAAwAJAAMAAAAVABcAAwAJAAMAAAAVABYAAwAJAAMAAAAVABUAAwAJAAMAAAAUABcAAwAJAAMAAAAUABYAAwAJAAMAAAAUABUAAwAJAAMAAAATABcAAwAJAAMAAAATABYAAwAJAAMAAAATABUAAwAJAAMAAAASABcAAwAJAAMAAAASABYAAwAJAAMAAAASABUAAwAJAAMAAAARABcAAwAJAAMAAAARABYAAwAJAAMAAAARABUAAwAJAAMAAAAQABcAAwAJAAMAAAAQABYAAwAJAAMAAAAQABUAAwAJAAMAAAAPABcAAwAJAAMAAAAPABYAAwAJAAMAAAAPABUAAwAJAAMAAAAOABcAAwAJAAMAAAAOABYAAwAJAAMAAAAOABUAAwAJAAMAAAANABcAAwAJAAMAAAANABYAAwAJAAMAAAANABUAAwAJAAMAAAAMABcAAwAJAAMAAAAMABYAAwAJAAMAAAAMABUAAwAJAAMAAAALABcAAwAJAAMAAAALABYAAwAJAAMAAAALABUAAwAJAAMAAAAKABcAAwAJAAMAAAAKABYAAwAJAAMAAAAKABUAAwAJAAMAAAAJABcAAwAJAAMAAAAJABYAAwAJAAMAAAAJABUAAwAJAAMAAAAIABcAAwAJAAMAAAAIABYAAwAJAAMAAAAIABUAAwAJAAMAAAAHABcAAwAJAAMAAAAHABYAAwAJAAMAAAAHABUAAwAJAAMAAAAGABcAAwAJAAMAAAAGABYAAwAJAAMAAAAGABUAAwAJAAMAAAAFABcAAwAJAAMAAAAFABYAAwAJAAMAAAAFABUAAwAJAAMAAAAEABcAAwAJAAMAAAAEABYAAwAJAAMAAAAEABUAAwAJAAMAAAADABcAAwAJAAMAAAADABYAAwAJAAMAAAADABUAAwAJAAMAAAACABcAAwAJAAMAAAACABYAAwAJAAMAAAACABUAAwAJAAMAAAABABcAAwAJAAMAAAABABYAAwAJAAMAAAABABUAAwAJAAMAAAAAABcAAwAJAAMAAAAAABYAAwAJAAMAAAAAABUAAwAJAAMAAAD//xcAAwAJAAMAAAD//xYAAwAJAAMAAAD//xUAAwAEAAEAAAAoABQAAwAAAAIAAAAnABQAAwACAAAAAAAmABQAAwAEAAAAAAAlABQAAwACAAAAAAAkABQAAwADAAAAAAAjABQAAwACAAAAAAAiABQAAwAEAAAAAAAhABQAAwABAAAAAAAgABQAAwADAAAAAAAfABQAAwADAAAAAAAeABQAAwAEAAAAAAAdABQAAwADAAAAAAAcABQAAwADAAAAAAAbABQAAwAAAAAAAAAaABQAAwABAAAAAAAZABQAAwAAAAAAAAAYABQAAwABAAAAAAAXABQAAwABAAAAAAAWABQAAwADAAAAAAAVABQAAwABAAAAAAAUABQAAwABAAAAAAATABQAAwAEAAAAAAASABQAAwAAAAAAAAARABQAAwAEAAAAAAAQABQAAwAEAAAAAAAPABQAAwABAAAAAAAOABQAAwAAAAAAAAANABQAAwABAAAAAAAMABQAAwAEAAAAAAALABQAAwAEAAAAAAAKABQAAwABAAAAAAAJABQAAwABAAAAAAAIABQAAwAAAAAAAAAHABQAAwAEAAAAAAAGABQAAwADAAAAAAAFABQAAwABAAAAAAAEABQAAwACAAAAAAADABQAAwAEAAAAAAACABQAAwADAAAAAAABABQAAwACAAAAAAAAABQAAwACAAAAAAD//xQAAwAAAAEAAAA=")
+tile_set = ExtResource("2_xkfny")
+
+[node name="Particles" type="Node2D" parent="." groups=["particles_layer"]]
+
+[node name="WorldFireParticles" parent="Particles" instance=ExtResource("3_tat3g")]
+position = Vector2(328, 312)
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAdABMAAQAAAAAAAgACABMAAQAAAAAAAgAnABIAAAADAAAAAAAnABMAAAADAAEAAAAUABMAAAAHAAIAAAA=")
+tile_set = ExtResource("3_wdfum")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(307, 313)
+sprite_frames = SubResource("SpriteFrames_iepig")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -66,6 +165,10 @@ text = "Credits"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="DustTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer2/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer2/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]

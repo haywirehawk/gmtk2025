@@ -12,15 +12,18 @@ func enter() -> void:
 	hitch_component.sprite_texture = parent.hitched_texture
 	hitch_component.show()
 	get_tree().get_first_node_in_group("entities_layer").add_child(hitch_component)
+	
+	parent.player.set_can_climb(true)
 
 
 func exit() -> void:
 	hitch_component.queue_free()
 	parent.reset_rope()
+	parent.player.set_can_climb(false)
 
 
 func update(delta: float) -> void:
-	if parent.player.input_jump_just_pressed and not parent.player.is_on_floor():
+	if parent.player.input_release_just_pressed:
 		transition.emit(self, "idle")
 		return
 	parent.swing(delta)

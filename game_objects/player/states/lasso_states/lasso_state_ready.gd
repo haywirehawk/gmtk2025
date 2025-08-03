@@ -4,7 +4,7 @@ var _max_strength: bool
 var _current_strength_percent: float
 var _shader_tween: Tween
 var _timer: SceneTreeTimer
-var _duration: float = 1.5
+var _duration: float = 0.5
 
 func enter() -> void:
 	_reset_variables()

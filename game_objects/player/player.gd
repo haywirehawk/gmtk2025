@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const BASE_MOVE_SPEED: float = 120.0
 const MAX_MOVE_SPEED: float = 250.0
+const BASE_CLIMB_SPEED: float = 100.0
 const BASE_MOVEMENT_DAMPING: float = 5.0
 const JUMP_VELOCITY: float = -250.0
 const JUMP_CANCEL_FACTOR: float = 0.75
@@ -10,8 +11,14 @@ const AIRBORNE_MOVEMENT_FACTOR: float = 250.0
 
 # Movement
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var movement_vector: Vector2
 var move_direction_x: float
+var move_direction_y: float
 var is_jumping: bool
+var jump_buffer: int = 5
+var jump_buffer_remaining: int
+var grounded_with_buffer: bool
+var can_climb: bool
 # Inputs
 var aim_vector: Vector2
 var mouse_aim_vector: Vector2
@@ -20,6 +27,7 @@ var input_jump_held: bool
 var input_jump_just_pressed: bool
 var input_lasso_held: bool
 var input_lasso_just_pressed: bool
+var input_release_just_pressed: bool
 var joystick_mode: bool
 
 @onready var visuals: Node2D = $Visuals
@@ -45,8 +53,11 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	get_inputs()
+	check_jump_buffer()
 	handle_jump()
 	handle_walking_movement(delta)
+	if can_climb:
+		handle_climbing_movement(delta)
 
 
 func _input(event: InputEvent) -> void:
@@ -66,20 +77,23 @@ func check_out_of_bounds() -> bool:
 
 
 func get_inputs() -> void:
-	move_direction_x = Input.get_axis("move_left", "move_right")
+	movement_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	move_direction_x = movement_vector.x
+	move_direction_y = movement_vector.y
 	mouse_aim_vector = aim_root.global_position.direction_to(aim_root.get_global_mouse_position())
 	joypad_aim_vector = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 	input_jump_just_pressed = Input.is_action_just_pressed("jump")
 	input_jump_held = Input.is_action_pressed("jump")
 	input_lasso_just_pressed = Input.is_action_just_pressed("lasso")
 	input_lasso_held = Input.is_action_pressed("lasso")
+	input_release_just_pressed = Input.is_action_just_pressed("release")
 	
 	if joystick_mode:
 		aim_vector = joypad_aim_vector
 	else:
 		aim_vector = mouse_aim_vector
 		# Restricts keyboard movement to cardinals to avoid unintended joypad inputs.
-		#movement_vector = movement_vector.snapped(Vector2(1.0, 1.0)).normalized()
+		movement_vector = movement_vector.snapped(Vector2(1.0, 1.0)).normalized()
 
 
 func update_aim_position() -> void:
@@ -88,6 +102,21 @@ func update_aim_position() -> void:
 	else:
 		direction_arrow.look_at(aim_root.global_position + aim_vector)
 		lasso_controller.aim_direction = aim_vector
+
+
+func set_can_climb(able: bool) -> void:
+	can_climb = able
+
+
+func check_jump_buffer() -> void:
+	if is_on_floor():
+		jump_buffer_remaining = jump_buffer
+		grounded_with_buffer = true
+	elif jump_buffer_remaining > 0:
+		jump_buffer_remaining -= 1
+		grounded_with_buffer = true
+	else:
+		grounded_with_buffer = false
 
 
 func apply_gravity(delta: float, gravity: float = default_gravity) -> void:
@@ -103,11 +132,17 @@ func handle_walking_movement(delta: float) -> void:
 		var nudge := move_direction_x * AIRBORNE_MOVEMENT_FACTOR * delta
 		velocity.x = clampf(velocity.x + nudge, -MAX_MOVE_SPEED, MAX_MOVE_SPEED)
 
+func handle_climbing_movement(delta: float) -> void:
+	if is_on_wall():
+		var target_velocity := move_direction_y * BASE_CLIMB_SPEED
+		velocity.y = lerpf(velocity.x, target_velocity, 1 - exp(-BASE_MOVEMENT_DAMPING * delta))
+
 
 func handle_jump() -> void:
-	if input_jump_just_pressed and is_on_floor() and not is_jumping:
+	if input_jump_just_pressed and grounded_with_buffer and not is_jumping:
 		velocity.y += JUMP_VELOCITY
 		is_jumping = true
+		return
 	if not input_jump_held and is_jumping:
 		velocity.y *= JUMP_CANCEL_FACTOR
 		is_jumping = false
@@ -119,7 +154,7 @@ func handle_animations() -> void:
 			player_sprite.play("walking")
 		else:
 			player_sprite.play("idle")
-	else:
+	elif velocity.y > 10 or velocity.y < -10:
 		player_sprite.play("airborne")
 	animate_lasso_slack()
 

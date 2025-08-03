@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bbs6thqicl6be"]
+[gd_scene load_steps=36 format=3 uid="uid://bbs6thqicl6be"]
 
 [ext_resource type="Script" uid="uid://dfc77vxsgp2f4" path="res://game_objects/player/player.gd" id="1_jcgnw"]
 [ext_resource type="PackedScene" uid="uid://cpqpp7ve1skp7" path="res://game_objects/components/health/health_component.tscn" id="2_3g2qd"]
@@ -188,6 +188,10 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("10_kc3ei")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lakk"]
+atlas = ExtResource("10_kc3ei")
+region = Rect2(0, 16, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_on823"]
 atlas = ExtResource("18_nl4u6")
 region = Rect2(0, 0, 16, 16)
@@ -215,8 +219,17 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 14.0,
 "texture": SubResource("AtlasTexture_o7l5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lakk")
+}, {
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_o7l5b")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6lakk")
 }],
 "loop": true,
 "name": &"idle",
@@ -252,20 +265,6 @@ libraries = {
 }
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_3g2qd")]
-
-[node name="PlayerStateMachine" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("4_na85j")
-
-[node name="Idle" type="Node" parent="PlayerStateMachine"]
-
-[node name="Walk" type="Node" parent="PlayerStateMachine"]
-
-[node name="Fall" type="Node" parent="PlayerStateMachine"]
-
-[node name="Jump" type="Node" parent="PlayerStateMachine"]
-
-[node name="Stun" type="Node" parent="PlayerStateMachine"]
 
 [node name="LassoStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
@@ -373,8 +372,9 @@ offset = Vector2(0, -8)
 unique_name_in_owner = true
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_cuamp")
-animation = &"airborne"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.654434
 
 [node name="EquipRoot" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true

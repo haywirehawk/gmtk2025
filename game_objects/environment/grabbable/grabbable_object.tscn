@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg05kbqnpijw8"]
+
+[ext_resource type="Texture2D" uid="uid://c7q326nutv75i" path="res://assets/items/Items-10.png" id="1_2roow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iubqr"]
+
+[node name="GrabbableObject" type="Sprite2D"]
+texture = ExtResource("1_2roow")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_iubqr")
