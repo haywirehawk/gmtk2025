@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://0c1uspxcou7k"]
+[gd_scene load_steps=4 format=3 uid="uid://drdli1tjx2ldi"]
 
 [ext_resource type="Texture2D" uid="uid://caxgnjy7e3qpm" path="res://assets/items/Items-07.png" id="1_lhpd4"]
 [ext_resource type="Script" uid="uid://csc1ist0v2dp7" path="res://game_objects/environment/poi/ice_block.gd" id="2_7eu3i"]
