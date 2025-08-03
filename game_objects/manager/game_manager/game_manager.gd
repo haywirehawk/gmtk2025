@@ -58,7 +58,6 @@ func spawn_player() -> void:
 	player = PLAYER_SCENE.instantiate()
 	player.global_position = spawn_location.global_position
 	get_tree().get_first_node_in_group("entities_layer").add_child(player)
-	camera.set_target(player, false)
 	camera.shake(1.0)
 	GameEvents.emit_player_spawned(player)
 
@@ -201,6 +200,7 @@ func _on_tornado_hit() -> void:
 func _on_player_spawned(_player: Player) -> void:
 	if tornado:
 		tornado.setup(_player)
+	camera.set_target(_player, false)
 
 
 func _on_tween_out_finished() -> void:
