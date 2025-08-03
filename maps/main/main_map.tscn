@@ -62,7 +62,6 @@ tile_set = ExtResource("11_kehfg")
 [node name="Particles" type="Node2D" parent="Environment" groups=["particles_layer"]]
 
 [node name="Tornado" parent="." instance=ExtResource("5_5gfxk")]
-visible = false
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 

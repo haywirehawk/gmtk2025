@@ -11,6 +11,7 @@ const AIRBORNE_MOVEMENT_FACTOR: float = 250.0
 
 # Movement
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var current_gravity: float
 var movement_vector: Vector2
 var move_direction_x: float
 var move_direction_y: float
@@ -19,6 +20,7 @@ var jump_buffer: int = 5
 var jump_buffer_remaining: int
 var grounded_with_buffer: bool
 var can_climb: bool
+var locked: bool
 # Inputs
 var aim_vector: Vector2
 var mouse_aim_vector: Vector2
@@ -41,9 +43,12 @@ var joystick_mode: bool
 func _ready() -> void:
 	lasso_controller.setup(self)
 	GameEvents.emit_player_spawned(self)
+	
+	current_gravity = default_gravity
 
 
 func _process(_delta: float) -> void:
+	if locked: return
 	update_aim_position()
 	move_and_slide()
 	flip()
@@ -51,6 +56,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if locked: return
 	apply_gravity(delta)
 	get_inputs()
 	check_jump_buffer()
@@ -67,8 +73,10 @@ func _input(event: InputEvent) -> void:
 		joystick_mode = false
 
 
-func setup(lasso: LassoResource) -> void:
-	_change_lasso(lasso)
+func lockout(lock: bool = true) -> void:
+	locked = lock
+	if is_node_ready():
+		player_sprite.play("airborne")
 
 
 func check_out_of_bounds() -> bool:

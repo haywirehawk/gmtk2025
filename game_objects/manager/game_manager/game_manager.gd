@@ -14,6 +14,9 @@ var dust_particle_scene: PackedScene = preload("uid://c2wxaso1uvwb2")
 var max_dust_particles: int = 15
 var max_dust_particles_spawn: int = 5
 
+var tween_in_time: float = 0.8
+var tween_out_time: float = 0.6
+
 @onready var doom_start_timer: Timer = %DoomStartTimer
 @onready var dust_timer: Timer = %DustTimer
 
@@ -42,6 +45,19 @@ func spawn_player() -> void:
 	player = PLAYER_SCENE.instantiate()
 	player.global_position = spawn_location.global_position
 	get_tree().get_first_node_in_group("entities_layer").add_child(player)
+	camera.set_target(player, false)
+	camera.shake(1.0)
+	GameEvents.emit_player_spawned(player)
+
+
+func respawn_player() -> void:
+	player = PLAYER_SCENE.instantiate()
+	player.global_position = spawn_location.global_position
+	player.lockout(true)
+	player.scale = Vector2(3, 3)
+	get_tree().get_first_node_in_group("entities_layer").add_child(player)
+	tween_in(player)
+	await get_tree().create_timer(tween_in_time).timeout
 	camera.set_target(player, false)
 	camera.shake(1.0)
 	GameEvents.emit_player_spawned(player)
@@ -80,6 +96,28 @@ func add_dust() -> void:
 	dust_timer.start()
 
 
+func tween_out(node: Node2D) -> void:
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(node, "scale", Vector2(3, 3), tween_out_time).from(Vector2.ONE)\
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(node, "rotation", PI * 4, tween_out_time).from(0)\
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	tween.finished.connect(_on_tween_out_finished)
+
+
+func tween_in(node: Node2D) -> void:
+	var end_location := node.global_position
+	var start_location := end_location + Vector2(0, -50)
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(node, "scale", Vector2.ONE, tween_in_time).from(Vector2(3, 3))\
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(node, "position", end_location, tween_in_time).from(start_location)\
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BOUNCE)
+	tween.tween_property(node, "rotation", 0, tween_in_time).from(2 * PI)\
+		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.finished.connect(_on_tween_in_finished)
+
+
 func _on_doom_timer_timeout() -> void:
 	pass
 
@@ -89,4 +127,17 @@ func _on_dust_timer_timeout() -> void:
 
 
 func _on_tornado_hit() -> void:
-	print("Tornado hit!")
+	player.lockout(true)
+	
+	tween_out(player)
+
+
+func _on_tween_out_finished() -> void:
+	player.queue_free()
+	camera.set_target(spawn_location)
+	await get_tree().create_timer(1.0).timeout
+	respawn_player()
+
+
+func _on_tween_in_finished() -> void:
+	player.lockout(false)

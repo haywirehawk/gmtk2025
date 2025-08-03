@@ -374,7 +374,7 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_cuamp")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.654434
+frame_progress = 0.0616196
 
 [node name="EquipRoot" type="Node2D" parent="Visuals"]
 unique_name_in_owner = true
