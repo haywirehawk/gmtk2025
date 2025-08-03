@@ -31,7 +31,7 @@ position = Vector2(0, -140)
 scale = Vector2(2.5, 0.5)
 texture = ExtResource("3_xrcap")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TextHolder"]
+[node name="RichTextLabel" type="Label" parent="TextHolder"]
 offset_left = -144.0
 offset_top = -166.0
 offset_right = 144.0
