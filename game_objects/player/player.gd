@@ -38,13 +38,18 @@ var joystick_mode: bool
 @onready var direction_arrow: Sprite2D = %DirectionArrow
 @onready var lasso_controller: LassoController = %LassoController
 @onready var equip_root: Node2D = %EquipRoot
+@onready var audio_player: PlayerAudioPlayer = %AudioPlayer
+@onready var hurtbox_collision_shape: CollisionShape2D = %HurtboxCollisionShape
 
 
 func _ready() -> void:
 	lasso_controller.setup(self)
-	GameEvents.emit_player_spawned(self)
 	
 	current_gravity = default_gravity
+	
+	GameEvents.lasso_acquired.connect(_on_lasso_acquired)
+	
+	GameEvents.emit_player_spawned(self)
 
 
 func _process(_delta: float) -> void:
@@ -76,6 +81,7 @@ func _input(event: InputEvent) -> void:
 func lockout(lock: bool = true) -> void:
 	locked = lock
 	if is_node_ready():
+		hurtbox_collision_shape.set_deferred("disabled", lock)
 		player_sprite.play("airborne")
 
 
@@ -150,6 +156,7 @@ func handle_jump() -> void:
 	if input_jump_just_pressed and grounded_with_buffer and not is_jumping:
 		velocity.y += JUMP_VELOCITY
 		is_jumping = true
+		audio_player.play_jump()
 		return
 	if not input_jump_held and is_jumping:
 		velocity.y *= JUMP_CANCEL_FACTOR
@@ -191,3 +198,7 @@ func try_change_lasso(new_lasso: LassoResource) -> bool:
 
 func _change_lasso(new_lasso: LassoResource) -> void:
 	lasso_controller.change_lasso(new_lasso)
+
+
+func _on_lasso_acquired(_lasso: LassoResource) -> void:
+	audio_player.play_lasso_acquired()

@@ -73,6 +73,8 @@ func get_collection_size() -> int:
 
 func _on_player_spawned(active_player: Player) -> void:
 	player = active_player
+	if get_collection_size() > 0:
+		player.try_change_lasso(get_current_lasso())
 
 
 func _add_lasso_to_collection(new_upgrade: LassoResource) -> void:

@@ -12,6 +12,12 @@ extends Node2D
 @onready var right_hitbox: HitboxComponent = $RightWall/HitboxComponent
 @onready var left_wall: TornadoSprite = %LeftWall
 @onready var right_wall: TornadoSprite = %RightWall
+@onready var left_audio_player: AudioStreamPlayer2D = %LeftAudioPlayer
+@onready var right_audio_player: AudioStreamPlayer2D = %RightAudioPlayer
+@onready var audio_timer: Timer = $AudioTimer
+
+var audio_playing: bool
+var starting_distance: float = 300
 
 
 var movement_timer: Timer
@@ -25,8 +31,12 @@ var _closing_speed: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	left_wall.position.x = -starting_distance
+	right_wall.position.x = starting_distance
+	
 	left_hitbox.successful_hit.connect(_tornado_hit)
 	right_hitbox.successful_hit.connect(_tornado_hit)
+	audio_timer.timeout.connect(_on_audio_timer_timeout)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,6 +45,7 @@ func _process(delta: float) -> void:
 	
 	follow_target(delta)
 	close_walls(delta)
+	check_wall_distance()
 
 
 func setup(new_target: Node2D) -> void:
@@ -48,6 +59,12 @@ func start_tornado() -> void:
 
 func stop_tornado() -> void:
 	idle = true
+	audio_timer.stop()
+
+
+func add_spread() -> void:
+	left_wall.position.x -= 1000
+	right_wall.position.x += 1000
 
 
 func set_closing_speed(speed: float) -> void:
@@ -65,7 +82,22 @@ func close_walls(delta: float) -> void:
 	var closing_distance = _closing_speed * delta
 	left_wall.position.x += closing_distance
 	right_wall.position.x -= closing_distance
-	
+
+
+func check_wall_distance() -> void:
+	if audio_playing:
+		if left_wall.position.x < -3000:
+			audio_timer.stop()
+			audio_playing = false
+	else:
+		if left_wall.position.x > -3000:
+			audio_timer.start()
+			audio_playing = true
+
+
+func play_sounds() -> void:
+	left_audio_player.play()
+	right_audio_player.play()
 
 
 #turns on/off random movement, can still move manually when off
@@ -127,3 +159,7 @@ func close_walls(delta: float) -> void:
 
 func _tornado_hit(_direction: Vector2) -> void:
 	GameEvents.tornado_hit.emit()
+
+
+func _on_audio_timer_timeout() -> void:
+	play_sounds()

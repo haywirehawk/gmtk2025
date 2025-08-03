@@ -26,6 +26,8 @@ func enter() -> void:
 	current_position = lasso_honda.global_position
 	get_tree().create_timer(2.0).timeout.connect(_timer_timeout)
 	
+	parent.player.audio_player.play_lasso_throw()
+	
 	#var direction = lasso_honda.global_position.direction_to(target).normalized()
 	#lasso_honda.velocity = direction * parent.throw_speed
 

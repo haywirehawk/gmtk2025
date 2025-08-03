@@ -134,6 +134,7 @@ func tween_in(node: Node2D) -> void:
 
 func set_grace_period() -> void:
 	tornado.stop_tornado()
+	tornado.add_spread()
 	grace_period_timer.start()
 	doom_timer.stop()
 
@@ -161,6 +162,7 @@ func _on_dust_timer_timeout() -> void:
 
 
 func _on_tornado_hit() -> void:
+	doom_clock -= 1
 	player.lockout(true)
 	
 	tween_out(player)

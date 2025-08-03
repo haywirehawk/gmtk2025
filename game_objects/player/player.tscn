@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bbs6thqicl6be"]
+[gd_scene load_steps=41 format=3 uid="uid://bbs6thqicl6be"]
 
 [ext_resource type="Script" uid="uid://dfc77vxsgp2f4" path="res://game_objects/player/player.gd" id="1_jcgnw"]
 [ext_resource type="PackedScene" uid="uid://cpqpp7ve1skp7" path="res://game_objects/components/health/health_component.tscn" id="2_3g2qd"]
@@ -15,6 +15,11 @@
 [ext_resource type="Script" uid="uid://cwetfej2djc7n" path="res://game_objects/player/states/lasso_states/lasso_state_miss.gd" id="8_d4pf5"]
 [ext_resource type="PackedScene" uid="uid://b53rlrm08se48" path="res://game_objects/components/hurtbox/hurtbox_component.tscn" id="10_d4pf5"]
 [ext_resource type="Texture2D" uid="uid://dqitiwxht8r11" path="res://game_objects/player/Cowboy.png" id="10_kc3ei"]
+[ext_resource type="Script" uid="uid://ctpy3qyy43ww0" path="res://game_objects/player/player_audio_player.gd" id="11_nl4u6"]
+[ext_resource type="AudioStream" uid="uid://0a67tauy7doc" path="res://Audio/sfx/impactSoft_heavy_002.ogg" id="12_on823"]
+[ext_resource type="AudioStream" uid="uid://c40pajf4r05v1" path="res://Audio/sfx/woosh6.ogg" id="13_d5r2k"]
+[ext_resource type="AudioStream" uid="uid://dmv0k2wavj7kk" path="res://Audio/sfx/phaserUp5.ogg" id="13_h4nmx"]
+[ext_resource type="AudioStream" uid="uid://c2mqu76bc6b24" path="res://Audio/sfx/handleSmallLeather2.ogg" id="13_ip10g"]
 [ext_resource type="Shader" uid="uid://bxa23hv7qmfki" path="res://resources/shaders/flash.gdshader" id="14_o7l5b"]
 [ext_resource type="Texture2D" uid="uid://cilpukysdlu7f" path="res://game_objects/player/Falling.png" id="16_qh24s"]
 [ext_resource type="Texture2D" uid="uid://drchecylmilrg" path="res://game_objects/player/Cowboy walk.png" id="18_nl4u6"]
@@ -293,15 +298,29 @@ script = ExtResource("7_3g2qd")
 [node name="Miss" type="Node" parent="LassoStateMachine"]
 script = ExtResource("8_d4pf5")
 
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Audio"]
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="Audio"]
+unique_name_in_owner = true
+script = ExtResource("11_nl4u6")
+player_jump_sound = ExtResource("12_on823")
+lasso_acquired_sound = ExtResource("13_h4nmx")
+lasso_hitch_sound = ExtResource("13_ip10g")
+lasso_throw_sound = ExtResource("13_d5r2k")
+
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CapsuleShape2D_qh24s")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_d4pf5")]
 visible = false
+collision_mask = 8
 health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+[node name="HurtboxCollisionShape" type="CollisionShape2D" parent="HurtboxComponent"]
+unique_name_in_owner = true
 position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_nl4u6")
 
@@ -384,3 +403,24 @@ position = Vector2(-3, -5)
 [node name="LassoSlack" type="Sprite2D" parent="Visuals/EquipRoot"]
 unique_name_in_owner = true
 offset = Vector2(0, 2)
+
+[node name="ThrowChargeProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(20, 2)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = 1.0
+offset_right = 8.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+value = 0.5
+show_percentage = false

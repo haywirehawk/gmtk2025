@@ -39,6 +39,7 @@ var particles_array: Array[Node]
 @onready var lasso_honda_area: CharacterBody2D = %LassoHondaArea
 @onready var lasso_honda_sprite: AnimatedSprite2D = %LassoHondaSprite
 @onready var lasso_slack: Sprite2D = %LassoSlack
+@onready var throw_charge_progress_bar: ProgressBar = %ThrowChargeProgressBar
 
 
 func _ready() -> void:

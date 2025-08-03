@@ -14,6 +14,7 @@ func enter() -> void:
 	get_tree().get_first_node_in_group("entities_layer").add_child(hitch_component)
 	
 	parent.player.set_can_climb(true)
+	parent.player.audio_player.play_lasso_hitch()
 
 
 func exit() -> void:
