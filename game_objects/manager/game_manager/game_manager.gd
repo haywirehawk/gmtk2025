@@ -211,4 +211,5 @@ func _on_tween_out_finished() -> void:
 
 
 func _on_tween_in_finished() -> void:
-	player.lockout(false)
+	if player:
+		player.lockout(false)
