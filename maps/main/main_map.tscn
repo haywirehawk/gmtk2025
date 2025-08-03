@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cmy4xujejhlfw"]
+[gd_scene load_steps=18 format=4 uid="uid://cmy4xujejhlfw"]
 
 [ext_resource type="PackedScene" uid="uid://c1hg8vg83s6wv" path="res://ui/hud/hud.tscn" id="1_5gfxk"]
 [ext_resource type="PackedScene" uid="uid://c752gnmyuhq6i" path="res://game_objects/camera/game_camera.tscn" id="1_wcb2u"]
@@ -9,10 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b0qvyu1crjo2y" path="res://game_objects/enemy/tornado/tornado.tscn" id="5_5gfxk"]
 [ext_resource type="AudioStream" uid="uid://4txk4e6cc13j" path="res://Audio/sfx/jingles-hit_00.ogg" id="6_m6h6d"]
 [ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="7_hjb1d"]
-[ext_resource type="PackedScene" uid="uid://d0nhuv8a8es4l" path="res://game_objects/collectable/upgrades/rubber_upgrade/rubber_upgrade.tscn" id="8_6jpqv"]
-[ext_resource type="PackedScene" uid="uid://d3s7a6g1gmhdt" path="res://game_objects/collectable/upgrades/ghost_upgrade/ghost_upgrade.tscn" id="8_kehfg"]
 [ext_resource type="PackedScene" uid="uid://bnio431nqamq3" path="res://game_objects/environment/poi/upgrade_altar.tscn" id="9_4s324"]
-[ext_resource type="PackedScene" uid="uid://bt2iv73fklqb1" path="res://game_objects/collectable/upgrades/fire_upgrade/fire_upgrade.tscn" id="9_nyxxn"]
 [ext_resource type="TileSet" uid="uid://std8qgkgyjcb" path="res://resources/tilemaps/background.tres" id="9_qn6lf"]
 [ext_resource type="TileSet" uid="uid://ccytbqj6i5xje" path="res://resources/tilemaps/platform_tilemap.tres" id="10_6jpqv"]
 [ext_resource type="PackedScene" uid="uid://umxdfcsp60w" path="res://game_objects/environment/poi/final_altar_backup.tscn" id="10_nyxxn"]
@@ -55,18 +52,6 @@ position = Vector2(328, 275)
 position = Vector2(583, 289)
 upgrade_scene = ExtResource("7_hjb1d")
 
-[node name="UpgradeAltar2" parent="Environment/Objects" instance=ExtResource("9_4s324")]
-position = Vector2(583, 289)
-upgrade_scene = ExtResource("9_nyxxn")
-
-[node name="UpgradeAltar3" parent="Environment/Objects" instance=ExtResource("9_4s324")]
-position = Vector2(583, 289)
-upgrade_scene = ExtResource("8_kehfg")
-
-[node name="UpgradeAltar4" parent="Environment/Objects" instance=ExtResource("9_4s324")]
-position = Vector2(583, 289)
-upgrade_scene = ExtResource("8_6jpqv")
-
 [node name="FinalAltarBackup" parent="Environment/Objects" instance=ExtResource("10_nyxxn")]
 position = Vector2(784, 288)
 
@@ -98,7 +83,7 @@ position = Vector2(1760, 654)
 position = Vector2(327, 291)
 
 [node name="BossSpawn" type="Marker2D" parent="."]
-position = Vector2(327, 291)
+position = Vector2(1299, 300)
 
 [node name="NPCs" type="Node2D" parent="."]
 
