@@ -45,8 +45,8 @@ texture = ExtResource("1_xbhsl")
 [node name="Player" parent="Entities" instance=ExtResource("2_f1ckj")]
 position = Vector2(279, 183)
 
-[node name="GameCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_fr3hr")]
-target = NodePath("../Entities/Player")
+[node name="GameCamera" parent="." instance=ExtResource("3_fr3hr")]
+position = Vector2(372, 237)
 
 [node name="NpcTemplate" parent="." instance=ExtResource("4_hg133")]
 position = Vector2(426, 239)
