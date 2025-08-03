@@ -15,12 +15,15 @@ func enter() -> void:
 	
 	parent.player.set_can_climb(true)
 	parent.player.audio_player.play_lasso_hitch()
+	if parent.tag == LassoController.LassoTag.GHOST:
+		parent.player.change_gravity(500)
 
 
 func exit() -> void:
 	hitch_component.queue_free()
 	parent.reset_rope()
 	parent.player.set_can_climb(false)
+	parent.player.reset_gravity()
 
 
 func update(delta: float) -> void:

@@ -94,4 +94,4 @@ position = Vector2(3482, 199)
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(501, 278)
+position = Vector2(327, 291)

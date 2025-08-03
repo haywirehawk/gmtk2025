@@ -139,6 +139,14 @@ func apply_gravity(delta: float, gravity: float = default_gravity) -> void:
 		velocity.y += gravity * delta
 
 
+func reset_gravity() -> void:
+	current_gravity = default_gravity
+
+
+func change_gravity(new_gravity: float) -> void:
+	current_gravity = new_gravity
+
+
 func handle_walking_movement(delta: float) -> void:
 	if is_on_floor():
 		var target_velocity := move_direction_x * BASE_MOVE_SPEED
