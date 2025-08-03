@@ -1,19 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://y4mgqlwfeq6c"]
+[gd_scene load_steps=11 format=3 uid="uid://y4mgqlwfeq6c"]
 
 [ext_resource type="Script" uid="uid://vttcfp82otvj" path="res://game_objects/environment/poi/final_altar.gd" id="1_bo7va"]
 [ext_resource type="PackedScene" uid="uid://cda1q5apf8hc5" path="res://game_objects/environment/poi/end_game_altar.tscn" id="1_sv8h7"]
+[ext_resource type="Texture2D" uid="uid://cpiqxw4rf3ggd" path="res://resources/lassos/basic_lasso/assets/base_lasso_slack.png" id="3_b8a7b"]
+[ext_resource type="Texture2D" uid="uid://l2lqgxmxref2" path="res://resources/lassos/basic_lasso/assets/base_lasso_segment.png" id="4_lsx8y"]
+[ext_resource type="Texture2D" uid="uid://b4h5ev0ccox2b" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_slack.png" id="4_w1nv4"]
+[ext_resource type="Texture2D" uid="uid://1as4e83okm7l" path="res://resources/lassos/fire_lasso/assets/fire_lasso_slack.png" id="5_lsx8y"]
+[ext_resource type="Texture2D" uid="uid://byhupsk5h884f" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_segment.png" id="6_nmurh"]
+[ext_resource type="Texture2D" uid="uid://cokvdjhfbio85" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_slack.png" id="6_p3ept"]
+[ext_resource type="Texture2D" uid="uid://chchbf3342dos" path="res://resources/lassos/fire_lasso/assets/fire_lasso_segment.png" id="8_k3vpa"]
+[ext_resource type="Texture2D" uid="uid://cni14bnqmw2y" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_segment.png" id="10_2i5p6"]
 
-[node name="FinalAltar" type="Node2D"]
+[node name="FinalAltar" type="Node2D" node_paths=PackedStringArray("altar1", "altar2", "altar3", "altar4")]
 script = ExtResource("1_bo7va")
+altar1 = NodePath("NormalAltar")
+altar2 = NodePath("RubberAltar")
+altar3 = NodePath("FireLasso")
+altar4 = NodePath("GhostLasso")
 
 [node name="NormalAltar" parent="." instance=ExtResource("1_sv8h7")]
 position = Vector2(-8, 0)
+collision_layer = 16
+active_sprite = ExtResource("3_b8a7b")
+rope_sprite = ExtResource("4_lsx8y")
 
 [node name="RubberAltar" parent="." instance=ExtResource("1_sv8h7")]
 position = Vector2(22, 0)
+collision_layer = 16
+collision_mask = 128
+active_sprite = ExtResource("4_w1nv4")
+rope_sprite = ExtResource("6_nmurh")
 
 [node name="FireLasso" parent="." instance=ExtResource("1_sv8h7")]
 position = Vector2(-23, 0)
+collision_layer = 16
+collision_mask = 64
+active_sprite = ExtResource("5_lsx8y")
+rope_sprite = ExtResource("8_k3vpa")
 
 [node name="GhostLasso" parent="." instance=ExtResource("1_sv8h7")]
 position = Vector2(7, 0)
+collision_layer = 16
+collision_mask = 256
+active_sprite = ExtResource("6_p3ept")
+rope_sprite = ExtResource("10_2i5p6")

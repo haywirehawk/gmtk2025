@@ -162,11 +162,15 @@ func handle_climbing_movement(delta: float) -> void:
 	else:
 		var target_vector := global_position.direction_to(lasso_controller.target) * 0.5 * (BASE_CLIMB_SPEED + bonus_climb_speed) * move_direction_y
 		velocity += target_vector * delta
-	print(is_on_wall())
+
+
+func check_on_wall_and_climbing() -> bool:
+	if can_climb and is_on_wall(): return true
+	else: return false
 
 
 func handle_jump() -> void:
-	if input_jump_just_pressed and grounded_with_buffer and not is_jumping:
+	if input_jump_just_pressed and (grounded_with_buffer) and not is_jumping:
 		velocity.y += JUMP_VELOCITY
 		is_jumping = true
 		audio_player.play_jump()
@@ -174,6 +178,10 @@ func handle_jump() -> void:
 	if not input_jump_held and is_jumping:
 		velocity.y *= JUMP_CANCEL_FACTOR
 		is_jumping = false
+	if input_jump_just_pressed and check_on_wall_and_climbing() and not is_jumping:
+		var jump_vector := global_position.direction_to(lasso_controller.target)
+		var x_sign: float = sign(jump_vector.x)
+		jump_vector = Vector2(x_sign * BASE_MOVE_SPEED / 2, JUMP_VELOCITY / 2)
 
 
 func handle_animations() -> void:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cda1q5apf8hc5"]
+[gd_scene load_steps=6 format=3 uid="uid://cda1q5apf8hc5"]
 
 [ext_resource type="Script" uid="uid://bf1yxkqt3epco" path="res://game_objects/environment/poi/end_game_altar.gd" id="1_se6cm"]
 [ext_resource type="Texture2D" uid="uid://oe4mj2frwocl" path="res://assets/items/Items-06.png" id="2_xa4sa"]
 [ext_resource type="Texture2D" uid="uid://b4h5ev0ccox2b" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_slack.png" id="3_xa4sa"]
+[ext_resource type="Texture2D" uid="uid://byhupsk5h884f" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_segment.png" id="4_40u1w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_40u1w"]
 radius = 6.0
@@ -23,3 +24,8 @@ shape = SubResource("CircleShape2D_40u1w")
 [node name="ActiveSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_xa4sa")
 offset = Vector2(0, -8)
+
+[node name="ropeSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -4.5)
+scale = Vector2(0.5, 0.25)
+texture = ExtResource("4_40u1w")

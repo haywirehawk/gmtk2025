@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=3 uid="uid://umxdfcsp60w"]
+
+[ext_resource type="Script" uid="uid://c8idaxbpiqwau" path="res://game_objects/environment/poi/final_altar_backup.gd" id="1_oh56d"]
+[ext_resource type="PackedScene" uid="uid://cda1q5apf8hc5" path="res://game_objects/environment/poi/end_game_altar.tscn" id="2_s1ry0"]
+[ext_resource type="Texture2D" uid="uid://cpiqxw4rf3ggd" path="res://resources/lassos/basic_lasso/assets/base_lasso_slack.png" id="3_dtyly"]
+[ext_resource type="Texture2D" uid="uid://l2lqgxmxref2" path="res://resources/lassos/basic_lasso/assets/base_lasso_segment.png" id="4_xel35"]
+[ext_resource type="Texture2D" uid="uid://b4h5ev0ccox2b" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_slack.png" id="5_mkkcs"]
+[ext_resource type="Texture2D" uid="uid://byhupsk5h884f" path="res://resources/lassos/rubber_lasso/assets/rubber_lasso_segment.png" id="6_drgfl"]
+[ext_resource type="Texture2D" uid="uid://1as4e83okm7l" path="res://resources/lassos/fire_lasso/assets/fire_lasso_slack.png" id="7_rote5"]
+[ext_resource type="Texture2D" uid="uid://chchbf3342dos" path="res://resources/lassos/fire_lasso/assets/fire_lasso_segment.png" id="8_khswr"]
+[ext_resource type="Texture2D" uid="uid://cokvdjhfbio85" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_slack.png" id="9_xp5v8"]
+[ext_resource type="Texture2D" uid="uid://cni14bnqmw2y" path="res://resources/lassos/ghost_lasso/assets/ghost_lasso_segment.png" id="10_78uql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oh56d"]
+size = Vector2(40, 20)
+
+[node name="FinalAltarBackup" type="Node2D" node_paths=PackedStringArray("altar1", "altar2", "altar3", "altar4")]
+script = ExtResource("1_oh56d")
+altar1 = NodePath("NormalAltar")
+altar2 = NodePath("RubberAltar")
+altar3 = NodePath("FireLasso")
+altar4 = NodePath("GhostLasso")
+
+[node name="NormalAltar" parent="." instance=ExtResource("2_s1ry0")]
+position = Vector2(-8, 0)
+collision_layer = 16
+active_sprite = ExtResource("3_dtyly")
+rope_sprite = ExtResource("4_xel35")
+
+[node name="RubberAltar" parent="." instance=ExtResource("2_s1ry0")]
+position = Vector2(22, 0)
+collision_layer = 16
+collision_mask = 128
+active_sprite = ExtResource("5_mkkcs")
+rope_sprite = ExtResource("6_drgfl")
+
+[node name="FireLasso" parent="." instance=ExtResource("2_s1ry0")]
+position = Vector2(-23, 0)
+collision_layer = 16
+collision_mask = 64
+active_sprite = ExtResource("7_rote5")
+rope_sprite = ExtResource("8_khswr")
+
+[node name="GhostLasso" parent="." instance=ExtResource("2_s1ry0")]
+position = Vector2(7, 0)
+collision_layer = 16
+collision_mask = 256
+active_sprite = ExtResource("9_xp5v8")
+rope_sprite = ExtResource("10_78uql")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_oh56d")

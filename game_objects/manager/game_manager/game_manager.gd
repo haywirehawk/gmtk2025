@@ -160,6 +160,7 @@ func change_scene(path: String) -> void:
 
 
 func _on_game_over(_success: bool) -> void:
+	if not is_instance_valid(self): return
 	if _success:
 		if boss_tornado:
 			boss_tornado.stop()
