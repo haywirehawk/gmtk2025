@@ -75,6 +75,10 @@ func change_lasso(new_lasso: LassoResource) -> void:
 func change_collision_from_tag() -> void:
 	if tag == LassoTag.FIRE:
 		lasso_honda_area.collision_layer = 96
+	elif tag == LassoTag.GHOST:
+		lasso_honda_area.collision_layer = 288
+	elif tag == LassoTag.RUBBER:
+		lasso_honda_area.collision_layer = 160
 	else:
 		lasso_honda_area.collision_layer = 32
 
