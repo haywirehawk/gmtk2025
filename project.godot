@@ -10,10 +10,15 @@ config_version=5
 
 [application]
 
-config/name="GMTK2025"
+config/name="Larry At: The Eye of the Storm"
+config/description="Larry is trapped in a tornado and must find lassos to help him escape."
 run/main_scene="uid://cpowjgf1nm8rp"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.207843, 0.168627, 0.258824, 1)
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+boot_splash/image="uid://j66rqcteg0ev"
+config/icon="uid://j66rqcteg0ev"
 
 [audio]
 

@@ -7,7 +7,6 @@ func _ready() -> void:
 	UIAudioManager.register_buttons([
 		close_button,
 	])
-	MusicManager.set_music_mode(MusicManager.MusicMode.CREDITS)
 	
 	close_button.pressed.connect(_on_close_button_pressed)
 
