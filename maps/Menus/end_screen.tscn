@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://donh4fpu6r25k"]
+
+[ext_resource type="Script" uid="uid://dfrckpadpcx8k" path="res://maps/Menus/end_screen.gd" id="1_pk6bw"]
+[ext_resource type="PackedScene" uid="uid://cpowjgf1nm8rp" path="res://maps/Menus/MainMenu.tscn" id="2_nmufo"]
+
+[node name="EndScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_pk6bw")
+menu_scene = ExtResource("2_nmufo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 512.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "You Won!!!"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"SubtitleLabel"
+text = "Ride that nader into the sunset!"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="MenuButton2" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="QuitButton3" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
