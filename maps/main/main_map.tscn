@@ -1,17 +1,22 @@
-[gd_scene load_steps=16 format=4 uid="uid://cmy4xujejhlfw"]
+[gd_scene load_steps=21 format=4 uid="uid://cmy4xujejhlfw"]
 
 [ext_resource type="PackedScene" uid="uid://c1hg8vg83s6wv" path="res://ui/hud/hud.tscn" id="1_5gfxk"]
 [ext_resource type="PackedScene" uid="uid://c752gnmyuhq6i" path="res://game_objects/camera/game_camera.tscn" id="1_wcb2u"]
 [ext_resource type="PackedScene" uid="uid://b574qxdeclqad" path="res://game_objects/manager/upgrade_manager/upgrade_manager.tscn" id="2_a7cji"]
 [ext_resource type="PackedScene" uid="uid://caa770o25ysc7" path="res://game_objects/manager/game_manager/game_manager.tscn" id="2_n1a2d"]
+[ext_resource type="PackedScene" uid="uid://wgn84s3k3cve" path="res://game_objects/enemy/tornado/lasso_tornado.tscn" id="3_divrk"]
 [ext_resource type="PackedScene" uid="uid://ba5arjpbjqef0" path="res://game_objects/manager/inventory_manager.tscn" id="4_7ucyl"]
 [ext_resource type="PackedScene" uid="uid://b0qvyu1crjo2y" path="res://game_objects/enemy/tornado/tornado.tscn" id="5_5gfxk"]
+[ext_resource type="AudioStream" uid="uid://4txk4e6cc13j" path="res://Audio/sfx/jingles-hit_00.ogg" id="6_m6h6d"]
 [ext_resource type="PackedScene" uid="uid://dxn5li1hk61b5" path="res://game_objects/collectable/upgrades/upgrade_base.tscn" id="7_hjb1d"]
+[ext_resource type="PackedScene" uid="uid://d0nhuv8a8es4l" path="res://game_objects/collectable/upgrades/rubber_upgrade/rubber_upgrade.tscn" id="8_6jpqv"]
+[ext_resource type="PackedScene" uid="uid://d3s7a6g1gmhdt" path="res://game_objects/collectable/upgrades/ghost_upgrade/ghost_upgrade.tscn" id="8_kehfg"]
 [ext_resource type="PackedScene" uid="uid://bnio431nqamq3" path="res://game_objects/environment/poi/upgrade_altar.tscn" id="9_4s324"]
+[ext_resource type="PackedScene" uid="uid://bt2iv73fklqb1" path="res://game_objects/collectable/upgrades/fire_upgrade/fire_upgrade.tscn" id="9_nyxxn"]
 [ext_resource type="TileSet" uid="uid://std8qgkgyjcb" path="res://resources/tilemaps/background.tres" id="9_qn6lf"]
 [ext_resource type="TileSet" uid="uid://ccytbqj6i5xje" path="res://resources/tilemaps/platform_tilemap.tres" id="10_6jpqv"]
+[ext_resource type="PackedScene" uid="uid://umxdfcsp60w" path="res://game_objects/environment/poi/final_altar_backup.tscn" id="10_nyxxn"]
 [ext_resource type="TileSet" uid="uid://bb1ih6gruci4e" path="res://resources/tilemaps/foreground_tilemap.tres" id="11_kehfg"]
-[ext_resource type="PackedScene" uid="uid://y4mgqlwfeq6c" path="res://game_objects/environment/poi/final_altar.tscn" id="12_nyxxn"]
 [ext_resource type="PackedScene" uid="uid://bx74u2cxmuxt3" path="res://game_objects/NPCs/NPC_template.tscn" id="15_nyxxn"]
 [ext_resource type="PackedScene" uid="uid://c5ie6sdhol7ud" path="res://maps/zones/FireZone.tscn" id="16_cejgv"]
 [ext_resource type="PackedScene" uid="uid://d0se5watni5f0" path="res://maps/zones/GhostZone.tscn" id="18_m6h6d"]
@@ -22,12 +27,14 @@
 inventory_manager = NodePath("../InventoryManager")
 upgrade_manager = NodePath("../UpgradeManager")
 
-[node name="GameManager" parent="." node_paths=PackedStringArray("camera", "tornado", "hud", "upgrade_manager", "spawn_location") instance=ExtResource("2_n1a2d")]
+[node name="GameManager" parent="." node_paths=PackedStringArray("camera", "tornado", "hud", "upgrade_manager", "spawn_location", "boss_spawn_location") instance=ExtResource("2_n1a2d")]
 camera = NodePath("../GameCamera")
 tornado = NodePath("../TornadoLayer/Tornado")
+boss_tornado_scene = ExtResource("3_divrk")
 hud = NodePath("../HUD")
 upgrade_manager = NodePath("../UpgradeManager")
 spawn_location = NodePath("../PlayerSpawn")
+boss_spawn_location = NodePath("../BossSpawn")
 
 [node name="UpgradeManager" parent="." instance=ExtResource("2_a7cji")]
 
@@ -48,8 +55,20 @@ position = Vector2(328, 275)
 position = Vector2(583, 289)
 upgrade_scene = ExtResource("7_hjb1d")
 
-[node name="FinalAltar" parent="Environment/Objects" instance=ExtResource("12_nyxxn")]
-position = Vector2(784, 290)
+[node name="UpgradeAltar2" parent="Environment/Objects" instance=ExtResource("9_4s324")]
+position = Vector2(583, 289)
+upgrade_scene = ExtResource("9_nyxxn")
+
+[node name="UpgradeAltar3" parent="Environment/Objects" instance=ExtResource("9_4s324")]
+position = Vector2(583, 289)
+upgrade_scene = ExtResource("8_kehfg")
+
+[node name="UpgradeAltar4" parent="Environment/Objects" instance=ExtResource("9_4s324")]
+position = Vector2(583, 289)
+upgrade_scene = ExtResource("8_6jpqv")
+
+[node name="FinalAltarBackup" parent="Environment/Objects" instance=ExtResource("10_nyxxn")]
+position = Vector2(784, 288)
 
 [node name="Tilemaps" type="Node2D" parent="Environment"]
 
@@ -78,6 +97,9 @@ position = Vector2(1760, 654)
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(327, 291)
 
+[node name="BossSpawn" type="Marker2D" parent="."]
+position = Vector2(327, 291)
+
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="QuestGiver1" parent="NPCs" instance=ExtResource("15_nyxxn")]
@@ -99,3 +121,7 @@ dialogArray = Array[String](["Hello! Press 'F' to talk to me!", "This lasso is r
 [node name="GhostBug" parent="NPCs" instance=ExtResource("15_nyxxn")]
 position = Vector2(2049, 655)
 dialogArray = Array[String](["Hello! Press 'F' to talk to me!", "This new lasso is longer!", "switch lassos with Q and E"])
+
+[node name="VictoryAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_m6h6d")

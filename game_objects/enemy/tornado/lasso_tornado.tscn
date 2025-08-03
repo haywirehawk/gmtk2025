@@ -141,6 +141,7 @@ mesh = SubResource("CapsuleMesh_fbqvm")
 texture = ExtResource("3_wvlgh")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 32
 script = ExtResource("4_fbqvm")
 

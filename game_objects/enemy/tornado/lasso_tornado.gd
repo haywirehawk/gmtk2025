@@ -3,7 +3,7 @@ extends Node2D
 
 
 @export var speed: float = 10
-@export var movement_damping: float = 0.5
+@export var movement_damping: float = 0.1
 
 @onready var hitbox: HitboxComponent = $HitboxComponent
 @onready var audio_player: AudioStreamPlayer2D = %AudioPlayer

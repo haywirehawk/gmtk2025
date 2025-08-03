@@ -1,12 +1,14 @@
 extends State
 
+var old_number: int
 
 func enter() -> void:
-	pass
+	old_number = parent.lasso_honda_area.collision_layer
+	parent.lasso_honda_area.collision_layer = 0
 
 
 func exit() -> void:
-	pass
+	parent.lasso_honda_area.collision_layer = old_number
 
 
 func update(_delta: float) -> void:
