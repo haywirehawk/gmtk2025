@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://ccytbqj6i5xje"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://ccytbqj6i5xje"]
 
 [ext_resource type="Texture2D" uid="uid://c7l0hqt5y7gbb" path="res://assets/tilemaps/Bricks.png" id="1_l7i45"]
 [ext_resource type="PackedScene" uid="uid://cg05kbqnpijw8" path="res://game_objects/environment/grabbable/grabbable_object.tscn" id="2_0rypo"]
 [ext_resource type="PackedScene" uid="uid://dge4nqm54mk10" path="res://game_objects/environment/grabbable/grabbable_cactus.tscn" id="3_jnh7k"]
 [ext_resource type="PackedScene" uid="uid://ccfp8l3a2aykq" path="res://game_objects/environment/grabbable/grabbable_cactus_2.tscn" id="4_tu4og"]
 [ext_resource type="PackedScene" uid="uid://b7y285fks2svd" path="res://game_objects/environment/grabbable/grabbable_pillar.tscn" id="5_o0h15"]
+[ext_resource type="PackedScene" uid="uid://0c1uspxcou7k" path="res://game_objects/environment/poi/ice_block.tscn" id="6_0rypo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6jpqv"]
 texture = ExtResource("1_l7i45")
@@ -445,6 +446,7 @@ scenes/1/scene = ExtResource("2_0rypo")
 scenes/2/scene = ExtResource("3_jnh7k")
 scenes/3/scene = ExtResource("4_tu4og")
 scenes/4/scene = ExtResource("5_o0h15")
+scenes/5/scene = ExtResource("6_0rypo")
 
 [resource]
 physics_layer_0/collision_layer = 1
