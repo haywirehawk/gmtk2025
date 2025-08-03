@@ -17,7 +17,7 @@ extends Node2D
 @onready var audio_timer: Timer = $AudioTimer
 
 var audio_playing: bool
-var starting_distance: float = 300
+var starting_distance: float = 30000
 
 
 var movement_timer: Timer
