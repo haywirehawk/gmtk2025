@@ -4,7 +4,7 @@ extends Node
 const PLAYER_SCENE = preload("uid://bbs6thqicl6be")
 
 @export var camera: GameCamera
-@export var tornado: Node
+@export var tornado: Tornado
 @export var hud: HUD
 @export var upgrade_manager: UpgradeManager
 @export var spawn_location: Marker2D
@@ -14,19 +14,28 @@ var dust_particle_scene: PackedScene = preload("uid://c2wxaso1uvwb2")
 var max_dust_particles: int = 15
 var max_dust_particles_spawn: int = 5
 
+var doom_clock: int = 0
+var life: int = 3
+var closing_rate: float = 25
+var end_screen_path = "uid://cqp2efgxp1mmc"
+
 var tween_in_time: float = 0.8
 var tween_out_time: float = 0.6
 
-@onready var doom_start_timer: Timer = %DoomStartTimer
+@onready var doom_timer: Timer = %DoomTimer
 @onready var dust_timer: Timer = %DustTimer
+@onready var grace_period_timer: Timer = %GracePeriodTimer
 
 
 func _ready() -> void:
 	MusicManager.set_music_mode_with_delay(MusicManager.MusicMode.GAMEPLAY, 10.0)
 	
 	GameEvents.tornado_hit.connect(_on_tornado_hit)
-	doom_start_timer.timeout.connect(_on_doom_timer_timeout)
+	GameEvents.player_spawned.connect(_on_player_spawned)
+	GameEvents.game_over.connect(_on_game_over)
+	doom_timer.timeout.connect(_on_doom_timer_timeout)
 	dust_timer.timeout.connect(_on_dust_timer_timeout)
+	grace_period_timer.timeout.connect(_on_grace_period_timeout)
 	
 	spawn_player()
 	
@@ -38,7 +47,7 @@ func _process(_delta: float) -> void:
 	if player:
 		if player.check_out_of_bounds():
 			player.queue_free()
-			spawn_player()
+			respawn_player()
 
 
 func spawn_player() -> void:
@@ -51,6 +60,10 @@ func spawn_player() -> void:
 
 
 func respawn_player() -> void:
+	life -= 1
+	if life <= 0:
+		end_game(false)
+		return
 	player = PLAYER_SCENE.instantiate()
 	player.global_position = spawn_location.global_position
 	player.lockout(true)
@@ -61,6 +74,7 @@ func respawn_player() -> void:
 	camera.set_target(player, false)
 	camera.shake(1.0)
 	GameEvents.emit_player_spawned(player)
+	set_grace_period()
 
 
 func reset_doom() -> void:
@@ -69,7 +83,7 @@ func reset_doom() -> void:
 
 ## Stops timers before they timeout. No signals will be emitted.
 func stop_timers() -> void:
-	doom_start_timer.stop()
+	doom_timer.stop()
 	dust_timer.stop()
 
 
@@ -118,8 +132,28 @@ func tween_in(node: Node2D) -> void:
 	tween.finished.connect(_on_tween_in_finished)
 
 
+func set_grace_period() -> void:
+	tornado.stop_tornado()
+	grace_period_timer.start()
+	doom_timer.stop()
+
+
+func end_game(victory: bool) -> void:
+	GameEvents.emit_gameover(victory)
+
+
+func _on_game_over(_success: bool) -> void:
+	get_tree().change_scene_to_file(end_screen_path)
+
+
+func _on_grace_period_timeout() -> void:
+	tornado.start_tornado()
+	doom_timer.start()
+
+
 func _on_doom_timer_timeout() -> void:
-	pass
+	doom_clock += 1
+	tornado.set_closing_speed(closing_rate * doom_clock)
 
 
 func _on_dust_timer_timeout() -> void:
@@ -130,6 +164,11 @@ func _on_tornado_hit() -> void:
 	player.lockout(true)
 	
 	tween_out(player)
+
+
+func _on_player_spawned(_player: Player) -> void:
+	if tornado:
+		tornado.setup(_player)
 
 
 func _on_tween_out_finished() -> void:

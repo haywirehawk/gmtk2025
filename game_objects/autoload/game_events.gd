@@ -7,7 +7,14 @@ signal player_inventory_changed(inventory: Dictionary)
 signal player_inventory_add_to(item: InventoryObject, count: int)
 signal enemy_died
 signal tornado_hit()
-signal win
+signal game_over(success: bool)
+
+
+var _victory: bool = false
+
+
+func check_victory() -> bool:
+	return _victory
 
 
 func emit_player_spawned(player: Player) -> void:
@@ -39,4 +46,10 @@ func emit_tornado_hit() -> void:
 
 
 func emit_win() -> void:
-	win.emit()
+	_victory = true
+	game_over.emit(true)
+	
+
+func emit_gameover(success: bool) -> void:
+	_victory = success
+	game_over.emit(success)

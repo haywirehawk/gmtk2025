@@ -5,11 +5,18 @@
 [node name="GameManager" type="Node"]
 script = ExtResource("1_xiaf6")
 
-[node name="DoomStartTimer" type="Timer" parent="."]
+[node name="DoomTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+wait_time = 30.0
+autostart = true
 
 [node name="DustTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="GracePeriodTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 30.0
+one_shot = true

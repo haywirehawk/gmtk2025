@@ -1,19 +1,131 @@
-[gd_scene load_steps=3 format=3 uid="uid://donh4fpu6r25k"]
+[gd_scene load_steps=17 format=4 uid="uid://cqp2efgxp1mmc"]
 
 [ext_resource type="Script" uid="uid://dfrckpadpcx8k" path="res://maps/Menus/end_screen.gd" id="1_pk6bw"]
 [ext_resource type="PackedScene" uid="uid://cpowjgf1nm8rp" path="res://maps/Menus/MainMenu.tscn" id="2_nmufo"]
+[ext_resource type="TileSet" uid="uid://bb1ih6gruci4e" path="res://resources/tilemaps/foreground_tilemap.tres" id="3_565xx"]
+[ext_resource type="PackedScene" uid="uid://cjcfv1uwjlf7o" path="res://game_objects/particles/fire/fire_particles.tscn" id="4_wko5t"]
+[ext_resource type="TileSet" uid="uid://ccytbqj6i5xje" path="res://resources/tilemaps/platform_tilemap.tres" id="5_jpjp3"]
+[ext_resource type="Texture2D" uid="uid://cilpukysdlu7f" path="res://game_objects/player/Falling.png" id="6_o2gor"]
+[ext_resource type="Texture2D" uid="uid://dqitiwxht8r11" path="res://game_objects/player/Cowboy.png" id="7_da43k"]
+[ext_resource type="Texture2D" uid="uid://drchecylmilrg" path="res://game_objects/player/Cowboy walk.png" id="8_h2c75"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4l60"]
+atlas = ExtResource("6_o2gor")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7l5b"]
+atlas = ExtResource("7_da43k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lakk"]
+atlas = ExtResource("7_da43k")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on823"]
+atlas = ExtResource("8_h2c75")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5r2k"]
+atlas = ExtResource("8_h2c75")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip10g"]
+atlas = ExtResource("8_h2c75")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4nmx"]
+atlas = ExtResource("8_h2c75")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ccvv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4l60")
+}],
+"loop": true,
+"name": &"airborne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 14.0,
+"texture": SubResource("AtlasTexture_o7l5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lakk")
+}, {
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_o7l5b")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6lakk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on823")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5r2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip10g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4nmx")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [node name="EndScreen" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_pk6bw")
 menu_scene = ExtResource("2_nmufo")
 
+[node name="VictoryLayer" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+tile_map_data = PackedByteArray("AAAoABcAAwAJAAMAAAAoABYAAwAJAAMAAAAoABUAAwACAAIAAAAnABcAAwAJAAMAAAAnABYAAwAJAAMAAAAnABUAAwAJAAMAAAAmABcAAwAJAAMAAAAmABYAAwAJAAMAAAAmABUAAwAJAAMAAAAlABcAAwAJAAMAAAAlABYAAwAJAAMAAAAlABUAAwAJAAMAAAAkABcAAwAJAAMAAAAkABYAAwAJAAMAAAAkABUAAwAJAAMAAAAjABcAAwAJAAMAAAAjABYAAwAJAAMAAAAjABUAAwAJAAMAAAAiABcAAwAJAAMAAAAiABYAAwAJAAMAAAAiABUAAwAJAAMAAAAhABcAAwAJAAMAAAAhABYAAwAJAAMAAAAhABUAAwAJAAMAAAAgABcAAwAJAAMAAAAgABYAAwAJAAMAAAAgABUAAwAJAAMAAAAfABcAAwAJAAMAAAAfABYAAwAJAAMAAAAfABUAAwAJAAMAAAAeABcAAwAJAAMAAAAeABYAAwAJAAMAAAAeABUAAwAJAAMAAAAdABcAAwAJAAMAAAAdABYAAwAJAAMAAAAdABUAAwAJAAMAAAAcABcAAwAJAAMAAAAcABYAAwAJAAMAAAAcABUAAwAJAAMAAAAbABcAAwAJAAMAAAAbABYAAwAJAAMAAAAbABUAAwAJAAMAAAAaABcAAwAJAAMAAAAaABYAAwAJAAMAAAAaABUAAwAJAAMAAAAZABcAAwAJAAMAAAAZABYAAwAJAAMAAAAZABUAAwAJAAMAAAAYABcAAwAJAAMAAAAYABYAAwAJAAMAAAAYABUAAwAJAAMAAAAXABcAAwAJAAMAAAAXABYAAwAJAAMAAAAXABUAAwAJAAMAAAAWABcAAwAJAAMAAAAWABYAAwAJAAMAAAAWABUAAwAJAAMAAAAVABcAAwAJAAMAAAAVABYAAwAJAAMAAAAVABUAAwAJAAMAAAAUABcAAwAJAAMAAAAUABYAAwAJAAMAAAAUABUAAwAJAAMAAAATABcAAwAJAAMAAAATABYAAwAJAAMAAAATABUAAwAJAAMAAAASABcAAwAJAAMAAAASABYAAwAJAAMAAAASABUAAwAJAAMAAAARABcAAwAJAAMAAAARABYAAwAJAAMAAAARABUAAwAJAAMAAAAQABcAAwAJAAMAAAAQABYAAwAJAAMAAAAQABUAAwAJAAMAAAAPABcAAwAJAAMAAAAPABYAAwAJAAMAAAAPABUAAwAJAAMAAAAOABcAAwAJAAMAAAAOABYAAwAJAAMAAAAOABUAAwAJAAMAAAANABcAAwAJAAMAAAANABYAAwAJAAMAAAANABUAAwAJAAMAAAAMABcAAwAJAAMAAAAMABYAAwAJAAMAAAAMABUAAwAJAAMAAAALABcAAwAJAAMAAAALABYAAwAJAAMAAAALABUAAwAJAAMAAAAKABcAAwAJAAMAAAAKABYAAwAJAAMAAAAKABUAAwAJAAMAAAAJABcAAwAJAAMAAAAJABYAAwAJAAMAAAAJABUAAwAJAAMAAAAIABcAAwAJAAMAAAAIABYAAwAJAAMAAAAIABUAAwAJAAMAAAAHABcAAwAJAAMAAAAHABYAAwAJAAMAAAAHABUAAwAJAAMAAAAGABcAAwAJAAMAAAAGABYAAwAJAAMAAAAGABUAAwAJAAMAAAAFABcAAwAJAAMAAAAFABYAAwAJAAMAAAAFABUAAwAJAAMAAAAEABcAAwAJAAMAAAAEABYAAwAJAAMAAAAEABUAAwAJAAMAAAADABcAAwAJAAMAAAADABYAAwAJAAMAAAADABUAAwAJAAMAAAACABcAAwAJAAMAAAACABYAAwAJAAMAAAACABUAAwAJAAMAAAABABcAAwAJAAMAAAABABYAAwAJAAMAAAABABUAAwAJAAMAAAAAABcAAwAJAAMAAAAAABYAAwAJAAMAAAAAABUAAwAJAAMAAAD//xcAAwAJAAMAAAD//xYAAwAJAAMAAAD//xUAAwAEAAEAAAAoABQAAwAAAAIAAAAnABQAAwABAAMAAAAmABQAAwADAAMAAAAlABQAAwADAAMAAAAkABQAAwACAAMAAAAjABQAAwAAAAMAAAAiABQAAwABAAMAAAAhABQAAwAEAAMAAAAgABQAAwADAAMAAAAfABQAAwAAAAMAAAAeABQAAwAEAAMAAAAdABQAAwADAAMAAAAcABQAAwADAAMAAAAbABQAAwADAAMAAAAaABQAAwABAAMAAAAZABQAAwAAAAMAAAAYABQAAwACAAMAAAAXABQAAwACAAMAAAAWABQAAwACAAMAAAAVABQAAwADAAMAAAAUABQAAwACAAMAAAATABQAAwAEAAMAAAASABQAAwAAAAMAAAARABQAAwADAAMAAAAQABQAAwAEAAMAAAAPABQAAwAAAAMAAAAOABQAAwAEAAMAAAANABQAAwADAAMAAAAMABQAAwADAAMAAAALABQAAwACAAMAAAAKABQAAwAAAAMAAAAAABQAAwABAAMAAAD//xQAAwAAAAEAAAAIABQAAwADAAMAAAAHABQAAwAEAAMAAAAGABQAAwABAAMAAAAFABQAAwAAAAMAAAAEABQAAwAEAAMAAAADABQAAwAEAAMAAAACABQAAwABAAMAAAABABQAAwABAAMAAAAJABQAAwADAAMAAAA=")
+tile_set = ExtResource("3_565xx")
+
+[node name="VictoryLayer2" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+tile_map_data = PackedByteArray("AAAdABMAAQAAAAAAAwACABMAAQAAAAAAAwAnABIAAAADAAAAAAAnABMAAAADAAEAAAAUABMAAAAHAAIAAAA=")
+tile_set = ExtResource("5_jpjp3")
+
+[node name="DefeatLayer" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+tile_map_data = PackedByteArray("AAAoABcAAwAJAAMAAAAoABYAAwAJAAMAAAAoABUAAwACAAIAAAAnABcAAwAJAAMAAAAnABYAAwAJAAMAAAAnABUAAwAJAAMAAAAmABcAAwAJAAMAAAAmABYAAwAJAAMAAAAmABUAAwAJAAMAAAAlABcAAwAJAAMAAAAlABYAAwAJAAMAAAAlABUAAwAJAAMAAAAkABcAAwAJAAMAAAAkABYAAwAJAAMAAAAkABUAAwAJAAMAAAAjABcAAwAJAAMAAAAjABYAAwAJAAMAAAAjABUAAwAJAAMAAAAiABcAAwAJAAMAAAAiABYAAwAJAAMAAAAiABUAAwAJAAMAAAAhABcAAwAJAAMAAAAhABYAAwAJAAMAAAAhABUAAwAJAAMAAAAgABcAAwAJAAMAAAAgABYAAwAJAAMAAAAgABUAAwAJAAMAAAAfABcAAwAJAAMAAAAfABYAAwAJAAMAAAAfABUAAwAJAAMAAAAeABcAAwAJAAMAAAAeABYAAwAJAAMAAAAeABUAAwAJAAMAAAAdABcAAwAJAAMAAAAdABYAAwAJAAMAAAAdABUAAwAJAAMAAAAcABcAAwAJAAMAAAAcABYAAwAJAAMAAAAcABUAAwAJAAMAAAAbABcAAwAJAAMAAAAbABYAAwAJAAMAAAAbABUAAwAJAAMAAAAaABcAAwAJAAMAAAAaABYAAwAJAAMAAAAaABUAAwAJAAMAAAAZABcAAwAJAAMAAAAZABYAAwAJAAMAAAAZABUAAwAJAAMAAAAYABcAAwAJAAMAAAAYABYAAwAJAAMAAAAYABUAAwAJAAMAAAAXABcAAwAJAAMAAAAXABYAAwAJAAMAAAAXABUAAwAJAAMAAAAWABcAAwAJAAMAAAAWABYAAwAJAAMAAAAWABUAAwAJAAMAAAAVABcAAwAJAAMAAAAVABYAAwAJAAMAAAAVABUAAwAJAAMAAAAUABcAAwAJAAMAAAAUABYAAwAJAAMAAAAUABUAAwAJAAMAAAATABcAAwAJAAMAAAATABYAAwAJAAMAAAATABUAAwAJAAMAAAASABcAAwAJAAMAAAASABYAAwAJAAMAAAASABUAAwAJAAMAAAARABcAAwAJAAMAAAARABYAAwAJAAMAAAARABUAAwAJAAMAAAAQABcAAwAJAAMAAAAQABYAAwAJAAMAAAAQABUAAwAJAAMAAAAPABcAAwAJAAMAAAAPABYAAwAJAAMAAAAPABUAAwAJAAMAAAAOABcAAwAJAAMAAAAOABYAAwAJAAMAAAAOABUAAwAJAAMAAAANABcAAwAJAAMAAAANABYAAwAJAAMAAAANABUAAwAJAAMAAAAMABcAAwAJAAMAAAAMABYAAwAJAAMAAAAMABUAAwAJAAMAAAALABcAAwAJAAMAAAALABYAAwAJAAMAAAALABUAAwAJAAMAAAAKABcAAwAJAAMAAAAKABYAAwAJAAMAAAAKABUAAwAJAAMAAAAJABcAAwAJAAMAAAAJABYAAwAJAAMAAAAJABUAAwAJAAMAAAAIABcAAwAJAAMAAAAIABYAAwAJAAMAAAAIABUAAwAJAAMAAAAHABcAAwAJAAMAAAAHABYAAwAJAAMAAAAHABUAAwAJAAMAAAAGABcAAwAJAAMAAAAGABYAAwAJAAMAAAAGABUAAwAJAAMAAAAFABcAAwAJAAMAAAAFABYAAwAJAAMAAAAFABUAAwAJAAMAAAAEABcAAwAJAAMAAAAEABYAAwAJAAMAAAAEABUAAwAJAAMAAAADABcAAwAJAAMAAAADABYAAwAJAAMAAAADABUAAwAJAAMAAAACABcAAwAJAAMAAAACABYAAwAJAAMAAAACABUAAwAJAAMAAAABABcAAwAJAAMAAAABABYAAwAJAAMAAAABABUAAwAJAAMAAAAAABcAAwAJAAMAAAAAABYAAwAJAAMAAAAAABUAAwAJAAMAAAD//xcAAwAJAAMAAAD//xYAAwAJAAMAAAD//xUAAwAEAAEAAAAoABQAAwAAAAIAAAAnABQAAwAFAAMAAAAmABQAAwAHAAMAAAAlABQAAwAFAAMAAAAkABQAAwAHAAMAAAAjABQAAwAIAAMAAAAiABQAAwAIAAMAAAAhABQAAwAGAAMAAAAgABQAAwAFAAMAAAAfABQAAwAHAAMAAAAeABQAAwAHAAMAAAAdABQAAwAIAAMAAAAcABQAAwAFAAMAAAAbABQAAwAIAAMAAAAaABQAAwAFAAMAAAAZABQAAwAFAAMAAAAYABQAAwAIAAMAAAAXABQAAwAHAAMAAAAWABQAAwAGAAMAAAAVABQAAwAIAAMAAAAUABQAAwAHAAMAAAATABQAAwAIAAMAAAASABQAAwAGAAMAAAARABQAAwAFAAMAAAAQABQAAwAFAAMAAAAPABQAAwAFAAMAAAAOABQAAwAIAAMAAAANABQAAwAHAAMAAAAMABQAAwAFAAMAAAALABQAAwAIAAMAAAAKABQAAwAHAAMAAAAAABQAAwAGAAMAAAD//xQAAwAAAAEAAAAIABQAAwAHAAMAAAAHABQAAwAFAAMAAAAGABQAAwAGAAMAAAAFABQAAwAHAAMAAAAEABQAAwAIAAMAAAADABQAAwAGAAMAAAACABQAAwAGAAMAAAABABQAAwAFAAMAAAAJABQAAwAFAAMAAAA=")
+tile_set = ExtResource("3_565xx")
+
+[node name="DefeatLayer2" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+tile_map_data = PackedByteArray("AAAdABMAAQAAAAAAAQACABMAAQAAAAAAAQAnABMAAAADAAAAAAAmABMAAAAEAAQAAAAnABIAAAAEAAQAAAAmABIAAAAEAAQAAAA=")
+tile_set = ExtResource("5_jpjp3")
+
+[node name="Particles" type="Node2D" parent="." groups=["particles_layer"]]
+
+[node name="WorldFireParticles" parent="Particles" instance=ExtResource("4_wko5t")]
+unique_name_in_owner = true
+position = Vector2(328, 312)
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(307, 313)
+sprite_frames = SubResource("SpriteFrames_4ccvv")
+animation = &"idle"
+autoplay = "idle"
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 512.0
-offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -33,25 +145,35 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
-text = "You Won!!!"
+text = "Success!"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SubtitleLabel"
+text = "Tornado VanquisheD"
 horizontal_alignment = 1
 
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"SubtitleLabel"
-text = "Ride that nader into the sunset!"
+text = "Thank you for playing!"
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MenuButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Restart"
+size_flags_horizontal = 4
+text = "Main Menu"
 
-[node name="MenuButton2" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Menu"
-
-[node name="QuitButton3" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 4
 text = "Quit"
