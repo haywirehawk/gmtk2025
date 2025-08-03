@@ -8,6 +8,7 @@ signal player_inventory_add_to(item: InventoryObject, count: int)
 signal enemy_died
 signal tornado_hit()
 signal game_over(success: bool)
+signal quest_completed()
 
 
 var _victory: bool = false
@@ -15,6 +16,10 @@ var _victory: bool = false
 
 func check_victory() -> bool:
 	return _victory
+
+
+func emit_quest_completed() -> void:
+	quest_completed.emit()
 
 
 func emit_player_spawned(player: Player) -> void:

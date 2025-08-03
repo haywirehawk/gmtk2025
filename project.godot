@@ -45,6 +45,7 @@ window/stretch/mode="viewport"
 
 entities_layer=""
 particles_layer=""
+tornado_layer=""
 
 [gui]
 
@@ -153,6 +154,8 @@ release={
 2d_physics/layer_5="Grabbable"
 2d_physics/layer_6="Lasso"
 2d_physics/layer_7="FireLasso"
+2d_physics/layer_8="RubberLasso"
+2d_physics/layer_9="GhostLasso"
 
 [rendering]
 

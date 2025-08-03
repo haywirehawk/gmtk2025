@@ -5,11 +5,14 @@ const PLAYER_SCENE = preload("uid://bbs6thqicl6be")
 
 @export var camera: GameCamera
 @export var tornado: Tornado
+@export var boss_tornado_scene: PackedScene
 @export var hud: HUD
 @export var upgrade_manager: UpgradeManager
 @export var spawn_location: Marker2D
+@export var boss_spawn_location: Marker2D
 
 var player: Player
+var boss_tornado: BossTornado
 var dust_particle_scene: PackedScene = preload("uid://c2wxaso1uvwb2")
 var max_dust_particles: int = 15
 var max_dust_particles_spawn: int = 5
@@ -33,6 +36,7 @@ func _ready() -> void:
 	GameEvents.tornado_hit.connect(_on_tornado_hit)
 	GameEvents.player_spawned.connect(_on_player_spawned)
 	GameEvents.game_over.connect(_on_game_over)
+	GameEvents.quest_completed.connect(_on_quest_complete)
 	doom_timer.timeout.connect(_on_doom_timer_timeout)
 	dust_timer.timeout.connect(_on_dust_timer_timeout)
 	grace_period_timer.timeout.connect(_on_grace_period_timeout)
@@ -75,6 +79,14 @@ func respawn_player() -> void:
 	camera.shake(1.0)
 	GameEvents.emit_player_spawned(player)
 	set_grace_period()
+
+
+func boss_fight() -> void:
+	if tornado:
+		tornado.queue_free()
+	boss_tornado = boss_tornado_scene.instantiate()
+	boss_tornado.global_position = boss_spawn_location.global_position
+	get_tree().get_first_node_in_group("tornado_layer").add_child(boss_tornado)
 
 
 func reset_doom() -> void:
@@ -133,8 +145,9 @@ func tween_in(node: Node2D) -> void:
 
 
 func set_grace_period() -> void:
-	tornado.stop_tornado()
-	tornado.add_spread()
+	if tornado:
+		tornado.stop_tornado()
+		tornado.add_spread()
 	grace_period_timer.start()
 	doom_timer.stop()
 
@@ -143,22 +156,39 @@ func end_game(victory: bool) -> void:
 	GameEvents.emit_gameover(victory)
 
 
+func change_scene(path: String) -> void:
+	get_tree().change_scene_to_file(path)
+
+
 func _on_game_over(_success: bool) -> void:
-	get_tree().change_scene_to_file(end_screen_path)
+	if _success:
+		if boss_tornado:
+			boss_tornado.stop()
+			%VictoryAudioStreamPlayer.play()
+			var tween := create_tween()
+			tween.tween_property(boss_tornado, "scale", Vector2.ZERO, 2)
+			await tween.finished
+	call_deferred("change_scene", end_screen_path)
 
 
 func _on_grace_period_timeout() -> void:
-	tornado.start_tornado()
+	if tornado:
+		tornado.start_tornado()
 	doom_timer.start()
 
 
 func _on_doom_timer_timeout() -> void:
 	doom_clock += 1
-	tornado.set_closing_speed(closing_rate * doom_clock)
+	if tornado:
+		tornado.set_closing_speed(closing_rate * doom_clock)
 
 
 func _on_dust_timer_timeout() -> void:
 	add_dust()
+
+
+func _on_quest_complete() -> void:
+	boss_fight()
 
 
 func _on_tornado_hit() -> void:

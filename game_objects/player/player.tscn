@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b53rlrm08se48" path="res://game_objects/components/hurtbox/hurtbox_component.tscn" id="10_d4pf5"]
 [ext_resource type="Texture2D" uid="uid://dqitiwxht8r11" path="res://game_objects/player/Cowboy.png" id="10_kc3ei"]
 [ext_resource type="Script" uid="uid://ctpy3qyy43ww0" path="res://game_objects/player/player_audio_player.gd" id="11_nl4u6"]
-[ext_resource type="AudioStream" uid="uid://0a67tauy7doc" path="res://Audio/sfx/impactSoft_heavy_002.ogg" id="12_on823"]
+[ext_resource type="AudioStream" uid="uid://di0d7irl8grmd" path="res://Audio/sfx/footstep_grass_003.ogg" id="12_ip10g"]
 [ext_resource type="AudioStream" uid="uid://c40pajf4r05v1" path="res://Audio/sfx/woosh6.ogg" id="13_d5r2k"]
 [ext_resource type="AudioStream" uid="uid://dmv0k2wavj7kk" path="res://Audio/sfx/phaserUp5.ogg" id="13_h4nmx"]
 [ext_resource type="AudioStream" uid="uid://c2mqu76bc6b24" path="res://Audio/sfx/handleSmallLeather2.ogg" id="13_ip10g"]
@@ -305,7 +305,7 @@ script = ExtResource("8_d4pf5")
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="Audio"]
 unique_name_in_owner = true
 script = ExtResource("11_nl4u6")
-player_jump_sound = ExtResource("12_on823")
+player_jump_sound = ExtResource("12_ip10g")
 lasso_acquired_sound = ExtResource("13_h4nmx")
 lasso_hitch_sound = ExtResource("13_ip10g")
 lasso_throw_sound = ExtResource("13_d5r2k")

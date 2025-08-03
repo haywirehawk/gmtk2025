@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bx74u2cxmuxt3"]
 
 [ext_resource type="Script" uid="uid://bfi1rqp2j5ulq" path="res://game_objects/NPCs/npc_template.gd" id="1_130m6"]
-[ext_resource type="Texture2D" uid="uid://cilpukysdlu7f" path="res://game_objects/player/Falling.png" id="2_xrcap"]
+[ext_resource type="Texture2D" uid="uid://bo8lj4inmymha" path="res://game_objects/NPCs/beetle.png" id="2_xrcap"]
 [ext_resource type="Texture2D" uid="uid://4vbrdlx8amd1" path="res://icon.svg" id="3_xrcap"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvut0"]
@@ -13,7 +13,7 @@ script = ExtResource("1_130m6")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_xrcap")
-offset = Vector2(0, -64)
+offset = Vector2(0, -8)
 
 [node name="Area2D" type="Area2D" parent="."]
 
