@@ -21,4 +21,5 @@ rest_length = 20.0
 throw_speed = 100.0
 stiffness = 100.0
 damping_factor = 6.0
+bonus_climb_speed = 50.0
 metadata/_custom_type_script = "uid://bqwr6lu7hmc7b"

@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const BASE_MOVE_SPEED: float = 120.0
 const MAX_MOVE_SPEED: float = 250.0
-const BASE_CLIMB_SPEED: float = 100.0
+const BASE_CLIMB_SPEED: float = 120.0
 const BASE_MOVEMENT_DAMPING: float = 5.0
 const JUMP_VELOCITY: float = -250.0
 const JUMP_CANCEL_FACTOR: float = 0.75
@@ -12,6 +12,7 @@ const AIRBORNE_MOVEMENT_FACTOR: float = 250.0
 # Movement
 var default_gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_gravity: float
+var bonus_climb_speed: float
 var movement_vector: Vector2
 var move_direction_x: float
 var move_direction_y: float
@@ -148,8 +149,12 @@ func handle_walking_movement(delta: float) -> void:
 
 func handle_climbing_movement(delta: float) -> void:
 	if is_on_wall():
-		var target_velocity := move_direction_y * BASE_CLIMB_SPEED
+		var target_velocity := move_direction_y * 2 * (BASE_CLIMB_SPEED + bonus_climb_speed)
 		velocity.y = lerpf(velocity.x, target_velocity, 1 - exp(-BASE_MOVEMENT_DAMPING * delta))
+	else:
+		var target_vector := global_position.direction_to(lasso_controller.target) * 0.5 * (BASE_CLIMB_SPEED + bonus_climb_speed) * move_direction_y
+		velocity += target_vector * delta
+	print(is_on_wall())
 
 
 func handle_jump() -> void:

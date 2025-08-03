@@ -13,8 +13,8 @@ func _ready() -> void:
 func activate() -> void:
 	$CollisionShape2D.disabled = true
 	$ActiveSprite.hide()
-	GameEvents.quest_updated
+	GameEvents.emit_quest_updated()
 
 
-func _on_area_entered(other_area: Area2D) -> void:
+func _on_area_entered(_other_area: Area2D) -> void:
 	activate()

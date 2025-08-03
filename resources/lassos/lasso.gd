@@ -19,3 +19,4 @@ extends Resource
 @export_range(20, 200, 5) var throw_speed: float = 80
 @export_range(0, 100, 5) var stiffness: float = 20
 @export_range(0, 30, 2) var damping_factor: float = 2
+@export var bonus_climb_speed: float = 0

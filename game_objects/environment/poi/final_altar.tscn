@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://y4mgqlwfeq6c"]
+[gd_scene load_steps=3 format=3 uid="uid://y4mgqlwfeq6c"]
 
+[ext_resource type="Script" uid="uid://vttcfp82otvj" path="res://game_objects/environment/poi/final_altar.gd" id="1_bo7va"]
 [ext_resource type="PackedScene" uid="uid://cda1q5apf8hc5" path="res://game_objects/environment/poi/end_game_altar.tscn" id="1_sv8h7"]
 
 [node name="FinalAltar" type="Node2D"]
+script = ExtResource("1_bo7va")
 
 [node name="NormalAltar" parent="." instance=ExtResource("1_sv8h7")]
 position = Vector2(-8, 0)

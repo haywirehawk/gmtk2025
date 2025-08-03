@@ -55,9 +55,9 @@ wait_time = 3.0
 [node name="LeftWall" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_dx4xg")
-position = Vector2(-30000, 180)
+position = Vector2(-30000, -4000)
 rotation = -0.141896
-scale = Vector2(20, -120.968)
+scale = Vector2(20, -600)
 texture = ExtResource("1_fmfmv")
 script = ExtResource("4_dx4xg")
 
@@ -83,9 +83,9 @@ max_polyphony = 15
 [node name="RightWall" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_3b81r")
-position = Vector2(30000, 180)
+position = Vector2(30000, -4000)
 rotation = 0.141372
-scale = Vector2(20, -120.969)
+scale = Vector2(20, -600)
 texture = ExtResource("1_fmfmv")
 script = ExtResource("4_dx4xg")
 
