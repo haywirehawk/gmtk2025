@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://dpaqvol2a4j6f"]
 
 [ext_resource type="PackedScene" uid="uid://bnio431nqamq3" path="res://game_objects/environment/poi/upgrade_altar.tscn" id="1_xr7s7"]
-[ext_resource type="PackedScene" uid="uid://d3s7a6g1gmhdt" path="res://game_objects/collectable/upgrades/ghost_upgrade/ghost_upgrade.tscn" id="2_xr7s7"]
+[ext_resource type="PackedScene" uid="uid://d0nhuv8a8es4l" path="res://game_objects/collectable/upgrades/rubber_upgrade/rubber_upgrade.tscn" id="2_p5fo6"]
 [ext_resource type="TileSet" uid="uid://std8qgkgyjcb" path="res://resources/tilemaps/background.tres" id="3_dw5hf"]
 [ext_resource type="TileSet" uid="uid://ccytbqj6i5xje" path="res://resources/tilemaps/platform_tilemap.tres" id="4_yv8my"]
 [ext_resource type="TileSet" uid="uid://bb1ih6gruci4e" path="res://resources/tilemaps/foreground_tilemap.tres" id="5_3otvj"]
@@ -12,8 +12,8 @@
 
 [node name="Objects" type="Node2D" parent="Environment"]
 
-[node name="GhostAltar" parent="Environment/Objects" instance=ExtResource("1_xr7s7")]
-upgrade_scene = ExtResource("2_xr7s7")
+[node name="RubberAltar" parent="Environment/Objects" instance=ExtResource("1_xr7s7")]
+upgrade_scene = ExtResource("2_p5fo6")
 
 [node name="Tilemaps" type="Node2D" parent="Environment"]
 
